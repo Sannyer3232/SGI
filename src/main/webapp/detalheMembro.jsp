@@ -202,6 +202,16 @@
 													<option value="1">Sede Manaus</option>
 												</select>
 											</div>
+											
+											<div class="form-group label-floating">
+												<label class="control-label">Filial</label> <select
+													class="form_group" name="mbrfilial">
+													<option value="">---- Selecionar Filial ----</option>
+													<option value="1">Filial Campos Elisios</option>
+													<option value="2">Filial Coroado</option>
+													<option value="3">Filial Cachoeirinha</option>
+												</select>
+											</div>
 											<div class="form-group label-floating">
 												<label class="control-label">Estado Civil</label> <select
 													class="form_group" name="mbrestadocivil">

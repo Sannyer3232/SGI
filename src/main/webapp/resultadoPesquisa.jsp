@@ -158,6 +158,7 @@
 															<th class="text-center">CPF</th>
 															<th class="text-center">Email</th>
 															<th class="text-center">Sede</th>
+															<th class="text-center">Filial</th>
 															<th class="text-center">Superior</th>
 															<th class="text-center">Cargo</th>
 															<th class="text-center">Editar</th>
@@ -180,6 +181,7 @@
 															<td><%=listaMembros.get(i).getMbrcpf()%></td>
 															<td><%=listaMembros.get(i).getMbremail()%></td>
 															<td><%=listaMembros.get(i).getSedenome()%></td>
+															<td><%=listaMembros.get(i).getFilialnome()%></td>
 															<td><%=listaMembros.get(i).getSupnome()%></td>
 															<td><%=listaMembros.get(i).getCargoNome() != null ? listaMembros.get(i).getCargoNome() : "Membro Comum"%></td>
 

@@ -19,6 +19,7 @@ public class MembroJavaBeans {
 	private boolean mbrativo;
 	private String mbracesso;
 	private int mbrfilial;
+	private String filialnome;
 	private String mbrsenha;
 	private int cargo;
 	private String sedenome;
@@ -30,6 +31,14 @@ public class MembroJavaBeans {
 	
 	
 	
+	public String getFilialnome() {
+		return filialnome;
+	}
+
+	public void setFilialnome(String filialnome) {
+		this.filialnome = filialnome;
+	}
+
 	public String getMbrnome() {
 		return mbrnome;
 	}
@@ -99,7 +108,7 @@ public class MembroJavaBeans {
 	
 	
 	public MembroJavaBeans(int id_Membro, String mbrnome, String mbrcpf, String mbremail, String sedenome,
-			String supnome, String cargoNome) {
+			String supnome, String cargoNome, String filialnome) {
 		this.id_Membro = id_Membro;
 		this.mbrnome = mbrnome;
 		this.mbrcpf = mbrcpf;
@@ -107,6 +116,8 @@ public class MembroJavaBeans {
 		this.sedenome = sedenome;
 		this.supnome = supnome;
 		this.cargoNome = cargoNome;
+		this.filialnome = filialnome;
+		
 	}
 
 	public MembroJavaBeans(int id_Membro, String mbrmemnome, String mbrcpf, String mbremail, String sedenome, String supnome) {

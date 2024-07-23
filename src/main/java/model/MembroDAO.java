@@ -44,7 +44,7 @@ public class MembroDAO {
 
 	@SuppressWarnings("null")
 	public void inserirMembro(MembroJavaBeans membro) {
-		String callSpInserir = "call sp_membro_endereco(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+		String callSpInserir = "call sp_membro_endereco(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 
 		try {
 			// Abrindo Conexão
@@ -75,6 +75,7 @@ public class MembroDAO {
 			pst.setString(18, membro.getMbrendereco().getEndcidade());
 			pst.setString(19, membro.getMbrendereco().getEndestado());
 			pst.setInt(20, membro.getCargo());
+			pst.setInt(21, membro.getMbrfilial());
 
 			// Executar call
 			pst.executeUpdate();
@@ -167,12 +168,14 @@ public class MembroDAO {
 	            String sede = rs.getString(5);
 	            String superior = rs.getString(6);
 	            String cargo = rs.getString(7);
+	            String filial = rs.getString(8);
+	            
 	            
 	            // Verifique se o campo superior é nulo antes de atribuir
 	            if (superior == null) {
-	                membros.add(new MembroJavaBeans(id,mbrnome, cpf, email,sede, "Sem superior", cargo));
+	                membros.add(new MembroJavaBeans(id,mbrnome, cpf, email,sede, "Sem superior", cargo, filial));
 	            } else {
-	                membros.add(new MembroJavaBeans(id,mbrnome, cpf, email,sede, superior, cargo));
+	                membros.add(new MembroJavaBeans(id,mbrnome, cpf, email,sede, superior, cargo, filial));
 	            }
 	        }
 	        
@@ -216,6 +219,7 @@ public class MembroDAO {
 	            membro.setMbrfotoCaminho(rs.getString(12));
 	            membro.setMbrativo(rs.getBoolean(13));
 	            membro.setMbracesso(rs.getString(14));
+	            membro.setMbrfilial(rs.getInt(21));
 	            
 	            endereco.setEndrua(rs.getString(15));
 	            endereco.setEndnumero(rs.getString(16));

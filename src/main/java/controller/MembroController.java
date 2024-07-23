@@ -160,6 +160,7 @@ public class MembroController extends HttpServlet {
 		membro.setMbrnumero_identidade(request.getParameter("mbridentidade"));
 		membro.setMbremail(request.getParameter("mbremail"));
 		membro.setMbrtelefone(request.getParameter("mbrtelefone"));
+		membro.setMbrfilial(Integer.parseInt(request.getParameter("mbrfilial")));
 
 		String senha = request.getParameter("mbrsenha");
 
@@ -252,6 +253,8 @@ public class MembroController extends HttpServlet {
 		membro.setMbrnumero_identidade(request.getParameter("mbridentidade"));
 		membro.setMbremail(request.getParameter("mbremail"));
 		membro.setMbrtelefone(request.getParameter("mbrtelefone"));
+		membro.setMbrfilial(Integer.parseInt(request.getParameter("mbrfilial")));
+		
 
 		String dateStr = request.getParameter("mbrdatanascimento");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
