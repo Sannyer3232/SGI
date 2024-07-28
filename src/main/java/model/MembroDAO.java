@@ -325,7 +325,7 @@ public class MembroDAO {
 			return achouMembro;
 		
 		} catch (Exception e) {
-			System.out.println("Erro Membro: "  + e);
+			System.out.println("Erro ao achar o Membro: "  + e);
 			return false;
 		}
 		

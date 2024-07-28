@@ -1,14 +1,18 @@
 package controller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import model.DizimosOferta;
 import model.DizimosOfertaDAO;
 import model.MembroDAO;
@@ -16,7 +20,7 @@ import model.MembroDAO;
 /**
  * Servlet implementation class DizimoOfertaController
  */
-@WebServlet(urlPatterns = { "/DizimoOfertaController", "/insertDizimo", "/insertOferta" })
+@WebServlet(urlPatterns = { "/DizimoOfertaController", "/insertDizimo", "/insertOferta" ,"/consultaDizimo","/desativaDizOferta"})
 public class DizimoOfertaController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     
@@ -52,6 +56,19 @@ public class DizimoOfertaController extends HttpServlet {
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
+        }else if(action.equals("/consultaDizimo")) {
+        	try {
+        		consultaDizimoOferta(request, response);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+        }else if(action.equals("/desativaDizOferta")) {
+        	try {
+        		excluirDizimoOferta(request, response);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+        	
         }
     }
 
@@ -115,6 +132,61 @@ public class DizimoOfertaController extends HttpServlet {
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
+    
+    protected float totalDizimoOferta(ArrayList<DizimosOferta> dizimosOfertas) {
+    	float dizimosOfertasTotal = 0;
+    	
+    	if(dizimosOfertas != null) {
+    		
+    		for(DizimosOferta dizmoOferta : dizimosOfertas) {
+    			dizimosOfertasTotal += dizmoOferta.getDzovalor();
+    		}
+    		
+    		return dizimosOfertasTotal;
+    		
+    	}else {
+    		return dizimosOfertasTotal;
+    	}
+    }
+    
+    protected void consultaDizimoOferta(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int mes = Integer.parseInt(request.getParameter("mes"));
+        int ano = Integer.parseInt(request.getParameter("ano"));
+        String tipo = request.getParameter("tipo");
+      
+        ArrayList<DizimosOferta> dizimosOfertas= dao.consultaDizimoOferta(mes, ano, tipo);
+        
+        request.setAttribute("dizimosOfertas", dizimosOfertas);
+        request.setAttribute("totalDizimosOfertas", totalDizimoOferta(dizimosOfertas));
+        request.setAttribute("p_mes", mes);
+        request.setAttribute("p_ano", ano);
+        request.setAttribute("p_tipo", tipo);
+        System.out.println("mes: " + mes + " ano: " + ano+" tipo:" + tipo );
+        RequestDispatcher rd = request.getRequestDispatcher("resultadoConsultaDizimoOferta.jsp");
+        rd.forward(request, response);
+    }
+    
+    protected void excluirDizimoOferta(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int dzoid = Integer.parseInt(request.getParameter("dzoid"));
+        String mes = request.getParameter("p_excluir_mes");
+        String ano = request.getParameter("p_excluir_ano");
+        String tipo = request.getParameter("p_excluir_tipo");
+        System.out.println("Antes de excluir mes: " + mes + " ano: " + ano+"tipo: "+tipo);
+        System.out.println(dzoid); 
+        
+
+        try {
+			dao.excluirRegistroDizOferta(dzoid);
+			
+	       response.sendRedirect("consultaDizimo?mes=" + mes + "&ano=" + ano + "&tipo=" + tipo);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+    }
+    
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request, response);

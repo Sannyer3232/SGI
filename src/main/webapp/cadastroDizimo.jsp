@@ -8,7 +8,7 @@
 <meta name="viewport"
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <link rel="stylesheet" href="./css/main.css">
-<link rel="stylesheet" href="./css/janela-modal.css">
+<link rel="stylesheet" href="./css/janela-modal-sucesso-erro.css">
 </head>
 <body>
 	<!-- SideBar -->
@@ -76,9 +76,9 @@
 								class="zmdi zmdi-exposure-alt zmdi-hc-fw"></i> Contas</a></li>
 						<li><a href="payments.html"><i
 								class="zmdi zmdi-favorite zmdi-hc-fw"></i> Doações</a></li>
-						<li><a href="payments.html"><i
+						<li><a href="cadastroDizimo.jsp"><i
 								class="zmdi zmdi-money zmdi-hc-fw"></i> Dízimos</a></li>
-						<li><a href="payments.html"><i
+						<li><a href="cadastroOferta.jsp"><i
 								class="zmdi zmdi-money-box zmdi-hc-fw"></i> Ofertas</a></li>
 						<li><a href="payments.html"><i
 								class="zmdi zmdi-chart zmdi-hc-fw"></i> Patrimonio</a></li>
@@ -128,6 +128,8 @@
 					<ul class="nav nav-tabs" style="margin-bottom: 15px;">
 						<li class="active"><a id="fonte-nav"
 							href="pesquisaMembros.jsp">Buscar Membros</a></li>
+							<li class="active"><a id="fonte-nav"
+							href="consultarDizimo.jsp">Consultar Registro de Dízimos</a></li>
 					</ul>
 
 
@@ -312,6 +314,5 @@ if (achouMembro != null) {
 }
 %>
 <script src="js/script-fechar.js"></script>
- <script src="js/validaContribuicao.js"></script>
 
 </html>

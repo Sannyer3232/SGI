@@ -9,6 +9,8 @@ public class DizimosOferta {
 	private String dzotipo;
 	private float dzovalor;
 	private Date dzodtcontribuicao;
+	private String dzomembronome;
+	private String dzoFilialNome;
 	
 	
 	
@@ -16,6 +18,16 @@ public class DizimosOferta {
 	
 	
 	
+	
+	public DizimosOferta(int iddizimooferta, String dzotipo, float dzovalor, Date dzodtcontribuicao,
+			String dzomembronome, String dzoFilialNome) {
+		this.iddizimooferta = iddizimooferta;
+		this.dzotipo = dzotipo;
+		this.dzovalor = dzovalor;
+		this.dzodtcontribuicao = dzodtcontribuicao;
+		this.dzomembronome = dzomembronome;
+		this.dzoFilialNome = dzoFilialNome;
+	}
 	
 	public DizimosOferta(int dzombrid, String dzotipo, float dzovalor, Date dzodtcontribuicao) {
 		this.dzombrid = dzombrid;
@@ -29,6 +41,23 @@ public class DizimosOferta {
 		this.dzotipo = dzotipo;
 		this.dzovalor = dzovalor;
 		this.dzodtcontribuicao = dzodtcontribuicao;
+	}
+	
+	
+	
+	
+	
+	public String getDzomembronome() {
+		return dzomembronome;
+	}
+	public void setDzomembronome(String dzomembronome) {
+		this.dzomembronome = dzomembronome;
+	}
+	public String getDzoFilialNome() {
+		return dzoFilialNome;
+	}
+	public void setDzoFilialNome(String dzoFilialNome) {
+		this.dzoFilialNome = dzoFilialNome;
 	}
 	public DizimosOferta() {
 		

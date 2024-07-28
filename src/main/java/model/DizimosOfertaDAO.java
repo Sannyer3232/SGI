@@ -2,8 +2,13 @@
 package model;
 //Importações necessárias
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
+
 
 public class DizimosOfertaDAO {
 	
@@ -64,6 +69,55 @@ public class DizimosOfertaDAO {
 		} catch (Exception e) {
 			System.out.println("Erro Dizimo: " + e);
 		}
+	}
+	
+	public ArrayList<DizimosOferta> consultaDizimoOferta(int mes, int ano, String tipo){
+		ArrayList<DizimosOferta> dizimosOfertas = new ArrayList<>();
+		String strConsultasql = "call sp_dizimo_por_mes(?,?,?);";
+		
+		try {
+			Connection con = conectar();
+			PreparedStatement pst = con.prepareStatement(strConsultasql);
+			pst.setInt(1, mes);
+			pst.setInt(2, ano);
+			pst.setString(3, tipo);
+			ResultSet rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				int dzoid = rs.getInt(1);
+				String dzonome = rs.getString(2);
+				String dzofilial = rs.getString(3);
+				Date dzoDate = rs.getDate(4);
+				String dzotipo = rs.getString(5);
+				float dzoValor = rs.getFloat(6);
+				
+				dizimosOfertas.add(new DizimosOferta(dzoid,dzotipo,dzoValor,dzoDate,dzonome,dzofilial));
+				
+			}
+			
+			con.close();
+			return dizimosOfertas;
+		} catch (Exception e) {
+			return null;
+		}
+		
+				
+				
+	}
+	
+	public void excluirRegistroDizOferta(int dzoid) {
+		String strProcedure = "call sp_excluir_dizimoOFerta(?);";
+		try {
+			Connection con = conectar();
+			PreparedStatement pst = con.prepareStatement(strProcedure);
+			pst.setInt(1, dzoid);
+			pst.executeUpdate();
+			con.close();
+			
+		} catch (Exception e) {
+			System.out.println("Erro ao excluir registro: " + e);
+		}
+		
 	}
 	
 

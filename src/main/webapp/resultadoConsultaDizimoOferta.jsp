@@ -1,14 +1,35 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="model.DizimosOferta"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.text.NumberFormat"%>
+<%@ page import="java.util.Locale"%>
+<%@ page import="java.time.LocalDate"%>
+<%@ page import="java.time.LocalDateTime"%>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.time.format.DateTimeFormatter"%>
+
+<%
+	String[] meses = {"Janeiro", "Fevereiro", "MarÃ§o", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro",
+		"Novembro", "Dezembro"};
+%>
+
+<%
+	int mes = (int) request.getAttribute("p_mes");
+	int ano = (int) request.getAttribute("p_ano");
+	String tipo = (String) request.getAttribute("p_tipo");
+%>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<title>Cadastro</title>
 <meta charset="UTF-8">
-<meta name="viewport"
-	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="./css/main.css">
+<link rel="stylesheet" href="./css/janela-modal-alerta.css">
+<title>Resultado Consulta de <%=tipo %> </title>
 </head>
 <body>
-	<!-- SideBar -->
 	<section class="full-box cover dashboard-sideBar">
 		<div class="full-box dashboard-sideBar-bg btn-menu-dashboard"></div>
 		<div class="full-box dashboard-sideBar-ct">
@@ -72,13 +93,13 @@
 						<li><a href="registration.html"><i
 								class="zmdi zmdi-exposure-alt zmdi-hc-fw"></i> Contas</a></li>
 						<li><a href="cadastroDizimo.jsp"><i
-								class="zmdi zmdi-favorite zmdi-hc-fw"></i> Doações</a></li>
+								class="zmdi zmdi-favorite zmdi-hc-fw"></i> DoaÃ§Ãµes</a></li>
 						<li><a href="cadastroDizimo.jsp"><i
-								class="zmdi zmdi-money zmdi-hc-fw"></i> Dízimos</a></li>
+								class="zmdi zmdi-money zmdi-hc-fw"></i> DÃ­zimos</a></li>
 						<li><a href="cadastroOferta.jsp"><i
 								class="zmdi zmdi-money-box zmdi-hc-fw"></i> Ofertas</a></li>
-						<li><a href="cadastroOferta.jsp"><i
-								class="zmdi zmdi-chart zmdi-hc-fw"></i> Patrimonio</a></li>
+						<li><a href="#"><i class="zmdi zmdi-chart zmdi-hc-fw"></i>
+								Patrimonio</a></li>
 					</ul></li>
 				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
 						class="zmdi zmdi-city zmdi-hc-fw"></i> Igrejas Filiadas <i
@@ -114,167 +135,110 @@
 		<div class="container-fluid">
 			<div class="page-header">
 				<h1 class="text-titles">
-					<i class="zmdi zmdi-account"></i> Membros <small>Cadastro</small>
+				<%if(tipo.equals("Dizimo")){ %>
+					<i class="zmdi zmdi-money zmdi-hc-fw"></i> DÃ­zimo <small>Consulta</small>
+				<%}else if(tipo.equals("Oferta")){ %>
+					<i class="zmdi zmdi-money-box"></i> Ofertas <small>Consulta</small>
+				<%} %>
 				</h1>
+
 			</div>
 		</div>
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-xs-12">
 
+
 					<ul class="nav nav-tabs" style="margin-bottom: 15px;">
-						<li class="active"><a id="fonte-nav"
-							href="pesquisaMembros.jsp">Buscar Membros</a></li>
+						<%if(tipo.equals("Dizimo")){ %>
+						<li><a id="fonte-nav" href="consultarDizimo.jsp"> Nova Consulta
+								DÃ­zimo</a></li>
+						<%}else if(tipo.equals("Oferta")){ %>
+						<li><a id="fonte-nav" href="consultaOferta.jsp"> Nova Consulta
+								Oferta</a></li>
+						<%} %>
+			
 					</ul>
+
 
 					<div id="myTabContent" class="tab-content">
 						<div class="tab-pane fade active in" id="new">
 							<div class="container-fluid">
 								<div class="row">
 									<div class="col-xs-12 col-md-10 col-md-offset-1">
-										<form method="post" enctype="multipart/form-data"
-											name="frmMembro" action="insert">
-											<div class="form-group label-floating">
-												<label class="control-label">Nome</label> <input
-													class="form-control" type="text" name="mbrnome">
-											</div>
-											<div class="form-group label-floating">
-												<label class="control-label">CPF</label> <input
-													class="form-control" type="text" name="mbrcpf">
-											</div>
-											<div class="form-group label-floating">
-												<label class="control-label">Id Superior</label> <input
-													class="form-control" type="text" name="mbrsuperior"></input>
-											</div>
-											<div class="form-group label-floating">
-												<label class="control-label">Identidade</label> <input
-													class="form-control" type="text" name="mbridentidade"></input>
-											</div>
-											<div class="form-group label-floating">
-												<label class="control-label">Email</label> <input
-													class="form-control" type="email" name="mbremail">
-											</div>
-											<div class="form-group label-floating">
-												<label class="control-label">Telefone</label> <input
-													class="form-control" type="text" name="mbrtelefone">
-											</div>
-											<div class="form-group label-floating">
-												<label class="control-label">Senha de Acesso</label> <input
-													class="form-control" type="text" name="mbrsenha">
-											</div>
-											<div class="form-group label-floating">
-												<label class="control-label">Data de Nascimento</label> <input
-													class="form_group" type="date" id="mbrnascimento"
-													name="mbrdatanascimento" required>
-											</div>
-
-											<div class="form-group label-floating">
-												<label class="control-label">Estado Civil</label> <select
-													class="form_group" name="mbrestadocivil">
-													<option value="1">Solteiro(a)</option>
-													<option value="2">Divorciado(a)</option>
-													<option value="3">Viúvo(a)</option>
-													<option value="4">Casado(a)</option>
-
-												</select>
-											</div>
-
-
-											<div class="form-group label-floating">
-												<label class="control-label">Sede</label> <select
-													class="form_group" name="mbrsede">
-													<option value="1">Sede Manaus</option>
-												</select>
-											</div>
+										<%
+											ArrayList<DizimosOferta> listaDizimosOfertas = (ArrayList<DizimosOferta>) request.getAttribute("dizimosOfertas");
+											float total = (float) request.getAttribute("totalDizimosOfertas");
+											NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
 											
-											<div class="form-group label-floating">
-												<label class="control-label">Filial</label> <select
-													class="form_group" name="mbrfilial">
-													<option value="">---- Selecionar Filial ----</option>
-													<option value="1">Filial Campos Elisios</option>
-													<option value="2">Filial Coroado</option>
-													<option value="3">Filial Cachoeirinha</option>
-												</select>
-											</div>
+											if (listaDizimosOfertas != null) {
+										%>
+										<div class="cardDizOferta">
 
-											<div class="form-group label-floating">
-												<label class="control-label">Ativo</label> <select
-													class="form_group" name="mbrativo">
-													<option value="1">Ativo</option>
-													<option value="0">Desligado</option>
-												</select>
+											<div class="title">
+												<p class="title-text">
+													Total de <%=tipo%> do MÃªs de
+													<%=meses[mes - 1]%>
+													de
+													<%=ano%></p>
 											</div>
+											<div class="data">
+												<p><%=nf.format(total)%></p>
+											</div>
+										</div>
+										<br> <br> <br>
+										<table class="table table-hover text-center">
 
-											<div class="form-group label-floating">
-												<label class="control-label">Nível de acesso</label> <select
-													class="form_group" name="mbracesso">
-													<option value="Administrador">Administrador</option>
-													<option value="Usuario">Usuário</option>
-												</select>
-											</div>
-											<div class="form-group label-floating">
-												<label class="control-label">Cargo</label> <select
-													class="form_group" name="cargo">
-													<option value="">---Selecione o Cargo---</option>
-													<option value="10">Membro Comum</option>
-													<option value="1">Pastor</option>
-													<option value="2">Presbitero</option>
-													<option value="3">Secretaria</option>
-													<option value="4">Diacono</option>
-													<option value="5">Porteiro</option>
-													<option value="6">Músico</option>
-													<option value="7">Coral e Louvor</option>
-													<option value="8">Oração e Intercessão</option>
-													<option value="9">Sonoplastia</option>
-												</select>
-											</div>
-											<div class="form-group label-floating">
-												<label class="control-label">Rua</label> <input
-													class="form-control" type="text" name="endrua">
-											</div>
+											<thead>
+												<tr>
+													<th class="text-center">ID</th>
+													<th class="text-center">Nome do Membro</th>
+													<th class="text-center">Filial</th>
+													<th class="text-center">Data da ContribuiÃ§Ã£o</th>
+													<th class="text-center">Tipo</th>
+													<th class="text-center">Valor</th>
+													<th class="text-center">Excluir</th>
+												</tr>
+											</thead>
+											<tbody>
 
-											<div class="form-group label-floating">
-												<label class="control-label">Número</label> <input
-													class="form-control" type="text" name="endnumero">
-											</div>
+												<%
+													for (DizimosOferta dizimoOferta : listaDizimosOfertas) {
+													LocalDateTime data = LocalDateTime.parse(dizimoOferta.getDzodtcontribuicao() + " " + "00:00:00",
+																DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+													LocalDateTime dataAtual = LocalDateTime.now();
+													SimpleDateFormat dataFormatter = new SimpleDateFormat("dd/MM/yyyy");
+													String dataFormatada = dataFormatter.format(dizimoOferta.getDzodtcontribuicao());
+												%>
+												<tr>
+													<td><%=dizimoOferta.getIddizimooferta()%></td>
+													<td><%=dizimoOferta.getDzomembronome()%></td>
+													<td><%=dizimoOferta.getDzoFilialNome()%></td>
+													<td><%=dataFormatada%></td>
+													<td><%=dizimoOferta.getDzotipo()%></td>
+													<td><%=nf.format(dizimoOferta.getDzovalor())%></td>
+													<td>
+														<button class="btn btn-danger btn-raised btn-xs"
+															onclick="abrirModalAlerta('<%=dizimoOferta.getIddizimooferta()%>', '<%=mes%>', '<%=ano%>','<%=tipo%>')">
+															<i class="zmdi zmdi-delete"></i>
+														</button>
 
-											<div class="form-group label-floating">
-												<label class="control-label">Bairro</label> <input
-													class="form-control" type="text" name="endbairro">
-											</div>
+													</td>
 
-											<div class="form-group label-floating">
-												<label class="control-label">CEP</label> <input
-													class="form-control" type="text" name="endcep">
-											</div>
-
-											<div class="form-group label-floating">
-												<label class="control-label">Cidade</label> <input
-													class="form-control" type="text" name="endcidade">
-											</div>
-											<div class="form-group label-floating">
-												<label class="control-label">Estado</label> <input
-													class="form-control" type="text" name="endestado">
-											</div>
-
-											<div class="form-group">
-												<label class="control-label">Photo</label>
-												<div>
-													<input type="text" readonly="" class="form-control"
-														placeholder="Browse..."> <input type="file"
-														id="mbrfoto" name="mbrfoto">
-												</div>
-											</div>
+												</tr>
 
 
+												<%
+												}
+												%>
+												<%
+												}
+												%>
 
-											<p class="text-center">
+											</tbody>
+										</table>
 
-												<button type="submit" class="btn btn-info btn-raised btn-sm">
-													<i class="zmdi zmdi-floppy"></i> Save
-												</button>
-											</p>
-										</form>
+
 									</div>
 								</div>
 							</div>
@@ -380,8 +344,30 @@
 	<script src="./js/ripples.min.js"></script>
 	<script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
 	<script src="./js/main.js"></script>
+	<script src="js/script-fecha-alerta.js"></script>
 	<script>
 		$.material.init();
 	</script>
 </body>
+
+<div class="janela-modal-alerta" id="janela-modal-alerta">
+	<div class="modal-alerta">
+		<button class="fechar" id="fechar">X</button>
+		<div class="container-modal">
+			<img class="icone" alt="alertaIcone"
+				src="./assets/img/alertaIcone.png">
+			<h1>Alerta!</h1>
+			<p>Deseja realmente exlcuir esse registro permanentemente?</p>
+			<div class="container-btn">
+				<button class="btn btn-danger btn-raised btn-xs" id="fechar-alerta">
+					<p id='fechar-alerta'>Cancelar</p>
+				</button>
+				<br> <a class="btn btn-success btn-raised btn-xs"
+					id="confirma-exclusao">Confirmar</a>
+			</div>
+		</div>
+
+	</div>
+</div>
+
 </html>
