@@ -151,6 +151,7 @@
 														alt="UserIcon">
 												</figure>
 											</div>
+											
 											<div class="form-group label-floating">
 
 												<div class="form-group label-floating">
@@ -212,6 +213,8 @@
 													<option value="3">Filial Cachoeirinha</option>
 												</select>
 											</div>
+											
+											
 											<div class="form-group label-floating">
 												<label class="control-label">Estado Civil</label> <select
 													class="form_group" name="mbrestadocivil">

@@ -219,7 +219,7 @@ public class MembroDAO {
 	            membro.setMbrfotoCaminho(rs.getString(12));
 	            membro.setMbrativo(rs.getBoolean(13));
 	            membro.setMbracesso(rs.getString(14));
-	            membro.setMbrfilial(rs.getInt(21));
+	           
 	            
 	            endereco.setEndrua(rs.getString(15));
 	            endereco.setEndnumero(rs.getString(16));
@@ -237,7 +237,9 @@ public class MembroDAO {
 	            } else {
 	                membro.setCargoNome("Membro Comum");
 	            }
+	           membro.setFilialnome(rs.getString(23));
 	        }
+	        membro.setFilialnome(callspselcionarMembro);
 	        
 	        conn.close();
 	        return membro; // Retorna o membro encontrado (ou null se não encontrado)
@@ -250,7 +252,7 @@ public class MembroDAO {
 
 	
 	public void updateMembro(MembroJavaBeans membro) {
-		String callSpAtulizar = "call sp_atualizar_membro(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+		String callSpAtulizar = "call sp_atualizar_membro(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 
 		try {
 			// Abrindo Conexão
@@ -279,6 +281,7 @@ public class MembroDAO {
 			pst.setString(17, membro.getMbrendereco().getEndcidade());
 			pst.setString(18, membro.getMbrendereco().getEndestado());
 			pst.setInt(19, membro.getCargo());
+			pst.setInt(20, membro.getMbrfilial());
 
 			// Executar call
 			pst.executeUpdate();
