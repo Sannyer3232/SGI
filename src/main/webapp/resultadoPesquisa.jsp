@@ -77,7 +77,7 @@
 						class="zmdi zmdi-caret-down pull-right"></i>
 				</a>
 					<ul class="list-unstyled full-box">
-						<li><a href="registration.html"><i
+						<li><a href="cadastrocontas.jsp"><i
 								class="zmdi zmdi-exposure-alt zmdi-hc-fw"></i> Contas</a></li>
 						<li><a href="cadastroDizimo.jsp"><i
 								class="zmdi zmdi-favorite zmdi-hc-fw"></i> Doações</a></li>

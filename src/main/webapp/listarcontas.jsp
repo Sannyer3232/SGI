@@ -1,13 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="model.ContasJavaBeans"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.text.NumberFormat"%>
+<%@ page import="java.util.Locale"%>
+<%@ page import="java.time.LocalDate"%>
+<%@ page import="java.time.LocalDateTime"%>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.time.format.DateTimeFormatter"%>
+<%
+ArrayList<ContasJavaBeans> lista = (ArrayList<ContasJavaBeans>) request.getAttribute("contas");
+%>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<title>Cadastro de Tarefas</title>
+<title>Contas</title>
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <link rel="stylesheet" href="./css/main.css">
+<link rel="stylesheet" href="./css/janela-modal-alerta.css">
 </head>
 <body>
 	<!-- SideBar -->
@@ -17,13 +29,13 @@
 			<!--SideBar Title -->
 			<div
 				class="full-box text-uppercase text-center text-titles dashboard-sideBar-title">
-				SGI <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
+				company <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
 			</div>
 			<!-- SideBar User info -->
 			<div class="full-box dashboard-sideBar-UserInfo">
 				<figure class="full-box">
-					<img src="./assets/img/icon.jpeg" alt="UserIcon">
-					<figcaption class="text-center text-titles">Monkey D Luffy</figcaption>
+					<img src="./assets/img/fotoPerfil.png" alt="UserIcon">
+					<figcaption class="text-center text-titles">Usuario</figcaption>
 				</figure>
 				<ul class="full-box list-unstyled text-center">
 					<li><a href="#!"> <i class="zmdi zmdi-settings"></i>
@@ -36,18 +48,17 @@
 			<!-- SideBar Menu -->
 			<ul class="list-unstyled full-box dashboard-sideBar-Menu">
 				<li><a href="home.html"> <i
-						class="zmdi zmdi-view-dashboard zmdi-hc-fw"></i> Panel Principal
+						class="zmdi zmdi-view-dashboard zmdi-hc-fw"></i> Painel Principal
 				</a></li>
 				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
-						class="zmdi zmdi-case zmdi-hc-fw"></i> Cadastro <i
+						class="zmdi zmdi-account-add zmdi-hc-fw"></i> Cadastro <i
 						class="zmdi zmdi-caret-down pull-right"></i>
 				</a>
 					<ul class="list-unstyled full-box">
 						<li><a href="cadastroMembros.jsp"><i
 								class="zmdi zmdi-account"></i> Membros</a></li>
-								<li><a href="cadastroTarefas.jsp"><i
+						<li><a href="cadastroTarefas.jsp"><i
 								class="zmdi zmdi-assignment"></i> Tarefas</a></li>
-
 					</ul></li>
 				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
 						class="zmdi zmdi-calendar-check zmdi-hc-fw"></i> Eventos <i
@@ -72,13 +83,13 @@
 					<ul class="list-unstyled full-box">
 						<li><a href="cadastrocontas.jsp"><i
 								class="zmdi zmdi-exposure-alt zmdi-hc-fw"></i> Contas</a></li>
-						<li><a href="cadastroDizimo.jsp"><i
+						<li><a href="payments.html"><i
 								class="zmdi zmdi-favorite zmdi-hc-fw"></i> Doações</a></li>
 						<li><a href="cadastroDizimo.jsp"><i
 								class="zmdi zmdi-money zmdi-hc-fw"></i> Dízimos</a></li>
 						<li><a href="cadastroOferta.jsp"><i
 								class="zmdi zmdi-money-box zmdi-hc-fw"></i> Ofertas</a></li>
-						<li><a href="#"><i
+						<li><a href="payments.html"><i
 								class="zmdi zmdi-chart zmdi-hc-fw"></i> Patrimonio</a></li>
 					</ul></li>
 				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
@@ -111,96 +122,99 @@
 				</a></li>
 			</ul>
 		</nav>
+
+		<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 		<!-- Content page -->
 		<div class="container-fluid">
 			<div class="page-header">
 				<h1 class="text-titles">
-					<i class="zmdi zmdi-assignment"></i> Tarefas <small>Cadastro</small>
+					<i class="zmdi zmdi-money-box zmdi-hc-fw"></i> Contas a pagar
 				</h1>
 			</div>
-			
+			<p class="lead">Área reservada ao cadastro de contas e
+				visualização das contas pagas e pendentes</p>
 		</div>
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-xs-12">
-				<div>
 					<ul class="nav nav-tabs" style="margin-bottom: 15px;">
-						
-						<li><a id ="fonte-nav" href="listarTarefas"> Lista de Tarefas Agendadas</a> </li>
-						<li><a id ="fonte-nav" href="listarTarefasCanceladas" >Lista de Tarefas Canceladas</a></li>
-						<li><a id ="fonte-nav" href="listarTarefasConcluida" >Lista de Tarefas Concluídas</a></li>
+						<li class="active"><a href="cadastrocontas.jsp">Cadastrar
+								Contas</a></li>
+					
 					</ul>
-					</div>
 					<div id="myTabContent" class="tab-content">
 						<div class="tab-pane fade active in" id="new">
 							<div class="container-fluid">
 								<div class="row">
 									<div class="col-xs-12 col-md-10 col-md-offset-1">
-									<script src="js/validaCadastroTarefas.js"></script>
-										<form method="get" enctype="multipart/form-data" name="frmMembro" action="insertTarefa" onsubmit="return validarCadastroTarefa()">
-											<div class="form-group label-floating">
-												<label class="control-label">Titulo</label> <input
-													class="form-control" type="text" name="trftitulo">
-											</div>
-											<div class="form-group label-floating">
-												<label class="control-label">Filial</label> <select
-													class="form_group" name="trffilial">
-													<option value="">---- Selecionar Filial ----</option>
-													<option value="1">Filial Campos Elisios</option>
-													<option value="2">Filial Coroado</option>
-													<option value="3">Filial Cachoeirinha</option>
-												</select>
-											</div>
-											<div class="form-group label-floating">
-												<label class="control-label">Descrição</label> <input
-													class="form-control" type="text" name="trfdesc"></input>
-											</div>
 
-											<div class="form-group label-floating">
-												<label class="control-label">ID do membro
-													responsável</label> <input class="form-control" type="text"
-													name="trfmbrid">
-											</div>
-
-											<div class="form-group label-floating">
-												<label class="control-label">Data de Agendamento</label> <input
-													class="form_group" type="date" id="trfdata" name="trfdata"
-													required>
-											</div>
-											<div class="form-group label-floating">
-												<label class="control-label">Hora de Agendamento</label> <input
-													class="form_group" type="time" id="trfhora" name="trfhora"
-													min="08:00" max="23:00" required>
-											</div>
-
-
-											<div class="form-group label-floating">
-												<label class="control-label">Status</label> <select
-													class="form_group" name="trfstatus">
-													<option value="Agendado">Agendado</option>
-													<option value="Concluido">Concluido</option>
-													<option value="Cancelado">Cancelado</option>
-												</select>
-											</div>
-
-
-											<p class="text-center">
-
-												<button type="submit" class="btn btn-info btn-raised btn-sm">
-													<i class="zmdi zmdi-floppy"></i> Save
-												</button>
-											</p>
-										</form>
+										<div class="table-responsive">
+											<table class="table table-hover text-center">
+												<thead>
+													<tr>
+														<th class="text-center">ID</th>
+														<th class="text-center">Nome Fornecedor</th>
+														<th class="text-center">Filial</th>
+														<th class="text-center">Descrição da Conta</th>
+														<th class="text-center">Data de Vencimento</th>
+														<th class="text-center">Valor</th>
+														<th class="text-center">Status</th>
+														<th class="text-center">Update</th>
+														<th class="text-center">Delete</th>
+													</tr>
+												</thead>
+												<tbody>
+													<%
+													NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+													
+													if (lista != null) {
+													%>
+													<tr>
+														<%
+														for (int i = 0; i < lista.size(); i++) {
+															LocalDateTime data = LocalDateTime.parse(lista.get(i).getCntdtvencimento() + " " + "00:00:00",
+																	DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+															LocalDateTime dataAtual = LocalDateTime.now();
+															SimpleDateFormat dataFormatter = new SimpleDateFormat("dd/MM/yyyy");
+															String dataFormatada = dataFormatter.format(lista.get(i).getCntdtvencimento());
+														%>
+													
+													<tr>
+														<td><%=lista.get(i).getIdcontapagar()%></td>
+														<td><%=lista.get(i).getCntnomefornecedor()%></td>
+														<td><%=lista.get(i).getCntidfilial()%></td>
+														<td><%=lista.get(i).getCntdescricaoconta()%></td>
+														<td><%=dataFormatada%></td>
+														<td><%=nf.format(lista.get(i).getCntvalor())%></td>
+														<td><%=lista.get(i).getCntstatuspagamento()%></td>
+														<td><a
+															href="ContasSelect?idcontapagar=<%=lista.get(i).getIdcontapagar()%>"
+															class="btn btn-success btn-raised btn-xs"><i
+																class="zmdi zmdi-refresh"></i>Editar</a></td>
+														<td><button class="btn btn-danger btn-raised btn-xs"
+																onclick="abrirModalAlertaConta('<%=lista.get(i).getIdcontapagar()%>')">
+																<i class="zmdi zmdi-delete"></i>
+															</button></td>
+													</tr>
+													<%
+														}
+														}%>
+												</tbody>
+											</table>
+											
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-
 					</div>
+
 				</div>
 			</div>
 		</div>
+
 	</section>
+	<!------------------------------------------------------------------------------------------------------------------------------------------------------>
 
 	<!-- Notifications area -->
 	<section class="full-box Notifications-area">
@@ -296,8 +310,31 @@
 	<script src="./js/ripples.min.js"></script>
 	<script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
 	<script src="./js/main.js"></script>
+	<script src="./js/abrir-janela-modal-conta.js"></script>
 	<script>
 		$.material.init();
 	</script>
 </body>
+
+
+
+<div class="janela-modal-alerta" id="janela-modal-alerta">
+	<div class="modal-alerta">
+		<button class="fechar" id="fechar">X</button>
+		<div class="container-modal">
+			<img class="icone" alt="alertaIcone"
+				src="./assets/img/alertaIcone.png">
+			<h1>Alerta!</h1>
+			<p>Deseja realmente exlcuir esse registro permanentemente?</p>
+			<div class="container-btn">
+				<button class="btn btn-danger btn-raised btn-xs" id="fechar-alerta">
+					<p id='fechar-alerta'>Cancelar</p>
+				</button>
+				<br> <a class="btn btn-success btn-raised btn-xs"
+					id="confirma-exclusao">Confirmar</a>
+			</div>
+		</div>
+
+	</div>
+</div>
 </html>

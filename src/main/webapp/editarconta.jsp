@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<title>Cadastro de Tarefas</title>
+<title>Contas</title>
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -17,13 +17,13 @@
 			<!--SideBar Title -->
 			<div
 				class="full-box text-uppercase text-center text-titles dashboard-sideBar-title">
-				SGI <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
+				company <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
 			</div>
 			<!-- SideBar User info -->
 			<div class="full-box dashboard-sideBar-UserInfo">
 				<figure class="full-box">
-					<img src="./assets/img/icon.jpeg" alt="UserIcon">
-					<figcaption class="text-center text-titles">Monkey D Luffy</figcaption>
+					<img src="./assets/img/fotoPerfil.png" alt="UserIcon">
+					<figcaption class="text-center text-titles">Usuário</figcaption>
 				</figure>
 				<ul class="full-box list-unstyled text-center">
 					<li><a href="#!"> <i class="zmdi zmdi-settings"></i>
@@ -36,18 +36,17 @@
 			<!-- SideBar Menu -->
 			<ul class="list-unstyled full-box dashboard-sideBar-Menu">
 				<li><a href="home.html"> <i
-						class="zmdi zmdi-view-dashboard zmdi-hc-fw"></i> Panel Principal
+						class="zmdi zmdi-view-dashboard zmdi-hc-fw"></i> Painel Principal
 				</a></li>
 				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
-						class="zmdi zmdi-case zmdi-hc-fw"></i> Cadastro <i
+						class="zmdi zmdi-account-add zmdi-hc-fw"></i> Cadastro <i
 						class="zmdi zmdi-caret-down pull-right"></i>
 				</a>
 					<ul class="list-unstyled full-box">
 						<li><a href="cadastroMembros.jsp"><i
 								class="zmdi zmdi-account"></i> Membros</a></li>
-								<li><a href="cadastroTarefas.jsp"><i
+						<li><a href="cadastroTarefas.jsp"><i
 								class="zmdi zmdi-assignment"></i> Tarefas</a></li>
-
 					</ul></li>
 				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
 						class="zmdi zmdi-calendar-check zmdi-hc-fw"></i> Eventos <i
@@ -72,13 +71,13 @@
 					<ul class="list-unstyled full-box">
 						<li><a href="cadastrocontas.jsp"><i
 								class="zmdi zmdi-exposure-alt zmdi-hc-fw"></i> Contas</a></li>
-						<li><a href="cadastroDizimo.jsp"><i
+						<li><a href="payments.html"><i
 								class="zmdi zmdi-favorite zmdi-hc-fw"></i> Doações</a></li>
 						<li><a href="cadastroDizimo.jsp"><i
 								class="zmdi zmdi-money zmdi-hc-fw"></i> Dízimos</a></li>
 						<li><a href="cadastroOferta.jsp"><i
 								class="zmdi zmdi-money-box zmdi-hc-fw"></i> Ofertas</a></li>
-						<li><a href="#"><i
+						<li><a href="payments.html"><i
 								class="zmdi zmdi-chart zmdi-hc-fw"></i> Patrimonio</a></li>
 					</ul></li>
 				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
@@ -111,40 +110,45 @@
 				</a></li>
 			</ul>
 		</nav>
+
+		<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 		<!-- Content page -->
 		<div class="container-fluid">
 			<div class="page-header">
 				<h1 class="text-titles">
-					<i class="zmdi zmdi-assignment"></i> Tarefas <small>Cadastro</small>
+					<i class="zmdi zmdi-money-box zmdi-hc-fw"></i> Contas a pagar
 				</h1>
 			</div>
-			
+			<p class="lead">Área reservada ao cadastro de contas e
+				visualização das contas pagas e pendentes</p>
 		</div>
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-xs-12">
-				<div>
 					<ul class="nav nav-tabs" style="margin-bottom: 15px;">
-						
-						<li><a id ="fonte-nav" href="listarTarefas"> Lista de Tarefas Agendadas</a> </li>
-						<li><a id ="fonte-nav" href="listarTarefasCanceladas" >Lista de Tarefas Canceladas</a></li>
-						<li><a id ="fonte-nav" href="listarTarefasConcluida" >Lista de Tarefas Concluídas</a></li>
+						<li class="active"><a href="#new" data-toggle="tab">Editar
+								Contas</a></li>
+						<li><a href="main">Lista de contas</a></li>
 					</ul>
-					</div>
 					<div id="myTabContent" class="tab-content">
 						<div class="tab-pane fade active in" id="new">
 							<div class="container-fluid">
 								<div class="row">
 									<div class="col-xs-12 col-md-10 col-md-offset-1">
-									<script src="js/validaCadastroTarefas.js"></script>
-										<form method="get" enctype="multipart/form-data" name="frmMembro" action="insertTarefa" onsubmit="return validarCadastroTarefa()">
+										<form name="frmConta" action="ContasUpdate" method="get">
 											<div class="form-group label-floating">
-												<label class="control-label">Titulo</label> <input
-													class="form-control" type="text" name="trftitulo">
+												<label class="control-label">Nome do Fornecedor</label> <input
+													type="text" name="idcontapagar" readonly
+													value="<%out.print(request.getAttribute("idcontapagar"));%>">
+											</div>
+											<div class="form-group label-floating">
+												<label class="control-label">Nome do Fornecedor</label> <input
+													class="form-control" type="text" name="nomefornecedor"
+													value="<%out.print(request.getAttribute("nome"));%>">
 											</div>
 											<div class="form-group label-floating">
 												<label class="control-label">Filial</label> <select
-													class="form_group" name="trffilial">
+													class="form_group" name="filial">
 													<option value="">---- Selecionar Filial ----</option>
 													<option value="1">Filial Campos Elisios</option>
 													<option value="2">Filial Coroado</option>
@@ -152,55 +156,137 @@
 												</select>
 											</div>
 											<div class="form-group label-floating">
-												<label class="control-label">Descrição</label> <input
-													class="form-control" type="text" name="trfdesc"></input>
-											</div>
+												<label class="control-label">Descrição da conta</label> <input
+													class="form-control" type="text" name="descricao"
+													value="<%out.print(request.getAttribute("descricaoconta"));%>">
 
-											<div class="form-group label-floating">
-												<label class="control-label">ID do membro
-													responsável</label> <input class="form-control" type="text"
-													name="trfmbrid">
-											</div>
-
-											<div class="form-group label-floating">
-												<label class="control-label">Data de Agendamento</label> <input
-													class="form_group" type="date" id="trfdata" name="trfdata"
-													required>
 											</div>
 											<div class="form-group label-floating">
-												<label class="control-label">Hora de Agendamento</label> <input
-													class="form_group" type="time" id="trfhora" name="trfhora"
-													min="08:00" max="23:00" required>
+												<label class="control-label">Data de Vencimento</label> <input
+													class="form_group" type="date" name="vencimento" required
+													value="<%out.print(request.getAttribute("vencimento"));%>">
 											</div>
-
-
 											<div class="form-group label-floating">
-												<label class="control-label">Status</label> <select
-													class="form_group" name="trfstatus">
-													<option value="Agendado">Agendado</option>
-													<option value="Concluido">Concluido</option>
-													<option value="Cancelado">Cancelado</option>
+												<label class="control-label">Valor</label> <input
+													class="form-control" type="text" name="valor"
+													value="<%out.print(request.getAttribute("valor"));%>">
+											</div>
+											<div class="form-group label-floating">
+												<label class="control-label">Situação</label> <select
+													class="form_group" name="status"
+													value="<%out.print(request.getAttribute("status"));%>">
+													<option value="">---- Status de Pagamento ----</option>
+													<option value="Pendente">Pendente</option>
+													<option value="Pago">Pago</option>
 												</select>
 											</div>
 
-
 											<p class="text-center">
-
-												<button type="submit" class="btn btn-info btn-raised btn-sm">
-													<i class="zmdi zmdi-floppy"></i> Save
-												</button>
+												<input type="submit" class="btn btn-info btn-raised btn-sm"
+													value="Salvar" onclick="validar()">
 											</p>
 										</form>
+										<script src="scripts/validador.js"></script>
 									</div>
 								</div>
 							</div>
 						</div>
-
+						<div class="tab-pane fade" id="list">
+							<div class="table-responsive">
+								<table class="table table-hover text-center">
+									<thead>
+										<tr>
+											<th class="text-center">#</th>
+											<th class="text-center">Payment</th>
+											<th class="text-center">Amount</th>
+											<th class="text-center">Pending</th>
+											<th class="text-center">Student</th>
+											<th class="text-center">Section</th>
+											<th class="text-center">Year</th>
+											<th class="text-center">Update</th>
+											<th class="text-center">Delete</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>1</td>
+											<td>$70</td>
+											<td>$40</td>
+											<td>$30</td>
+											<td>Carlos Alfaro</td>
+											<td>Section</td>
+											<td>2017</td>
+											<td><a href="#!"
+												class="btn btn-success btn-raised btn-xs"><i
+													class="zmdi zmdi-refresh"></i></a></td>
+											<td><a href="#!"
+												class="btn btn-danger btn-raised btn-xs"><i
+													class="zmdi zmdi-delete"></i></a></td>
+										</tr>
+										<tr>
+											<td>2</td>
+											<td>$70</td>
+											<td>$70</td>
+											<td>$0</td>
+											<td>Claudia Rodriguez</td>
+											<td>Section</td>
+											<td>2017</td>
+											<td><a href="#!"
+												class="btn btn-success btn-raised btn-xs"><i
+													class="zmdi zmdi-refresh"></i></a></td>
+											<td><a href="#!"
+												class="btn btn-danger btn-raised btn-xs"><i
+													class="zmdi zmdi-delete"></i></a></td>
+										</tr>
+										<tr>
+											<td>3</td>
+											<td>$70</td>
+											<td>$70</td>
+											<td>$0</td>
+											<td>Alicia Melendez</td>
+											<td>Section</td>
+											<td>2017</td>
+											<td><a href="#!"
+												class="btn btn-success btn-raised btn-xs"><i
+													class="zmdi zmdi-refresh"></i></a></td>
+											<td><a href="#!"
+												class="btn btn-danger btn-raised btn-xs"><i
+													class="zmdi zmdi-delete"></i></a></td>
+										</tr>
+										<tr>
+											<td>4</td>
+											<td>$70</td>
+											<td>$70</td>
+											<td>$0</td>
+											<td>Alba Bonilla</td>
+											<td>Section</td>
+											<td>2017</td>
+											<td><a href="#!"
+												class="btn btn-success btn-raised btn-xs"><i
+													class="zmdi zmdi-refresh"></i></a></td>
+											<td><a href="#!"
+												class="btn btn-danger btn-raised btn-xs"><i
+													class="zmdi zmdi-delete"></i></a></td>
+										</tr>
+									</tbody>
+								</table>
+								<ul class="pagination pagination-sm">
+									<li class="disabled"><a href="#!">«</a></li>
+									<li class="active"><a href="#!">1</a></li>
+									<li><a href="#!">2</a></li>
+									<li><a href="#!">3</a></li>
+									<li><a href="#!">4</a></li>
+									<li><a href="#!">5</a></li>
+									<li><a href="#!">»</a></li>
+								</ul>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+	<!------------------------------------------------------------------------------------------------------------------------------------------------------>
 
 	<!-- Notifications area -->
 	<section class="full-box Notifications-area">
