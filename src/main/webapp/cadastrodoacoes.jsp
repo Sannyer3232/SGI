@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<title>Editar patrimonio</title>
+<title>cadastrodoacoes</title>
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <link rel="stylesheet" href="./css/main.css">
+<link rel="stylesheet" href="./css/janela-modal-sucesso-erro.css">
 </head>
 <body>
 	<!-- SideBar -->
@@ -17,7 +18,7 @@
 			<!--SideBar Title -->
 			<div
 				class="full-box text-uppercase text-center text-titles dashboard-sideBar-title">
-				company <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
+				SGI <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
 			</div>
 			<!-- SideBar User info -->
 			<div class="full-box dashboard-sideBar-UserInfo">
@@ -42,8 +43,7 @@
 						class="zmdi zmdi-account-add zmdi-hc-fw"></i> Cadastro <i
 						class="zmdi zmdi-caret-down pull-right"></i>
 				</a>
-				
-						<ul class="list-unstyled full-box">
+					<ul class="list-unstyled full-box">
 						<li><a href="cadastroMembros.jsp"><i
 								class="zmdi zmdi-account"></i> Membros</a></li>
 						<li><a href="cadastroTarefas.jsp"><i
@@ -70,7 +70,7 @@
 						class="zmdi zmdi-caret-down pull-right"></i>
 				</a>
 					<ul class="list-unstyled full-box">
-						<li><a href="registration.html"><i
+						<li><a href="cadastrocontas.jsp"><i
 								class="zmdi zmdi-exposure-alt zmdi-hc-fw"></i> Contas</a></li>
 						<li><a href="cadastrodoacoes.jsp"><i
 								class="zmdi zmdi-favorite zmdi-hc-fw"></i> Doações</a></li>
@@ -117,82 +117,81 @@
 		<div class="container-fluid">
 			<div class="page-header">
 				<h1 class="text-titles">
-					<i class="zmdi zmdi-chart zmdi-hc-fw"></i> Patrimonios
+					<i class="zmdi zmdi-favorite zmdi-hc-fw"></i> Doações
 				</h1>
 			</div>
-			<p class="lead">Área reservada ao edição de dados dos Patrimonio
-				e visualização dos patrimonios da Igreja</p>
+			<p class="lead">Área reservada ao cadastro de Doações e
+				visualização das Doações feitas pela Igreja</p>
 		</div>
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-xs-12">
 					<ul class="nav nav-tabs" style="margin-bottom: 15px;">
-						<li class="active"><a href="#new" data-toggle="tab"> Novo
-								Patrimonio</a></li>
-
+						<li class="active"><a href="#new" data-toggle="tab">
+								Nova Doação</a></li>
+						<li><a href="pesquisardoacao.jsp">Lista de Doações</a></li>
+						<li><a href="pesquisaMembros.jsp">Pesquisar Membro</a></li>
 					</ul>
+					
 					<div id="myTabContent" class="tab-content">
 						<div class="tab-pane fade active in" id="new">
 							<div class="container-fluid">
 								<div class="row">
 									<div class="col-xs-12 col-md-10 col-md-offset-1">
+									
+										<form name="frmDoacao" action="insertdoacao" method="get">
+											<div class="form-group label-floating">
+												<label class="control-label">Nome do Doador</label> <input
+													class="form-control" type="text" name="doanomedoador">
+											</div>
+											<div class="form-group label-floating">
+												<label class="control-label">Código do Doador</label> <input
+													class="form-control" type="text" name="doamembroid">
 
-										<form name="frmPatrimonio" action="updatepatri" method="get">
-											<div class="form-group label-floating">
-												<label class="control-label">Id</label> <input
-													class="form-control" type="text" name="idpatrimonio"
-													readonly
-													value="<%out.print(request.getAttribute("idpatrimonio"));%>">
 											</div>
+											
 											<div class="form-group label-floating">
-												<label class="control-label">Nome do Item</label> <input
-													class="form-control" type="text" name="ptrnome"
-													value="<%out.print(request.getAttribute("ptrnome"));%>">
+												<label class="control-label">Descrição</label> <input
+													class="form-control" type="text" name="doadescricao">
+
 											</div>
+											
+											<div class="form-group label-floating">
+												<label class="control-label">Data de Doação</label> <input
+													class="form_group" type="date" name="doadtdoacao" required>
+											</div>
+											
+											<div class="form-group label-floating">
+												<label class="control-label">Valor</label> <input
+													class="form-control" type="text" name="doavalor">
+											</div>
+											
+											<div class="form-group label-floating">
+												<label class="control-label">Status</label> <select
+													class="form_group" name="status">
+													<option value="">Status da Doação</option>
+													<option value="pendente">Pendente</option>
+													<option value="entregue">Entregue</option>
+													<option value="recusado">Recusado</option>
+												</select>
+											</div>
+											
 											<div class="form-group label-floating">
 												<label class="control-label">Filial</label> <select
-													class="form_group" name="ptridfil">
+													class="form_group" name="doaidfilial">
 													<option value="">Selecionar Filial</option>
 													<option value="1">Filial Campos Elisios</option>
 													<option value="2">Filial Coroado</option>
 													<option value="3">Filial Cachoeirinha</option>
 												</select>
 											</div>
-											<div class="form-group label-floating">
-												<label class="control-label">Descrição</label> <input
-													class="form-control" type="text" name="ptrdescricao"
-													value="<%out.print(request.getAttribute("ptrdescricao"));%>">
-
-											</div>
-											<div class="form-group label-floating">
-												<label class="control-label">Valor</label> <input
-													class="form-control" type="text" name="ptrvalor"
-													value="<%out.print(request.getAttribute("ptrvalor"));%>">
-											</div>
-											<div class="form-group label-floating">
-												<label class="control-label">Data de Aquisição</label> <input
-													class="form_group" type="date" name="ptrdataaquisicao"
-													value="<%out.print(request.getAttribute("ptrdataaquisicao"));%>"
-													required>
-											</div>
-
-											<div class="form-group label-floating">
-												<label class="control-label">Estado</label> <select
-													class="form_group" name="ptrestado"
-													value="<%out.print(request.getAttribute("ptrestado"));%>">
-													<option value="">Estado do item</option>
-													<option value="novo">Novo</option>
-													<option value="usado">Usado</option>
-													<option value="danificado">Danificado</option>
-												</select>
-											</div>
 
 											<p class="text-center">
 												<input type="submit" class="btn btn-info btn-raised btn-sm"
-													value="Salvar" onclick="validarpatri()">
+													value="Adicionar" onclick="validarpatri()">
+
 											</p>
 										</form>
-										<script src="scripts/validadorpatri.js"></script>
 									</div>
 								</div>
 							</div>
@@ -392,4 +391,65 @@
 		$.material.init();
 	</script>
 </body>
+
+<%
+String achouMembro = request.getParameter("success");
+if (achouMembro != null) {
+	if ("true".equals(achouMembro)) {
+%>
+<div class="janela-modal-sucesso" id="janela-modal-sucesso">
+	<div class="modal-sucesso">
+		<button class="fechar" id="fechar-sucesso">X</button>
+			<div class="container-modal">
+				<img class = "icone"alt="sucessoIcon" src="./assets/img/sucesso.png">
+				<h1>Sucesso!</h1>
+				<p>O cadastro da doação foi realizado com sucesso.</p>
+			</div>
+	</div>
+</div>
+<%
+} else if ("false".equals(achouMembro)) {
+%>
+<div class="janela-modal-erro" id="janela-modal-erro">
+	<div class="modal-erro">
+		<button class="fechar" id="fechar-erro">X</button>
+			<div class="container-modal">
+				<img class="icone"alt="sucessoIcon" src="./assets/img/erro.png">
+				<h1>Erro!</h1>
+				<p>Os dados inseridos estão incorretos.</p>
+			</div>
+	</div>
+</div>
+<%
+}else if("true-edit".equals(achouMembro)){
+%>
+<div class="janela-modal-sucesso" id="janela-modal-sucesso">
+	<div class="modal-sucesso">
+		<button class="fechar" id="fechar-sucesso">X</button>
+			<div class="container-modal">
+				<img class = "icone"alt="sucessoIcon" src="./assets/img/sucesso.png">
+				<h1>Sucesso!</h1>
+				<p>O Edição da doação foi realizado com sucesso.</p>
+			</div>
+	</div>
+</div>
+<%
+}else if("false-edit".equals(achouMembro)){
+%>
+<div class="janela-modal-erro" id="janela-modal-erro">
+	<div class="modal-erro">
+		<button class="fechar" id="fechar-erro">X</button>
+			<div class="container-modal">
+				<img class="icone"alt="sucessoIcon" src="./assets/img/erro.png">
+				<h1>Erro!</h1>
+				<p>Os dados inseridos estão incorretos na edição.</p>
+			</div>
+	</div>
+</div>
+
+<%
+}
+}
+%>
+<script src="./js/script-fechar.js"></script>
 </html>

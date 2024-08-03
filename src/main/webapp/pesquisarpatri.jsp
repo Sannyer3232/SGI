@@ -73,7 +73,7 @@
 					<ul class="list-unstyled full-box">
 						<li><a href="registration.html"><i
 								class="zmdi zmdi-exposure-alt zmdi-hc-fw"></i> Contas</a></li>
-						<li><a href="payments.html"><i
+						<li><a href="cadastrodoacoes.jsp"><i
 								class="zmdi zmdi-favorite zmdi-hc-fw"></i> Doações</a></li>
 						<li><a href="payments.html"><i
 								class="zmdi zmdi-money zmdi-hc-fw"></i> Dízimos</a></li>

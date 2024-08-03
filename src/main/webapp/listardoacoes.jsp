@@ -1,13 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
+<%@ page import="model.DoacoesJavaBeans"%>
+<%@ page import="java.util.ArrayList"%>
+<%
+ArrayList<DoacoesJavaBeans> lista = (ArrayList<DoacoesJavaBeans>) request.getAttribute("doacao");
+
+%>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<title>Editar patrimonio</title>
+<title>listardoacoes</title>
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <link rel="stylesheet" href="./css/main.css">
+<link rel="stylesheet" href="./css/janela-modal-alerta.css">
 </head>
 <body>
 	<!-- SideBar -->
@@ -23,7 +30,7 @@
 			<div class="full-box dashboard-sideBar-UserInfo">
 				<figure class="full-box">
 					<img src="./assets/img/fotoPerfil.png" alt="UserIcon">
-					<figcaption class="text-center text-titles">Usuário</figcaption>
+					<figcaption class="text-center text-titles">Usuario</figcaption>
 				</figure>
 				<ul class="full-box list-unstyled text-center">
 					<li><a href="#!"> <i class="zmdi zmdi-settings"></i>
@@ -42,8 +49,7 @@
 						class="zmdi zmdi-account-add zmdi-hc-fw"></i> Cadastro <i
 						class="zmdi zmdi-caret-down pull-right"></i>
 				</a>
-				
-						<ul class="list-unstyled full-box">
+					<ul class="list-unstyled full-box">
 						<li><a href="cadastroMembros.jsp"><i
 								class="zmdi zmdi-account"></i> Membros</a></li>
 						<li><a href="cadastroTarefas.jsp"><i
@@ -70,7 +76,7 @@
 						class="zmdi zmdi-caret-down pull-right"></i>
 				</a>
 					<ul class="list-unstyled full-box">
-						<li><a href="registration.html"><i
+						<li><a href="cadastrocontas.jsp"><i
 								class="zmdi zmdi-exposure-alt zmdi-hc-fw"></i> Contas</a></li>
 						<li><a href="cadastrodoacoes.jsp"><i
 								class="zmdi zmdi-favorite zmdi-hc-fw"></i> Doações</a></li>
@@ -117,19 +123,18 @@
 		<div class="container-fluid">
 			<div class="page-header">
 				<h1 class="text-titles">
-					<i class="zmdi zmdi-chart zmdi-hc-fw"></i> Patrimonios
+					<i class="zmdi zmdi-favorite zmdi-hc-fw"></i> Doações
 				</h1>
 			</div>
-			<p class="lead">Área reservada ao edição de dados dos Patrimonio
-				e visualização dos patrimonios da Igreja</p>
+			<p class="lead">Área reservada a visualização, edição e exclusão de doações</p>
 		</div>
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-xs-12">
 					<ul class="nav nav-tabs" style="margin-bottom: 15px;">
-						<li class="active"><a href="#new" data-toggle="tab"> Novo
-								Patrimonio</a></li>
-
+						<li class="active"><a href="cadastrodoacoes.jsp">Cadastrar
+								Doaçao</a></li>
+						<li><a href="pesquisaMembros.jsp">Pesquisar Membro</a></li>
 					</ul>
 					<div id="myTabContent" class="tab-content">
 						<div class="tab-pane fade active in" id="new">
@@ -137,160 +142,65 @@
 								<div class="row">
 									<div class="col-xs-12 col-md-10 col-md-offset-1">
 
-										<form name="frmPatrimonio" action="updatepatri" method="get">
-											<div class="form-group label-floating">
-												<label class="control-label">Id</label> <input
-													class="form-control" type="text" name="idpatrimonio"
-													readonly
-													value="<%out.print(request.getAttribute("idpatrimonio"));%>">
-											</div>
-											<div class="form-group label-floating">
-												<label class="control-label">Nome do Item</label> <input
-													class="form-control" type="text" name="ptrnome"
-													value="<%out.print(request.getAttribute("ptrnome"));%>">
-											</div>
-											<div class="form-group label-floating">
-												<label class="control-label">Filial</label> <select
-													class="form_group" name="ptridfil">
-													<option value="">Selecionar Filial</option>
-													<option value="1">Filial Campos Elisios</option>
-													<option value="2">Filial Coroado</option>
-													<option value="3">Filial Cachoeirinha</option>
-												</select>
-											</div>
-											<div class="form-group label-floating">
-												<label class="control-label">Descrição</label> <input
-													class="form-control" type="text" name="ptrdescricao"
-													value="<%out.print(request.getAttribute("ptrdescricao"));%>">
-
-											</div>
-											<div class="form-group label-floating">
-												<label class="control-label">Valor</label> <input
-													class="form-control" type="text" name="ptrvalor"
-													value="<%out.print(request.getAttribute("ptrvalor"));%>">
-											</div>
-											<div class="form-group label-floating">
-												<label class="control-label">Data de Aquisição</label> <input
-													class="form_group" type="date" name="ptrdataaquisicao"
-													value="<%out.print(request.getAttribute("ptrdataaquisicao"));%>"
-													required>
-											</div>
-
-											<div class="form-group label-floating">
-												<label class="control-label">Estado</label> <select
-													class="form_group" name="ptrestado"
-													value="<%out.print(request.getAttribute("ptrestado"));%>">
-													<option value="">Estado do item</option>
-													<option value="novo">Novo</option>
-													<option value="usado">Usado</option>
-													<option value="danificado">Danificado</option>
-												</select>
-											</div>
-
-											<p class="text-center">
-												<input type="submit" class="btn btn-info btn-raised btn-sm"
-													value="Salvar" onclick="validarpatri()">
-											</p>
-										</form>
-										<script src="scripts/validadorpatri.js"></script>
+										<div class="table-responsive">
+											<table class="table table-hover text-center">
+												<thead>
+													<tr>
+														<th class="text-center">ID</th>
+														<th class="text-center">Nome do Doador</th>
+														<th class="text-center">Codigo do Doador</th>
+														<th class="text-center">Descrição</th>
+														<th class="text-center">Data da Doação</th>
+														<th class="text-center">Valor</th>
+														<th class="text-center">Status</th>
+														<th class="text-center">Filial</th>
+														<th class="text-center">Update</th>
+														<th class="text-center">Delete</th>
+														<th class="text-center">Comprovante</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<%
+														for (int i = 0; i < lista.size(); i++) {
+														%>
+													
+													<tr>
+														<td><%=lista.get(i).getIddoacao() %></td>
+														<td><%=lista.get(i).getDoanomedoador()%></td>
+														<td><%=lista.get(i).getDoamembroid()%></td>
+														<td><%=lista.get(i).getDoadescricao()%></td>
+														<td><%=lista.get(i).getDoadtdoacao()%></td>
+														<td><%=lista.get(i).getDoavalor()%></td>
+														<td><%=lista.get(i).getStatus()%></td>
+														<td><%=lista.get(i).getDoaidfilial()%></td>
+														<td><a
+															href="selectdoacao?iddoacao=<%=lista.get(i).getIddoacao()%>" class="btn btn-success btn-raised btn-xs"><i
+															class="zmdi zmdi-refresh"></i>Editar</a></td>
+														<td><a
+															class="btn btn-danger btn-raised btn-xs"
+															onclick="abrirModalAlertaDoacoes('<%=lista.get(i).getIddoacao()%>')"><i
+															class="zmdi zmdi-delete"></i>Excluir</a></td>
+														<td><a
+															href="reportdoacao?iddoacao=<%=lista.get(i).getIddoacao()%>"
+															class="btn btn-raised btn-xs" id="btn-comprov"><i class="zmdi zmdi-file"></i>Comprovante</a></td>
+													</tr>
+													<%} %>
+												</tbody>
+												<tbody>
+											</table>
+											<script src="scripts/confirmadorPatri.js"></script>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="tab-pane fade" id="list">
-							<div class="table-responsive">
-								<table class="table table-hover text-center">
-									<thead>
-										<tr>
-											<th class="text-center">#</th>
-											<th class="text-center">Payment</th>
-											<th class="text-center">Amount</th>
-											<th class="text-center">Pending</th>
-											<th class="text-center">Student</th>
-											<th class="text-center">Section</th>
-											<th class="text-center">Year</th>
-											<th class="text-center">Update</th>
-											<th class="text-center">Delete</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>1</td>
-											<td>$70</td>
-											<td>$40</td>
-											<td>$30</td>
-											<td>Carlos Alfaro</td>
-											<td>Section</td>
-											<td>2017</td>
-											<td><a href="#!"
-												class="btn btn-success btn-raised btn-xs"><i
-													class="zmdi zmdi-refresh"></i></a></td>
-											<td><a href="#!"
-												class="btn btn-danger btn-raised btn-xs"><i
-													class="zmdi zmdi-delete"></i></a></td>
-										</tr>
-										<tr>
-											<td>2</td>
-											<td>$70</td>
-											<td>$70</td>
-											<td>$0</td>
-											<td>Claudia Rodriguez</td>
-											<td>Section</td>
-											<td>2017</td>
-											<td><a href="#!"
-												class="btn btn-success btn-raised btn-xs"><i
-													class="zmdi zmdi-refresh"></i></a></td>
-											<td><a href="#!"
-												class="btn btn-danger btn-raised btn-xs"><i
-													class="zmdi zmdi-delete"></i></a></td>
-										</tr>
-										<tr>
-											<td>3</td>
-											<td>$70</td>
-											<td>$70</td>
-											<td>$0</td>
-											<td>Alicia Melendez</td>
-											<td>Section</td>
-											<td>2017</td>
-											<td><a href="#!"
-												class="btn btn-success btn-raised btn-xs"><i
-													class="zmdi zmdi-refresh"></i></a></td>
-											<td><a href="#!"
-												class="btn btn-danger btn-raised btn-xs"><i
-													class="zmdi zmdi-delete"></i></a></td>
-										</tr>
-										<tr>
-											<td>4</td>
-											<td>$70</td>
-											<td>$70</td>
-											<td>$0</td>
-											<td>Alba Bonilla</td>
-											<td>Section</td>
-											<td>2017</td>
-											<td><a href="#!"
-												class="btn btn-success btn-raised btn-xs"><i
-													class="zmdi zmdi-refresh"></i></a></td>
-											<td><a href="#!"
-												class="btn btn-danger btn-raised btn-xs"><i
-													class="zmdi zmdi-delete"></i></a></td>
-										</tr>
-									</tbody>
-								</table>
-								<ul class="pagination pagination-sm">
-									<li class="disabled"><a href="#!">«</a></li>
-									<li class="active"><a href="#!">1</a></li>
-									<li><a href="#!">2</a></li>
-									<li><a href="#!">3</a></li>
-									<li><a href="#!">4</a></li>
-									<li><a href="#!">5</a></li>
-									<li><a href="#!">»</a></li>
-								</ul>
-							</div>
-						</div>
 					</div>
+
 				</div>
 			</div>
 		</div>
+
 	</section>
 	<!------------------------------------------------------------------------------------------------------------------------------------------------------>
 
@@ -388,8 +298,29 @@
 	<script src="./js/ripples.min.js"></script>
 	<script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
 	<script src="./js/main.js"></script>
+	<script src="js/abrir-janela-modal-doacoes.js"></script>
 	<script>
 		$.material.init();
 	</script>
 </body>
+
+<div class="janela-modal-alerta" id="janela-modal-alerta">
+	<div class="modal-alerta">
+		<button class="fechar" id="fechar">X</button>
+		<div class="container-modal">
+			<img class="icone" alt="alertaIcone"
+				src="./assets/img/alertaIcone.png">
+			<h1>Alerta!</h1>
+			<p>Deseja realmente exlcuir esse registro permanentemente?</p>
+			<div class="container-btn">
+				<button class="btn btn-danger btn-raised btn-xs" id="fechar-alerta">
+					<p id='fechar-alerta'>Cancelar</p>
+				</button>
+				<br> <a class="btn btn-success btn-raised btn-xs"
+					id="confirma-exclusao">Confirmar</a>
+			</div>
+		</div>
+
+	</div>
+</div>
 </html>

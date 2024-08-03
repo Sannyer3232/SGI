@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<title>Editar patrimonio</title>
+<title>Editar Doacao</title>
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -42,8 +43,7 @@
 						class="zmdi zmdi-account-add zmdi-hc-fw"></i> Cadastro <i
 						class="zmdi zmdi-caret-down pull-right"></i>
 				</a>
-				
-						<ul class="list-unstyled full-box">
+					<ul class="list-unstyled full-box">
 						<li><a href="cadastroMembros.jsp"><i
 								class="zmdi zmdi-account"></i> Membros</a></li>
 						<li><a href="cadastroTarefas.jsp"><i
@@ -70,7 +70,7 @@
 						class="zmdi zmdi-caret-down pull-right"></i>
 				</a>
 					<ul class="list-unstyled full-box">
-						<li><a href="registration.html"><i
+						<li><a href="cadastrocontas.jsp"><i
 								class="zmdi zmdi-exposure-alt zmdi-hc-fw"></i> Contas</a></li>
 						<li><a href="cadastrodoacoes.jsp"><i
 								class="zmdi zmdi-favorite zmdi-hc-fw"></i> Doações</a></li>
@@ -117,73 +117,78 @@
 		<div class="container-fluid">
 			<div class="page-header">
 				<h1 class="text-titles">
-					<i class="zmdi zmdi-chart zmdi-hc-fw"></i> Patrimonios
+					<i class="zmdi zmdi-favorite zmdi-hc-fw"></i> Doaçoes
 				</h1>
 			</div>
-			<p class="lead">Área reservada ao edição de dados dos Patrimonio
-				e visualização dos patrimonios da Igreja</p>
+			<p class="lead">Área reservada ao edição de dados das Doações
+				e visualização dos doações da Igreja</p>
 		</div>
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-xs-12">
 					<ul class="nav nav-tabs" style="margin-bottom: 15px;">
-						<li class="active"><a href="#new" data-toggle="tab"> Novo
-								Patrimonio</a></li>
-
+						<li class="active"><a href="#new" data-toggle="tab"> Nova
+								Doação</a></li>
+						<li><a href=pesquisardoacao.jsp>Lista de Doações</a></li>
 					</ul>
 					<div id="myTabContent" class="tab-content">
 						<div class="tab-pane fade active in" id="new">
 							<div class="container-fluid">
 								<div class="row">
 									<div class="col-xs-12 col-md-10 col-md-offset-1">
-
-										<form name="frmPatrimonio" action="updatepatri" method="get">
+				
+										<form name="frmDoacao" action="updatedoacao" method="get">
 											<div class="form-group label-floating">
 												<label class="control-label">Id</label> <input
-													class="form-control" type="text" name="idpatrimonio"
+													class="form-control" type="text" name="iddoacao"
 													readonly
-													value="<%out.print(request.getAttribute("idpatrimonio"));%>">
+													value="<%out.print(request.getAttribute("iddoacao"));%>">
 											</div>
 											<div class="form-group label-floating">
-												<label class="control-label">Nome do Item</label> <input
-													class="form-control" type="text" name="ptrnome"
-													value="<%out.print(request.getAttribute("ptrnome"));%>">
+												<label class="control-label">Nome do Doador</label> <input
+													class="form-control" type="text" name="doanomedoador"
+													value="<%out.print(request.getAttribute("doanomedoador"));%>">
+											</div>
+											<div class="form-group label-floating">
+												<label class="control-label">Código do membro</label> <input
+													class="form-control" type="text" name="doamembroid"
+													value="<%out.print(request.getAttribute("doamembroid"));%>">
+
+											</div>
+											<div class="form-group label-floating">
+												<label class="control-label">Descrição</label> <input
+													class="form-control" type="text" name="doadescricao"
+													value="<%out.print(request.getAttribute("doadescricao"));%>">
+
+											</div>
+											<div class="form-group label-floating">
+												<label class="control-label">Data da Doação</label> <input
+													class="form_group" type="date" name="doadtdoacao"
+													value="<%out.print(request.getAttribute("doadtdoacao"));%>"
+													required>
+											</div>
+											<div class="form-group label-floating">
+												<label class="control-label">Valor</label> <input
+													class="form-control" type="text" name="doavalor"
+													value="<%out.print(request.getAttribute("doavalor"));%>">
+											</div>
+											<div class="form-group label-floating">
+												<label class="control-label">Status</label> <select
+													class="form_group" name="status"
+													value="<%out.print(request.getAttribute("status"));%>">
+													<option value="">Status da doação</option>
+													<option value="Pendente">Pendente</option>
+													<option value="Entregue">Entregue</option>
+													<option value="Recusado">Recusado</option>
+												</select>
 											</div>
 											<div class="form-group label-floating">
 												<label class="control-label">Filial</label> <select
-													class="form_group" name="ptridfil">
+													class="form_group" name="doaidfilial">
 													<option value="">Selecionar Filial</option>
 													<option value="1">Filial Campos Elisios</option>
 													<option value="2">Filial Coroado</option>
 													<option value="3">Filial Cachoeirinha</option>
-												</select>
-											</div>
-											<div class="form-group label-floating">
-												<label class="control-label">Descrição</label> <input
-													class="form-control" type="text" name="ptrdescricao"
-													value="<%out.print(request.getAttribute("ptrdescricao"));%>">
-
-											</div>
-											<div class="form-group label-floating">
-												<label class="control-label">Valor</label> <input
-													class="form-control" type="text" name="ptrvalor"
-													value="<%out.print(request.getAttribute("ptrvalor"));%>">
-											</div>
-											<div class="form-group label-floating">
-												<label class="control-label">Data de Aquisição</label> <input
-													class="form_group" type="date" name="ptrdataaquisicao"
-													value="<%out.print(request.getAttribute("ptrdataaquisicao"));%>"
-													required>
-											</div>
-
-											<div class="form-group label-floating">
-												<label class="control-label">Estado</label> <select
-													class="form_group" name="ptrestado"
-													value="<%out.print(request.getAttribute("ptrestado"));%>">
-													<option value="">Estado do item</option>
-													<option value="novo">Novo</option>
-													<option value="usado">Usado</option>
-													<option value="danificado">Danificado</option>
 												</select>
 											</div>
 
