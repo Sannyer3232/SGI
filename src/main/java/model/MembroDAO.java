@@ -43,7 +43,7 @@ public class MembroDAO {
 	/** CRUD CREAT **/
 
 	@SuppressWarnings("null")
-	public void inserirMembro(MembroJavaBeans membro) {
+	public boolean inserirMembro(MembroJavaBeans membro) {
 		String callSpInserir = "call sp_membro_endereco(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 
 		try {
@@ -81,9 +81,11 @@ public class MembroDAO {
 			pst.executeUpdate();
 			// Encerrar Conexão
 			conn.close();
+			return true;
 
 		} catch (Exception e) {
 			System.out.println(e);
+			return false;
 		}
 	}
 
@@ -251,7 +253,7 @@ public class MembroDAO {
 	}
 
 	
-	public void updateMembro(MembroJavaBeans membro) {
+	public boolean updateMembro(MembroJavaBeans membro) {
 		String callSpAtulizar = "call sp_atualizar_membro(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 
 		try {
@@ -287,9 +289,11 @@ public class MembroDAO {
 			pst.executeUpdate();
 			// Encerrar Conexão
 			conn.close();
+			return true;
 
 		} catch (Exception e) {
 			System.out.println(e);
+			return false;
 		}
 	}
 	

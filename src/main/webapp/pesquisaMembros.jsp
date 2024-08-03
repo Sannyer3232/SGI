@@ -11,6 +11,7 @@
 <meta name="viewport"
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <link rel="stylesheet" href="./css/main.css">
+<link rel="stylesheet" href="./css/janela-modal-sucesso-erro.css">
 </head>
 <body>
 	<!-- SideBar -->
@@ -82,7 +83,7 @@
 								class="zmdi zmdi-money zmdi-hc-fw"></i> Dízimos</a></li>
 						<li><a href="cadastroOferta.jsp"><i
 								class="zmdi zmdi-money-box zmdi-hc-fw"></i> Ofertas</a></li>
-						<li><a href="#"><i
+						<li><a href="cadastropatrimonio.jsp"><i
 								class="zmdi zmdi-chart zmdi-hc-fw"></i> Patrimonio</a></li>
 					</ul></li>
 				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
@@ -270,4 +271,37 @@
 		$.material.init();
 	</script>
 </body>
+<%
+String achouMembro = request.getParameter("success");
+if (achouMembro != null) {
+	if ("true".equals(achouMembro)) {
+%>
+<div class="janela-modal-sucesso" id="janela-modal-sucesso">
+	<div class="modal-sucesso">
+		<button class="fechar" id="fechar-sucesso">X</button>
+		<div class="container-modal">
+			<img class="icone" alt="sucessoIcon" src="./assets/img/sucesso.png">
+			<h1>Sucesso!</h1>
+			<p>O cadastro do membro foi atualizado com sucesso.</p>
+		</div>
+	</div>
+</div>
+<%
+} else if ("false".equals(achouMembro)) {
+%>
+<div class="janela-modal-erro" id="janela-modal-erro">
+	<div class="modal-erro">
+		<button class="fechar" id="fechar-erro">X</button>
+		<div class="container-modal">
+			<img class="icone" alt="sucessoIcon" src="./assets/img/erro.png">
+			<h1>Erro!</h1>
+			<p>Erro ao atualizar o cadastro do membro.</p>
+		</div>
+	</div>
+</div>
+<%
+}
+}
+%>
+<script src="js/script-fechar.js"></script>
 </html>

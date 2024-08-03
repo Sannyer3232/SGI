@@ -113,9 +113,12 @@ public class TarefasController extends HttpServlet {
 
 		System.out.println("Titulo: " + tarefa.getTarefatitulo());
 
-		dao.inserirTarefa(tarefa);
-
-		response.sendRedirect("cadastroTarefas.jsp");
+		if(dao.inserirTarefa(tarefa)) {
+			
+			response.sendRedirect("cadastroTarefas.jsp?success=true");
+		}else {
+			response.sendRedirect("cadastroTarefas.jsp?success=false");
+		}
 
 	}
 
@@ -191,9 +194,12 @@ public class TarefasController extends HttpServlet {
 
 		System.out.println("Titulo: " + tarefa.getTarefatitulo());
 
-		dao.updateTarefa(tarefa);
-
-		response.sendRedirect("cadastroTarefas.jsp");
+		if(dao.updateTarefa(tarefa)) {
+			
+			response.sendRedirect("listarTarefas?success=true");
+		}else {
+			response.sendRedirect("listarTarefas?success=false");
+		}
 
 	}
 

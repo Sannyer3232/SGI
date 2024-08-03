@@ -1,28 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="model.PatrimonioJavaBeans"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.text.NumberFormat"%>
+<%@ page import="java.util.Locale"%>
+<%@ page import="java.time.LocalDate"%>
+<%@ page import="java.time.LocalDateTime"%>
+<%@ page import="java.text.SimpleDateFormat"%>
+<%@ page import="java.time.format.DateTimeFormatter"%>
+<%
+ArrayList<PatrimonioJavaBeans> lista = (ArrayList<PatrimonioJavaBeans>) request.getAttribute("patrimonios");
+%>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+<title>cadastropatrimonios</title>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <link rel="stylesheet" href="./css/main.css">
-<title>Consulta de Dízimos</title>
+<link rel="stylesheet" href="./css/janela-modal-alerta.css">
+<link rel="stylesheet" href="./css/janela-modal-sucesso-erro.css">
 </head>
 <body>
+	<!-- SideBar -->
 	<section class="full-box cover dashboard-sideBar">
 		<div class="full-box dashboard-sideBar-bg btn-menu-dashboard"></div>
 		<div class="full-box dashboard-sideBar-ct">
 			<!--SideBar Title -->
 			<div
 				class="full-box text-uppercase text-center text-titles dashboard-sideBar-title">
-				SGI <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
+				company <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
 			</div>
 			<!-- SideBar User info -->
 			<div class="full-box dashboard-sideBar-UserInfo">
 				<figure class="full-box">
-					<img src="./assets/img/icon.jpeg" alt="UserIcon">
-					<figcaption class="text-center text-titles">Monkey D
-						Luffy</figcaption>
+					<img src="./assets/img/fotoPerfil.png" alt="UserIcon">
+					<figcaption class="text-center text-titles">Usuario</figcaption>
 				</figure>
 				<ul class="full-box list-unstyled text-center">
 					<li><a href="#!"> <i class="zmdi zmdi-settings"></i>
@@ -35,18 +50,18 @@
 			<!-- SideBar Menu -->
 			<ul class="list-unstyled full-box dashboard-sideBar-Menu">
 				<li><a href="home.html"> <i
-						class="zmdi zmdi-view-dashboard zmdi-hc-fw"></i> Panel Principal
+						class="zmdi zmdi-view-dashboard zmdi-hc-fw"></i> Painel Principal
 				</a></li>
 				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
-						class="zmdi zmdi-case zmdi-hc-fw"></i> Cadastro <i
+						class="zmdi zmdi-account-add zmdi-hc-fw"></i> Cadastro <i
 						class="zmdi zmdi-caret-down pull-right"></i>
 				</a>
-					<ul class="list-unstyled full-box">
+			
+						<ul class="list-unstyled full-box">
 						<li><a href="cadastroMembros.jsp"><i
 								class="zmdi zmdi-account"></i> Membros</a></li>
 						<li><a href="cadastroTarefas.jsp"><i
 								class="zmdi zmdi-assignment"></i> Tarefas</a></li>
-
 					</ul></li>
 				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
 						class="zmdi zmdi-calendar-check zmdi-hc-fw"></i> Eventos <i
@@ -69,9 +84,9 @@
 						class="zmdi zmdi-caret-down pull-right"></i>
 				</a>
 					<ul class="list-unstyled full-box">
-						<li><a href="cadastrocontas.jsp"><i
+						<li><a href="registration.html"><i
 								class="zmdi zmdi-exposure-alt zmdi-hc-fw"></i> Contas</a></li>
-						<li><a href="cadastroDizimo.jsp"><i
+						<li><a href="payments.html"><i
 								class="zmdi zmdi-favorite zmdi-hc-fw"></i> Doações</a></li>
 						<li><a href="cadastroDizimo.jsp"><i
 								class="zmdi zmdi-money zmdi-hc-fw"></i> Dízimos</a></li>
@@ -110,85 +125,102 @@
 				</a></li>
 			</ul>
 		</nav>
+
+		<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 		<!-- Content page -->
 		<div class="container-fluid">
 			<div class="page-header">
 				<h1 class="text-titles">
-					<i class="zmdi zmdi-money zmdi-hc-fw"></i> Dízimo <small>Consulta</small>
+					<i class="zmdi zmdi-chart zmdi-hc-fw"></i> Patrimonios
 				</h1>
-
 			</div>
+			<p class="lead">Área reservada a visualização, edição e exclusão
+				de patrimonios</p>
 		</div>
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-xs-12">
-
-
 					<ul class="nav nav-tabs" style="margin-bottom: 15px;">
-
-						<li><a id="fonte-nav" href="cadastroDizimo.jsp">
-								Cadastrar Dízimo</a></li>
-
+						<li class="active"><a href="cadastropatrimonio.html">Cadastrar
+								Patrimonio</a></li>
+						<li><a href="pesquisarpatri.jsp">Listar Patrimonios</a></li>
 					</ul>
-
 					<div id="myTabContent" class="tab-content">
 						<div class="tab-pane fade active in" id="new">
 							<div class="container-fluid">
 								<div class="row">
 									<div class="col-xs-12 col-md-10 col-md-offset-1">
-										<form method="get" enctype="multipart/form-data"
-											action="consultaDizimo">
-											
-											<div class="custom-select">
-												<label class="select-fonte" for="mes">Mês:</label> <select id="mes" name="mes"
-													required>
-													<option value="">Selecione o mês</option>
-													<option value="01">Janeiro</option>
-													<option value="02">Fevereiro</option>
-													<option value="03">Março</option>
-													<option value="04">Abril</option>
-													<option value="05">Maio</option>
-													<option value="06">Junho</option>
-													<option value="07">Julho</option>
-													<option value="08">Agosto</option>
-													<option value="09">Setembro</option>
-													<option value="10">Outubro</option>
-													<option value="11">Novembro</option>
-													<option value="12">Dezembro</option>
-												</select>
-											</div>
 
-											<div class="custom-select">
-
-												<label class="select-fonte" for="ano">Ano:</label> <select id="ano" name="ano"
-													required>
-													<option value="">Selecione o ano</option>
-				
-												</select>
-											</div>
-											
-											<div class="custom-select">
-
-												<input type="hidden" value="Dizimo" name="tipo">
-											</div>
-
-											<p class="text-center">
-												<button type="submit" class="btn btn-info btn-raised btn-sm">
-													<i class="zmdi zmdi-floppy"></i> Pesquisar
-												</button>
-										</form>
-
-
+										<div class="table-responsive">
+											<table class="table table-hover text-center">
+												<thead>
+													<tr>
+														<th class="text-center">ID</th>
+														<th class="text-center">Nome item</th>
+														<th class="text-center">Filial</th>
+														<th class="text-center">Descrição</th>
+														<th class="text-center">Valor</th>
+														<th class="text-center">Data de Aquisição</th>
+														<th class="text-center">Estado</th>
+														<th class="text-center">Update</th>
+														<th class="text-center">Delete</th>
+													</tr>
+												</thead>
+												<tbody>
+												<%
+													NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+													
+													if (lista != null) {
+													%>
+													<tr>
+														<%
+														for (int i = 0; i < lista.size(); i++) {
+															LocalDateTime data = LocalDateTime.parse(lista.get(i).getPtrdataaquisicao() + " " + "00:00:00",
+																	DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+															LocalDateTime dataAtual = LocalDateTime.now();
+															SimpleDateFormat dataFormatter = new SimpleDateFormat("dd/MM/yyyy");
+															String dataFormatada = dataFormatter.format(lista.get(i).getPtrdataaquisicao());
+														%>
+													
+													<tr>
+														<td><%=lista.get(i).getIdpatrimonio()%></td>
+														<td><%=lista.get(i).getPtrnome()%></td>
+														<td><%=lista.get(i).getPtridfil()%></td>
+														<td><%=lista.get(i).getPtrdescricao()%></td>
+														<td><%=nf.format(lista.get(i).getPtrvalor())%></td>
+														<td><%=dataFormatada%></td>
+														<td><%=lista.get(i).getPtrestado()%></td>
+														<td><a
+															href="selectpatri?idpatrimonio=<%=lista.get(i).getIdpatrimonio()%>"
+															class="btn btn-success btn-raised btn-xs"><i
+																class="zmdi zmdi-refresh"></i>Editar</a></td>
+														<td><button
+																onclick="abrirModalAlertaPatrimonio(<%=lista.get(i).getIdpatrimonio()%>)"
+																class="btn btn-danger btn-raised btn-xs">
+																<i class="zmdi zmdi-delete"></i>Excluir
+															</button></td>
+													</tr>
+													<%
+													}
+													}
+													%>
+												</tbody>
+												<tbody>
+											</table>
+											<script src="scripts/confirmadorPatri.js"></script>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-
 					</div>
+
 				</div>
 			</div>
 		</div>
+
 	</section>
+	<!------------------------------------------------------------------------------------------------------------------------------------------------------>
 
 	<!-- Notifications area -->
 	<section class="full-box Notifications-area">
@@ -284,9 +316,64 @@
 	<script src="./js/ripples.min.js"></script>
 	<script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
 	<script src="./js/main.js"></script>
-	<script src="./js/anoDinamico.js"></script>
+	<script src="./js/abrir-janela-modal-patrimonio.js"></script>
 	<script>
 		$.material.init();
 	</script>
 </body>
+
+<div class="janela-modal-alerta" id="janela-modal-alerta">
+	<div class="modal-alerta">
+		<button class="fechar" id="fechar">X</button>
+		<div class="container-modal">
+			<img class="icone" alt="alertaIcone"
+				src="./assets/img/alertaIcone.png">
+			<h1>Alerta!</h1>
+			<p>Deseja realmente exlcuir esse registro permanentemente?</p>
+			<div class="container-btn">
+				<button class="btn btn-danger btn-raised btn-xs" id="fechar-alerta">
+					<p id='fechar-alerta'>Cancelar</p>
+				</button>
+				<br> <a class="btn btn-success btn-raised btn-xs"
+					id="confirma-exclusao">Confirmar</a>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+<%
+String achouMembro = request.getParameter("success");
+if (achouMembro != null) {
+	if ("true".equals(achouMembro)) {
+%>
+<div class="janela-modal-sucesso" id="janela-modal-sucesso">
+	<div class="modal-sucesso">
+		<button class="fechar" id="fechar-sucesso">X</button>
+		<div class="container-modal">
+			<img class="icone" alt="sucessoIcon" src="./assets/img/sucesso.png">
+			<h1>Sucesso!</h1>
+			<p>O cadastro do património foi editado com sucesso.</p>
+		</div>
+	</div>
+</div>
+<%
+} else if ("false".equals(achouMembro)) {
+%>
+<div class="janela-modal-erro" id="janela-modal-erro">
+	<div class="modal-erro">
+		<button class="fechar" id="fechar-erro">X</button>
+		<div class="container-modal">
+			<img class="icone" alt="sucessoIcon" src="./assets/img/erro.png">
+			<h1>Erro!</h1>
+			<p>Erro ao editar um o património.</p>
+		</div>
+	</div>
+</div>
+<%
+}
+}
+%>
+<script src="js/script-fechar.js"></script>
 </html>

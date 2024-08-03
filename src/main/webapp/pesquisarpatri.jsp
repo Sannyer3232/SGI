@@ -1,14 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+<title>pesquisapatrimonio</title>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <link rel="stylesheet" href="./css/main.css">
-<title>Consulta de Dízimos</title>
 </head>
 <body>
+	<!-- SideBar -->
 	<section class="full-box cover dashboard-sideBar">
 		<div class="full-box dashboard-sideBar-bg btn-menu-dashboard"></div>
 		<div class="full-box dashboard-sideBar-ct">
@@ -20,9 +23,8 @@
 			<!-- SideBar User info -->
 			<div class="full-box dashboard-sideBar-UserInfo">
 				<figure class="full-box">
-					<img src="./assets/img/icon.jpeg" alt="UserIcon">
-					<figcaption class="text-center text-titles">Monkey D
-						Luffy</figcaption>
+					<img src="./assets/img/fotoPerfil.png" alt="UserIcon">
+					<figcaption class="text-center text-titles">Usuário</figcaption>
 				</figure>
 				<ul class="full-box list-unstyled text-center">
 					<li><a href="#!"> <i class="zmdi zmdi-settings"></i>
@@ -42,10 +44,10 @@
 						class="zmdi zmdi-caret-down pull-right"></i>
 				</a>
 					<ul class="list-unstyled full-box">
-						<li><a href="cadastroMembros.jsp"><i
-								class="zmdi zmdi-account"></i> Membros</a></li>
+						<li><a href="cadastro.html"><i
+								class="zmdi zmdi-accounts zmdi-hc-fw"></i> Membros</a></li>
 						<li><a href="cadastroTarefas.jsp"><i
-								class="zmdi zmdi-assignment"></i> Tarefas</a></li>
+								class="zmdi zmdi-timer zmdi-hc-fw"></i> Tarefas</a></li>
 
 					</ul></li>
 				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
@@ -69,13 +71,13 @@
 						class="zmdi zmdi-caret-down pull-right"></i>
 				</a>
 					<ul class="list-unstyled full-box">
-						<li><a href="cadastrocontas.jsp"><i
+						<li><a href="registration.html"><i
 								class="zmdi zmdi-exposure-alt zmdi-hc-fw"></i> Contas</a></li>
-						<li><a href="cadastroDizimo.jsp"><i
+						<li><a href="payments.html"><i
 								class="zmdi zmdi-favorite zmdi-hc-fw"></i> Doações</a></li>
-						<li><a href="cadastroDizimo.jsp"><i
+						<li><a href="payments.html"><i
 								class="zmdi zmdi-money zmdi-hc-fw"></i> Dízimos</a></li>
-						<li><a href="cadastroOferta.jsp"><i
+						<li><a href="payments.html"><i
 								class="zmdi zmdi-money-box zmdi-hc-fw"></i> Ofertas</a></li>
 						<li><a href="cadastropatrimonio.jsp"><i
 								class="zmdi zmdi-chart zmdi-hc-fw"></i> Patrimonio</a></li>
@@ -110,11 +112,11 @@
 				</a></li>
 			</ul>
 		</nav>
-		<!-- Content page -->
+	<!---------- Content page ------------------------------------------------------------------------------------------------------------------------------------->
 		<div class="container-fluid">
 			<div class="page-header">
 				<h1 class="text-titles">
-					<i class="zmdi zmdi-money zmdi-hc-fw"></i> Dízimo <small>Consulta</small>
+					<i class="zmdi zmdi-chart zmdi-hc-fw"></i> Patrimônios <small>Pesquisa</small>
 				</h1>
 
 			</div>
@@ -126,8 +128,8 @@
 
 					<ul class="nav nav-tabs" style="margin-bottom: 15px;">
 
-						<li><a id="fonte-nav" href="cadastroDizimo.jsp">
-								Cadastrar Dízimo</a></li>
+						<li><a id="fonte-nav" href="cadastropatrimonio.html">
+								Cadastrar Patrimônios</a></li>
 
 					</ul>
 
@@ -137,40 +139,15 @@
 								<div class="row">
 									<div class="col-xs-12 col-md-10 col-md-offset-1">
 										<form method="get" enctype="multipart/form-data"
-											action="consultaDizimo">
+											name="frmMembro" action="mainpatri">
 											
-											<div class="custom-select">
-												<label class="select-fonte" for="mes">Mês:</label> <select id="mes" name="mes"
-													required>
-													<option value="">Selecione o mês</option>
-													<option value="01">Janeiro</option>
-													<option value="02">Fevereiro</option>
-													<option value="03">Março</option>
-													<option value="04">Abril</option>
-													<option value="05">Maio</option>
-													<option value="06">Junho</option>
-													<option value="07">Julho</option>
-													<option value="08">Agosto</option>
-													<option value="09">Setembro</option>
-													<option value="10">Outubro</option>
-													<option value="11">Novembro</option>
-													<option value="12">Dezembro</option>
-												</select>
-											</div>
-
-											<div class="custom-select">
-
-												<label class="select-fonte" for="ano">Ano:</label> <select id="ano" name="ano"
-													required>
-													<option value="">Selecione o ano</option>
-				
-												</select>
-											</div>
-											
-											<div class="custom-select">
-
-												<input type="hidden" value="Dizimo" name="tipo">
-											</div>
+											<label class="control-label">Filial</label> <select
+												class="form_group" name="filial">
+												<option value="">Selecionar Filial</option>
+												<option value="1">Filial Campos Elisios</option>
+												<option value="2">Filial Coroado</option>
+												<option value="3">Filial Cachoeirinha</option>
+											</select>
 
 											<p class="text-center">
 												<button type="submit" class="btn btn-info btn-raised btn-sm">
@@ -284,7 +261,6 @@
 	<script src="./js/ripples.min.js"></script>
 	<script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
 	<script src="./js/main.js"></script>
-	<script src="./js/anoDinamico.js"></script>
 	<script>
 		$.material.init();
 	</script>

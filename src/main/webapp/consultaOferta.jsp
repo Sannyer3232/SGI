@@ -77,7 +77,7 @@
 								class="zmdi zmdi-money zmdi-hc-fw"></i> Dízimos</a></li>
 						<li><a href="cadastroOferta.jsp"><i
 								class="zmdi zmdi-money-box zmdi-hc-fw"></i> Ofertas</a></li>
-						<li><a href="cadastroDizimo.jsp"><i
+						<li><a href="cadastropatrimonio.jsp"><i
 								class="zmdi zmdi-chart zmdi-hc-fw"></i> Patrimonio</a></li>
 					</ul></li>
 				<li><a href="#!" class="btn-sideBar-SubMenu"> <i

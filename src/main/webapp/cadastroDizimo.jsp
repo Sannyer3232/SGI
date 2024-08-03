@@ -80,7 +80,7 @@
 								class="zmdi zmdi-money zmdi-hc-fw"></i> Dízimos</a></li>
 						<li><a href="cadastroOferta.jsp"><i
 								class="zmdi zmdi-money-box zmdi-hc-fw"></i> Ofertas</a></li>
-						<li><a href="payments.html"><i
+						<li><a href="cadastropatrimonio.jsp"><i
 								class="zmdi zmdi-chart zmdi-hc-fw"></i> Patrimonio</a></li>
 					</ul></li>
 				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
@@ -292,7 +292,7 @@ if (achouMembro != null) {
 			<div class="container-modal">
 				<img class = "icone"alt="sucessoIcon" src="./assets/img/sucesso.png">
 				<h1>Sucesso!</h1>
-				<p>O cadastro do dízimo foi realizado com sucesso.</p>
+				<p>O cadastro do dizimo foi realizado com sucesso.</p>
 			</div>
 	</div>
 </div>
@@ -305,7 +305,7 @@ if (achouMembro != null) {
 			<div class="container-modal">
 				<img class="icone"alt="sucessoIcon" src="./assets/img/erro.png">
 				<h1>Erro!</h1>
-				<p>Matrícula do membro não encontrada.</p>
+				<p>Matricula do membro não encontrada!.</p>
 			</div>
 	</div>
 </div>

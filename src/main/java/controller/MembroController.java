@@ -230,11 +230,16 @@ public class MembroController extends HttpServlet {
 		// Invocando o metodo inserir
 		System.out.println("Nome: " + membro.getMbrmemnome());
 		System.out.println("CPF: " + membro.getMbrcpf());
-
-		dao.inserirMembro(membro);
-
+		
 		// Redirecionar
-		response.sendRedirect("cadastroMembros.jsp");
+		if(dao.inserirMembro(membro)) {
+			response.sendRedirect("cadastroMembros.jsp?success=true");
+		}else {
+			response.sendRedirect("cadastroMembros.jsp?success=false");
+		}
+
+	
+
 	}
 
 	// Update de Membros
@@ -286,10 +291,14 @@ public class MembroController extends HttpServlet {
 		System.out.println("Nome: " + membro.getMbrmemnome());
 		System.out.println("CPF: " + membro.getMbrcpf());
 
-		dao.updateMembro(membro);
+		
 
 		// Redirecionar
-		response.sendRedirect("pesquisaMembros.jsp");
+		if(dao.updateMembro(membro)) {
+			response.sendRedirect("pesquisaMembros.jsp?success=true");
+		}else {
+			response.sendRedirect("pesquisaMembros.jsp?success=false");
+		}
 	}
 
 	// Desativar Membro

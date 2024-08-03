@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -77,7 +77,7 @@
 								class="zmdi zmdi-money zmdi-hc-fw"></i> Dízimos</a></li>
 						<li><a href="cadastroOferta.jsp"><i
 								class="zmdi zmdi-money-box zmdi-hc-fw"></i> Ofertas</a></li>
-						<li><a href="cadastropatrimonio.html"><i
+						<li><a href="cadastropatrimonio.jsp"><i
 								class="zmdi zmdi-chart zmdi-hc-fw"></i> Patrimonio</a></li>
 					</ul></li>
 				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
@@ -116,7 +116,7 @@
 		<div class="container-fluid">
 			<div class="page-header">
 				<h1 class="text-titles">
-					<i class="zmdi zmdi-money-box zmdi-hc-fw"></i> Contas a pagar 
+					<i class="zmdi zmdi-money-box zmdi-hc-fw"></i> Contas a pagar
 				</h1>
 			</div>
 			<p class="lead">Área reservada ao cadastro de contas e
@@ -181,7 +181,7 @@
 								</div>
 							</div>
 						</div>
-				
+
 					</div>
 				</div>
 			</div>

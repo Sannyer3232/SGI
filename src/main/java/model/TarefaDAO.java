@@ -27,7 +27,7 @@ public class TarefaDAO {
 		}
 	}
 	
-	public void inserirTarefa(TarefasJavaBeans tarefa) {
+	public boolean inserirTarefa(TarefasJavaBeans tarefa) {
 		String callspinserir = "CALL sp_inserir_tarefa(?,?,?,?,?,?,?)";
 		try {
 			
@@ -45,9 +45,11 @@ public class TarefaDAO {
 			pst.executeUpdate();
 			
 			con.close();
+			return true;
 			
 		} catch (Exception e) {
 			System.out.println(e);
+			return false;
 		}
 	}
 
@@ -166,7 +168,7 @@ public class TarefaDAO {
 		}
 	}
 	
-	public void updateTarefa(TarefasJavaBeans tarefa) {
+	public boolean updateTarefa(TarefasJavaBeans tarefa) {
 		String callspinserir = "CALL sp_editar_tarefa(?,?,?,?,?,?,?,?);";
 		try {
 			
@@ -185,9 +187,11 @@ public class TarefaDAO {
 			pst.executeUpdate();
 			
 			con.close();
+			return true;
 			
 		} catch (Exception e) {
 			System.out.println(e);
+			return false;
 		}
 	}
 }
