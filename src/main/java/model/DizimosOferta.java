@@ -19,6 +19,12 @@ public class DizimosOferta {
 	
 	
 	
+	public DizimosOferta(float dzovalor, Date dzodtcontribuicao, String dzoFilialNome) {
+		this.dzovalor = dzovalor;
+		this.dzodtcontribuicao = dzodtcontribuicao;
+		this.dzoFilialNome = dzoFilialNome;
+	}
+
 	public DizimosOferta(int iddizimooferta, String dzotipo, float dzovalor, Date dzodtcontribuicao,
 			String dzomembronome, String dzoFilialNome) {
 		this.iddizimooferta = iddizimooferta;

@@ -120,6 +120,30 @@ public class DizimosOfertaDAO {
 		
 	}
 	
+	public ArrayList<DizimosOferta> listarDizimos(String tipo){
+		String sp = "call sp_dizimosOfertas_por_tipo(?);";
+		ArrayList<DizimosOferta> dizimosOfertas = new ArrayList<>();
+		try {
+			Connection con = conectar();
+			PreparedStatement ps = con.prepareStatement(sp);
+			ps.setString(1, tipo);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				Float valor = rs.getFloat(1);
+				Date data = rs.getDate(2);
+				String filial = rs.getString(3);
+				
+				dizimosOfertas.add(new DizimosOferta(valor, data, filial));
+			}
+			
+			con.close();
+			return dizimosOfertas;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
 
 
 }
