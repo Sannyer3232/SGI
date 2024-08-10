@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="model.FilialJavaBeans" %>
+<%@ page import="java.util.ArrayList"%>
+<%ArrayList<FilialJavaBeans> filiais = (ArrayList<FilialJavaBeans>) request.getAttribute("filiais"); %>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -40,13 +45,14 @@
 				</a></li>
 				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
 						class="zmdi zmdi-case zmdi-hc-fw"></i> Cadastro <i
-						class="zmdi zmdi-caret-down pull-right"></i>
-				</a>
+						class="zmdi zmdi-caret-down pull-right"></i></a>
 					<ul class="list-unstyled full-box">
-						<li><a href="cadastroMembros.jsp"><i
+						<li><a href="cadastroMembros"><i
 								class="zmdi zmdi-account"></i> Membros</a></li>
-						<li><a href="cadastroTarefas.jsp"><i
+						<li><a href="cadastroTarefa"><i
 								class="zmdi zmdi-assignment"></i> Tarefas</a></li>
+						<li><a href="student.html"><i
+								class="zmdi zmdi-accounts-add zmdi-hc-fw"></i> Grupos</a></li>
 
 					</ul></li>
 				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
@@ -58,37 +64,34 @@
 								class="zmdi zmdi-cake zmdi-hc-fw"></i> Aniversariantes</a></li>
 						<li><a href="teacher.html"><i
 								class="zmdi zmdi-alarm-plus zmdi-hc-fw"></i> Cultos</a></li>
-						<li><a href="student.html"><i
-								class="zmdi zmdi-accounts-add zmdi-hc-fw"></i> Grupos</a></li>
+						
 						<li><a href="representative.html"><i
 								class="zmdi zmdi-star zmdi-hc-fw"></i> Festividades</a></li>
-						<li><a href="representative.html"><i
-								class="zmdi zmdi-pin-help zmdi-hc-fw"></i> Ajuda</a></li>
+						<li><a href="cadastro_eventos.jsp"><i class="zmdi zmdi-calendar"></i> Cadastrar Evento</a></li>
+						
 					</ul></li>
 				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
 						class="zmdi zmdi-card zmdi-hc-fw"></i> Financeiro <i
 						class="zmdi zmdi-caret-down pull-right"></i>
 				</a>
 					<ul class="list-unstyled full-box">
-						<li><a href="cadastrocontas.jsp"><i
+						<li><a href="CadastroContas"><i
 								class="zmdi zmdi-exposure-alt zmdi-hc-fw"></i> Contas</a></li>
-						<li><a href="cadastrodoacoes.jsp"><i class="zmdi zmdi-favorite zmdi-hc-fw"></i>
-								Doações</a></li>
-						<li><a href="cadastroDizimo.jsp"><i
-								class="zmdi zmdi-money zmdi-hc-fw"></i> Dízimos</a></li>
+						<li><a href="cadastroDoacoes"><i class="zmdi zmdi-favorite zmdi-hc-fw"></i>
+								DoaÃ§Ãµes</a></li>
+						<li><a href="membroparadizimo.jsp"><i
+								class="zmdi zmdi-money zmdi-hc-fw"></i> DÃ­zimos</a></li>
 						<li><a href="cadastroOferta.jsp"><i
 								class="zmdi zmdi-money-box zmdi-hc-fw"></i> Ofertas</a></li>
-						<li><a href="cadastropatrimonio.jsp"><i
+						<li><a href="cadastroPatrimonio"><i
 								class="zmdi zmdi-chart zmdi-hc-fw"></i> Patrimonio</a></li>
 					</ul></li>
-				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
-						class="zmdi zmdi-city zmdi-hc-fw"></i> Igrejas Filiadas <i
-						class="zmdi zmdi-caret-down pull-right"></i>
-				</a>
-					<ul class="list-unstyled full-box">
-						<li><a href="school.html"><i
-								class="zmdi zmdi-balance zmdi-hc-fw"></i> Filial 1</a></li>
-					</ul></li>
+	
+					
+					<li><a href="ajuda.jsp"> <i
+						class="zmdi zmdi-pin-help"></i> Ajuda
+				</a></li>
+					
 			</ul>
 		</div>
 	</section>
@@ -174,7 +177,7 @@
 													class="form_group" name="mbrestadocivil">
 													<option value="1">Solteiro(a)</option>
 													<option value="2">Divorciado(a)</option>
-													<option value="3">Viúvo(a)</option>
+													<option value="3">ViÃºvo(a)</option>
 													<option value="4">Casado(a)</option>
 
 												</select>
@@ -192,9 +195,9 @@
 												<label class="control-label">Filial</label> <select
 													class="form_group" name="mbrfilial">
 													<option value="">---- Selecionar Filial ----</option>
-													<option value="1">Filial Campos Elisios</option>
-													<option value="2">Filial Coroado</option>
-													<option value="3">Filial Cachoeirinha</option>
+													<%for(FilialJavaBeans filial : filiais){ %>
+													<option value="<%=filial.getIdfilial()%>"><%=filial.getFilnome() %></option>
+													<%} %>
 												</select>
 											</div>
 
@@ -207,10 +210,10 @@
 											</div>
 
 											<div class="form-group label-floating">
-												<label class="control-label">Nível de acesso</label> <select
+												<label class="control-label">NÃ­vel de acesso</label> <select
 													class="form_group" name="mbracesso">
 													<option value="Administrador">Administrador</option>
-													<option value="Usuario">Usuário</option>
+													<option value="Usuario">UsuÃ¡rio</option>
 												</select>
 											</div>
 											<div class="form-group label-floating">
@@ -223,9 +226,9 @@
 													<option value="3">Secretaria</option>
 													<option value="4">Diacono</option>
 													<option value="5">Porteiro</option>
-													<option value="6">Músico</option>
+													<option value="6">MÃºsico</option>
 													<option value="7">Coral e Louvor</option>
-													<option value="8">Oração e Intercessão</option>
+													<option value="8">OraÃ§Ã£o e IntercessÃ£o</option>
 													<option value="9">Sonoplastia</option>
 												</select>
 											</div>
@@ -235,7 +238,7 @@
 											</div>
 
 											<div class="form-group label-floating">
-												<label class="control-label">Número</label> <input
+												<label class="control-label">NÃºmero</label> <input
 													class="form-control" type="text" name="endnumero">
 											</div>
 

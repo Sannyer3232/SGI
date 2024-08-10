@@ -126,28 +126,7 @@ public class MembroDAO {
 
 	}
 
-	public ArrayList<FilialJavaBeans> listarFiliais() {
-		ArrayList<FilialJavaBeans> filiais = new ArrayList<>();
-		String callsp_filiais = "CALL sp_filial();";
-
-		try {
-			Connection conn = conectar();
-			PreparedStatement pst = conn.prepareStatement(callsp_filiais);
-			ResultSet rs = pst.executeQuery();
-
-			while (rs.next()) {
-				String id = rs.getString(1);
-				String nome = rs.getString(2);
-				filiais.add(new FilialJavaBeans(id, nome));
-			}
-			conn.close();
-			return filiais;
-		} catch (Exception e) {
-			System.out.println(e);
-			return null;
-		}
-
-	}
+	
 	public ArrayList<MembroJavaBeans> pesquisarMembro(String nome, String status) {
 	    ArrayList<MembroJavaBeans> membros = new ArrayList<>();
 	    String call_spmembros = "Call sp_membro_dados_nome(?, ?)";

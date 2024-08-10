@@ -19,14 +19,18 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 import model.DoacoesDAO;
 import model.DoacoesJavaBeans;
+import model.FilialDAO;
+import model.FilialJavaBeans;
 
 @WebServlet(urlPatterns = { "/ControllerDoacoes", "/maindoacao", "/insertdoacao", "/selectdoacao", "/updatedoacao",
-		"/deletedoacao", "/reportdoacao" })
+		"/deletedoacao", "/reportdoacao", "/cadastroDoacoes"})
 public class ControllerDoacao extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	DoacoesDAO dao = new DoacoesDAO();
 	DoacoesJavaBeans doacao = new DoacoesJavaBeans();
+	FilialDAO daoFilial = new FilialDAO();
+	FilialJavaBeans filial = new FilialJavaBeans();
 
 	public ControllerDoacao() {
 		super();
@@ -55,7 +59,10 @@ public class ControllerDoacao extends HttpServlet {
 			removerDoacao(request, response);
 		} else if (action.equals("/reportdoacao")) {
 			comprovanteDoacao(request, response);
-		} else {
+		} else if(action.equals("/cadastroDoacoes")) {
+			listarFilial(request, response);
+		}else {
+		
 			response.sendRedirect("cadastrodoacoes.jsp");
 		}
 	}
@@ -71,6 +78,16 @@ public class ControllerDoacao extends HttpServlet {
 		request.setAttribute("doacao", lista);
 		RequestDispatcher rd = request.getRequestDispatcher("listardoacoes.jsp");
 		rd.forward(request, response);
+	}
+	protected void listarFilial(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		ArrayList<FilialJavaBeans> filiais = daoFilial.listarFilial();
+		request.setAttribute("filiais", filiais);
+		RequestDispatcher rd = request.getRequestDispatcher("cadastrodoacoes.jsp");
+		rd.forward(request, response);
+		
+	
 	}
 
 	// NOVA DOAÇÃO
@@ -97,12 +114,12 @@ public class ControllerDoacao extends HttpServlet {
 		if (dao.inserirdoacao(doacao)) {
 			// redirecionar para o documento com parametro para exibir tela de cadastro
 			// realizado
-			response.sendRedirect("cadastrodoacoes.jsp?success=true");
+			response.sendRedirect("cadastroDoacoes?success=true");
 
 		} else {
 			// redirecionar para o documento com parametro para exibir tela de falha no
 			// cadastro
-			response.sendRedirect("cadastrodoacoes.jsp?success=false");
+			response.sendRedirect("cadastroDoacoes?success=false");
 
 		}
 

@@ -16,16 +16,19 @@ import javax.servlet.http.HttpServletResponse;
 import model.DizimosOferta;
 import model.DizimosOfertaDAO;
 import model.MembroDAO;
+import model.MembroJavaBeans;
 
 /**
  * Servlet implementation class DizimoOfertaController
  */
-@WebServlet(urlPatterns = { "/DizimoOfertaController", "/insertDizimo", "/insertOferta" ,"/consultaDizimo","/desativaDizOferta"})
+@WebServlet(urlPatterns = { "/DizimoOfertaController", "/insertDizimo", "/insertOferta" ,"/consultaDizimo","/desativaDizOferta",
+		"/pequisaMembroDizimo", "/pesquisaMembroOferta"})
 public class DizimoOfertaController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     
     private DizimosOfertaDAO dao = new DizimosOfertaDAO();
     private MembroDAO mbrdao = new MembroDAO();
+    
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -69,6 +72,18 @@ public class DizimoOfertaController extends HttpServlet {
 				System.out.println(e);
 			}
         	
+        }else if(action.equals("/pequisaMembroDizimo")) {
+        	try {
+        		listarpesquisaDizimo(request, response);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+        }else if(action.equals("/pesquisaMembroOferta")) {
+        	try {
+        		listarpesquisaOferta(request, response);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
         }
     }
 
@@ -88,16 +103,16 @@ public class DizimoOfertaController extends HttpServlet {
         } catch (ParseException e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "Data inválida.");
-            RequestDispatcher rd = request.getRequestDispatcher("cadastroDizimo.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("membroparadizimo.jsp");
             rd.forward(request, response);
             return;
         }
 
         if (mbrdao.achaMembro(dizimoOferta.getDzombrid())) {
             dao.insereContribuicao(dizimoOferta);
-            response.sendRedirect("cadastroDizimo.jsp?success=true");
+            response.sendRedirect("membroparadizimo.jsp?success=true");
         } else {
-            response.sendRedirect("cadastroDizimo.jsp?success=false");
+            response.sendRedirect("membroparadizimo.jsp?success=false");
         }
     }
 
@@ -117,16 +132,16 @@ public class DizimoOfertaController extends HttpServlet {
         } catch (ParseException e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "Data inválida.");
-            RequestDispatcher rd = request.getRequestDispatcher("cadastroOferta.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("membroparaoferta.jsp");
             rd.forward(request, response);
             return;
         }
 
         if (mbrdao.achaMembro(dizimoOferta.getDzombrid())) {
             dao.insereContribuicao(dizimoOferta);
-            response.sendRedirect("cadastroOferta.jsp?success=true");
+            response.sendRedirect("membroparaoferta.jsp?success=true");
         } else {
-            response.sendRedirect("cadastroOferta.jsp?success=false");
+            response.sendRedirect("membroparaoferta.jsp?success=false");
         }
     }
     /**
@@ -187,8 +202,42 @@ public class DizimoOfertaController extends HttpServlet {
 		}
     }
     
+    protected ArrayList<MembroJavaBeans> listarpesquisa(String nome, String status){
+    	ArrayList<MembroJavaBeans> lista = mbrdao.pesquisarMembro(nome, status);
+    	if(lista != null) {
+    		return lista;
+    	}else {
+    		return null;
+    	}
+    }
+    
+    protected void listarpesquisaDizimo(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// Criando um objeto que ira receber os dados JavaBenas
+    	
+
+		request.setAttribute("pesquisaMembros", listarpesquisa(request.getParameter("nomePesquisa"),
+				request.getParameter("status")));
+		RequestDispatcher rd = request.getRequestDispatcher("resultamembrodizimo.jsp");
+		rd.forward(request, response);
+	}
+    
+    protected void listarpesquisaOferta(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// Criando um objeto que ira receber os dados JavaBenas
+    	
+
+		request.setAttribute("pesquisaMembros", listarpesquisa(request.getParameter("nomePesquisa"),
+				request.getParameter("status")));
+		RequestDispatcher rd = request.getRequestDispatcher("resultamembrooferta.jsp");
+		rd.forward(request, response);
+	}
+    
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request, response);
     }
+    
+    
+    
 }

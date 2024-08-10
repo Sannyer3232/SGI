@@ -7,7 +7,6 @@ import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -18,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import model.EnderecoJavaBeans;
+import model.FilialDAO;
+import model.FilialJavaBeans;
 import model.MembroDAO;
 import model.MembroJavaBeans;;
 
@@ -25,7 +26,7 @@ import model.MembroJavaBeans;;
  * Servlet implementation class MembroController
  */
 @WebServlet(urlPatterns = { "/MembroController", "/insert", "/pesquisaMembros", "/select", "/updateMembro",
-		"/desativa" ,"/detalheMembro"})
+		"/desativa" ,"/detalheMembro", "/cadastroMembros"})
 @MultipartConfig(maxFileSize = 16177215) // 16 MB
 public class MembroController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -34,6 +35,8 @@ public class MembroController extends HttpServlet {
 	MembroDAO dao = new MembroDAO();
 	MembroJavaBeans membro = new MembroJavaBeans();
 	EnderecoJavaBeans endereco = new EnderecoJavaBeans();
+	FilialDAO daoFilial = new FilialDAO();
+	FilialJavaBeans filial = new FilialJavaBeans();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -92,6 +95,13 @@ public class MembroController extends HttpServlet {
 				e.printStackTrace();
 			}
 			
+		}else if(action.equals("/cadastroMembros")) {
+			try {
+				listarFilial(request, response);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
 		}
 		else {
 			}
@@ -110,6 +120,17 @@ public class MembroController extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("aniversariantes.jsp");
 		rd.forward(request, response);
 
+	}
+	
+	protected void listarFilial(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		ArrayList<FilialJavaBeans> filiais = daoFilial.listarFilial();
+		request.setAttribute("filiais", filiais);
+		RequestDispatcher rd = request.getRequestDispatcher("cadastroMembros.jsp");
+		rd.forward(request, response);
+		
+	
 	}
 
 	protected void listarpesquisa(HttpServletRequest request, HttpServletResponse response)
@@ -233,9 +254,9 @@ public class MembroController extends HttpServlet {
 		
 		// Redirecionar
 		if(dao.inserirMembro(membro)) {
-			response.sendRedirect("cadastroMembros.jsp?success=true");
+			response.sendRedirect("cadastroMembros?success=true");
 		}else {
-			response.sendRedirect("cadastroMembros.jsp?success=false");
+			response.sendRedirect("cadastroMembros?success=false");
 		}
 
 	

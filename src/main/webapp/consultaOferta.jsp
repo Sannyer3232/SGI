@@ -73,7 +73,7 @@
 								class="zmdi zmdi-exposure-alt zmdi-hc-fw"></i> Contas</a></li>
 						<li><a href="cadastrodoacoes.jsp"><i
 								class="zmdi zmdi-favorite zmdi-hc-fw"></i> Doações</a></li>
-						<li><a href="cadastroDizimo.jsp"><i
+						<li><a href="membroparadizimo.jsp"><i
 								class="zmdi zmdi-money zmdi-hc-fw"></i> Dízimos</a></li>
 						<li><a href="cadastroOferta.jsp"><i
 								class="zmdi zmdi-money-box zmdi-hc-fw"></i> Ofertas</a></li>

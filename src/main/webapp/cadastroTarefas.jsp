@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="model.FilialJavaBeans"%>
+<%@ page import="java.util.ArrayList"%>
+<%
+ArrayList<FilialJavaBeans> filiais = (ArrayList<FilialJavaBeans>) request.getAttribute("filiais");
+%>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -24,7 +30,8 @@
 			<div class="full-box dashboard-sideBar-UserInfo">
 				<figure class="full-box">
 					<img src="./assets/img/icon.jpeg" alt="UserIcon">
-					<figcaption class="text-center text-titles">Monkey D Luffy</figcaption>
+					<figcaption class="text-center text-titles">Monkey D
+						Luffy</figcaption>
 				</figure>
 				<ul class="full-box list-unstyled text-center">
 					<li><a href="#!"> <i class="zmdi zmdi-settings"></i>
@@ -41,13 +48,14 @@
 				</a></li>
 				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
 						class="zmdi zmdi-case zmdi-hc-fw"></i> Cadastro <i
-						class="zmdi zmdi-caret-down pull-right"></i>
-				</a>
+						class="zmdi zmdi-caret-down pull-right"></i></a>
 					<ul class="list-unstyled full-box">
-						<li><a href="cadastroMembros.jsp"><i
+						<li><a href="cadastroMembros"><i
 								class="zmdi zmdi-account"></i> Membros</a></li>
-								<li><a href="cadastroTarefas.jsp"><i
+						<li><a href="cadastroTarefa"><i
 								class="zmdi zmdi-assignment"></i> Tarefas</a></li>
+						<li><a href="student.html"><i
+								class="zmdi zmdi-accounts-add zmdi-hc-fw"></i> Grupos</a></li>
 
 					</ul></li>
 				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
@@ -59,37 +67,34 @@
 								class="zmdi zmdi-cake zmdi-hc-fw"></i> Aniversariantes</a></li>
 						<li><a href="teacher.html"><i
 								class="zmdi zmdi-alarm-plus zmdi-hc-fw"></i> Cultos</a></li>
-						<li><a href="student.html"><i
-								class="zmdi zmdi-accounts-add zmdi-hc-fw"></i> Grupos</a></li>
+						
 						<li><a href="representative.html"><i
 								class="zmdi zmdi-star zmdi-hc-fw"></i> Festividades</a></li>
-						<li><a href="representative.html"><i
-								class="zmdi zmdi-pin-help zmdi-hc-fw"></i> Ajuda</a></li>
+						<li><a href="cadastro_eventos.jsp"><i class="zmdi zmdi-calendar"></i> Cadastrar Evento</a></li>
+						
 					</ul></li>
 				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
 						class="zmdi zmdi-card zmdi-hc-fw"></i> Financeiro <i
 						class="zmdi zmdi-caret-down pull-right"></i>
 				</a>
 					<ul class="list-unstyled full-box">
-						<li><a href="cadastrocontas.jsp"><i
+						<li><a href="CadastroContas"><i
 								class="zmdi zmdi-exposure-alt zmdi-hc-fw"></i> Contas</a></li>
-						<li><a href="cadastrodoacoes.jsp"><i
-								class="zmdi zmdi-favorite zmdi-hc-fw"></i> Doações</a></li>
-						<li><a href="cadastroDizimo.jsp"><i
+						<li><a href="cadastroDoacoes"><i class="zmdi zmdi-favorite zmdi-hc-fw"></i>
+								Doações</a></li>
+						<li><a href="membroparadizimo.jsp"><i
 								class="zmdi zmdi-money zmdi-hc-fw"></i> Dízimos</a></li>
 						<li><a href="cadastroOferta.jsp"><i
 								class="zmdi zmdi-money-box zmdi-hc-fw"></i> Ofertas</a></li>
-						<li><a href="cadastropatrimonio.jsp"><i
+						<li><a href="cadastroPatrimonio"><i
 								class="zmdi zmdi-chart zmdi-hc-fw"></i> Patrimonio</a></li>
 					</ul></li>
-				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
-						class="zmdi zmdi-city zmdi-hc-fw"></i> Igrejas Filiadas <i
-						class="zmdi zmdi-caret-down pull-right"></i>
-				</a>
-					<ul class="list-unstyled full-box">
-						<li><a href="school.html"><i
-								class="zmdi zmdi-balance zmdi-hc-fw"></i> Filial 1</a></li>
-					</ul></li>
+	
+					
+					<li><a href="ajuda.jsp"> <i
+						class="zmdi zmdi-pin-help"></i> Ajuda
+				</a></li>
+					
 			</ul>
 		</div>
 	</section>
@@ -119,26 +124,31 @@
 					<i class="zmdi zmdi-assignment"></i> Tarefas <small>Cadastro</small>
 				</h1>
 			</div>
-			
+
 		</div>
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-xs-12">
-				<div>
-					<ul class="nav nav-tabs" style="margin-bottom: 15px;">
-						
-						<li><a id ="fonte-nav" href="listarTarefas"> Lista de Tarefas Agendadas</a> </li>
-						<li><a id ="fonte-nav" href="listarTarefasCanceladas" >Lista de Tarefas Canceladas</a></li>
-						<li><a id ="fonte-nav" href="listarTarefasConcluida" >Lista de Tarefas Concluídas</a></li>
-					</ul>
+					<div>
+						<ul class="nav nav-tabs" style="margin-bottom: 15px;">
+
+							<li><a id="fonte-nav" href="listarTarefas"> Lista de
+									Tarefas Agendadas</a></li>
+							<li><a id="fonte-nav" href="listarTarefasCanceladas">Lista
+									de Tarefas Canceladas</a></li>
+							<li><a id="fonte-nav" href="listarTarefasConcluida">Lista
+									de Tarefas Concluídas</a></li>
+						</ul>
 					</div>
 					<div id="myTabContent" class="tab-content">
 						<div class="tab-pane fade active in" id="new">
 							<div class="container-fluid">
 								<div class="row">
 									<div class="col-xs-12 col-md-10 col-md-offset-1">
-									<script src="js/validaCadastroTarefas.js"></script>
-										<form method="get" enctype="multipart/form-data" name="frmMembro" action="insertTarefa" onsubmit="return validarCadastroTarefa()">
+										<script src="js/validaCadastroTarefas.js"></script>
+										<form method="get" enctype="multipart/form-data"
+											name="frmMembro" action="insertTarefa"
+											onsubmit="return validarCadastroTarefa()">
 											<div class="form-group label-floating">
 												<label class="control-label">Titulo</label> <input
 													class="form-control" type="text" name="trftitulo">
@@ -147,9 +157,9 @@
 												<label class="control-label">Filial</label> <select
 													class="form_group" name="trffilial">
 													<option value="">---- Selecionar Filial ----</option>
-													<option value="1">Filial Campos Elisios</option>
-													<option value="2">Filial Coroado</option>
-													<option value="3">Filial Cachoeirinha</option>
+													<%for(FilialJavaBeans filial : filiais){ %>
+													<option value="<%=filial.getIdfilial()%>"><%=filial.getFilnome() %></option>
+													<%} %>
 												</select>
 											</div>
 											<div class="form-group label-floating">
@@ -309,11 +319,11 @@ if (achouMembro != null) {
 <div class="janela-modal-sucesso" id="janela-modal-sucesso">
 	<div class="modal-sucesso">
 		<button class="fechar" id="fechar-sucesso">X</button>
-			<div class="container-modal">
-				<img class = "icone"alt="sucessoIcon" src="./assets/img/sucesso.png">
-				<h1>Sucesso!</h1>
-				<p>O cadastro do tarefa foi realizado com sucesso.</p>
-			</div>
+		<div class="container-modal">
+			<img class="icone" alt="sucessoIcon" src="./assets/img/sucesso.png">
+			<h1>Sucesso!</h1>
+			<p>O cadastro do tarefa foi realizado com sucesso.</p>
+		</div>
 	</div>
 </div>
 <%
@@ -322,11 +332,11 @@ if (achouMembro != null) {
 <div class="janela-modal-erro" id="janela-modal-erro">
 	<div class="modal-erro">
 		<button class="fechar" id="fechar-erro">X</button>
-			<div class="container-modal">
-				<img class="icone"alt="sucessoIcon" src="./assets/img/erro.png">
-				<h1>Erro!</h1>
-				<p>Erro ao cadastrar nova tarefa!</p>
-			</div>
+		<div class="container-modal">
+			<img class="icone" alt="sucessoIcon" src="./assets/img/erro.png">
+			<h1>Erro!</h1>
+			<p>Erro ao cadastrar nova tarefa!</p>
+		</div>
 	</div>
 </div>
 <%

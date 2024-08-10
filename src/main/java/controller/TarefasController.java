@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.FilialDAO;
+import model.FilialJavaBeans;
 import model.TarefaDAO;
 import model.TarefasJavaBeans;
 
@@ -19,12 +21,14 @@ import model.TarefasJavaBeans;
  * Servlet implementation class TarefasController
  */
 @WebServlet(urlPatterns = { "/TarefasController", "/insertTarefa", "/listarTarefas", "/listarTarefasCanceladas",
-		"/listarTarefasConcluida", "/detalheTarefa", "/updateTarefa" })
+		"/listarTarefasConcluida", "/detalheTarefa", "/updateTarefa", "/cadastroTarefa" })
 public class TarefasController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	TarefasJavaBeans tarefa = new TarefasJavaBeans();
 	TarefaDAO dao = new TarefaDAO();
+	FilialDAO daoFilial = new FilialDAO();
+	FilialJavaBeans filial = new FilialJavaBeans();
 
 	public TarefasController() {
 		super();
@@ -79,6 +83,9 @@ public class TarefasController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if(action.equals("/cadastroTarefa")) {
+			listarFilial(request, response);
+			
 		}
 	}
 
@@ -115,11 +122,22 @@ public class TarefasController extends HttpServlet {
 
 		if(dao.inserirTarefa(tarefa)) {
 			
-			response.sendRedirect("cadastroTarefas.jsp?success=true");
+			response.sendRedirect("cadastroTarefa?success=true");
 		}else {
-			response.sendRedirect("cadastroTarefas.jsp?success=false");
+			response.sendRedirect("cadastroTarefa?success=false");
 		}
 
+	}
+	
+	protected void listarFilial(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		ArrayList<FilialJavaBeans> filiais = daoFilial.listarFilial();
+		request.setAttribute("filiais", filiais);
+		RequestDispatcher rd = request.getRequestDispatcher("cadastroTarefas.jsp");
+		rd.forward(request, response);
+		
+	
 	}
 
 	protected void listarTarefas(HttpServletRequest request, HttpServletResponse response)

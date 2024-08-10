@@ -13,13 +13,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.ContasDAO;
 import model.ContasJavaBeans;
+import model.FilialDAO;
+import model.FilialJavaBeans;
 
 //Padrões de Url que chama os apelidos das páginas e passa os parametros
-@WebServlet(urlPatterns = { "/Controller", "/ContasMain", "/ContasInsert", "/ContasSelect", "/ContasUpdate", "/ContasDelete" })
+@WebServlet(urlPatterns = { "/Controller", "/ContasMain", "/ContasInsert", "/ContasSelect", "/ContasUpdate", "/ContasDelete",
+		"/CadastroContas"})
 public class ContasController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	ContasDAO dao = new ContasDAO();
 	ContasJavaBeans conta = new ContasJavaBeans();
+	FilialDAO daoFilial = new FilialDAO();
+	FilialJavaBeans filial = new FilialJavaBeans();
+
 
 	public ContasController() {
 		super();
@@ -41,7 +47,10 @@ public class ContasController extends HttpServlet {
 			editarConta(request, response);
 		} else if (action.equals("/ContasDelete")) {
 			removerConta(request, response);
-		} else {
+		}else if(action.equals("/CadastroContas")){ 
+			listarFilial(request, response);
+			
+		}else {
 			response.sendRedirect("index.html");
 		}
 	}
@@ -56,7 +65,17 @@ public class ContasController extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("listarcontas.jsp");
 		rd.forward(request, response);
 	}
-
+	
+	protected void listarFilial(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		ArrayList<FilialJavaBeans> filiais = daoFilial.listarFilial();
+		request.setAttribute("filiais", filiais);
+		RequestDispatcher rd = request.getRequestDispatcher("cadastrocontas.jsp");
+		rd.forward(request, response);
+		
+	
+	}
 	// Cadastrar contas
 	protected void novaConta(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

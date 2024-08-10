@@ -12,6 +12,7 @@
 <meta name="viewport"
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <link rel="stylesheet" href="./css/main.css">
+<link rel="stylesheet" href="./css/janela-modal-alerta.css">
 </head>
 <body>
 
@@ -47,13 +48,14 @@
 				</a></li>
 				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
 						class="zmdi zmdi-case zmdi-hc-fw"></i> Cadastro <i
-						class="zmdi zmdi-caret-down pull-right"></i>
-				</a>
+						class="zmdi zmdi-caret-down pull-right"></i></a>
 					<ul class="list-unstyled full-box">
-						<li><a href="cadastroMembros.jsp"><i
+						<li><a href="cadastroMembros"><i
 								class="zmdi zmdi-account"></i> Membros</a></li>
-						<li><a href="cadastroTarefas.jsp"><i
+						<li><a href="cadastroTarefa"><i
 								class="zmdi zmdi-assignment"></i> Tarefas</a></li>
+						<li><a href="student.html"><i
+								class="zmdi zmdi-accounts-add zmdi-hc-fw"></i> Grupos</a></li>
 
 					</ul></li>
 				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
@@ -65,37 +67,34 @@
 								class="zmdi zmdi-cake zmdi-hc-fw"></i> Aniversariantes</a></li>
 						<li><a href="teacher.html"><i
 								class="zmdi zmdi-alarm-plus zmdi-hc-fw"></i> Cultos</a></li>
-						<li><a href="student.html"><i
-								class="zmdi zmdi-accounts-add zmdi-hc-fw"></i> Grupos</a></li>
+						
 						<li><a href="representative.html"><i
 								class="zmdi zmdi-star zmdi-hc-fw"></i> Festividades</a></li>
-						<li><a href="representative.html"><i
-								class="zmdi zmdi-pin-help zmdi-hc-fw"></i> Ajuda</a></li>
+						<li><a href="cadastro_eventos.jsp"><i class="zmdi zmdi-calendar"></i> Cadastrar Evento</a></li>
+						
 					</ul></li>
 				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
 						class="zmdi zmdi-card zmdi-hc-fw"></i> Financeiro <i
 						class="zmdi zmdi-caret-down pull-right"></i>
 				</a>
 					<ul class="list-unstyled full-box">
-						<li><a href="cadastrocontas.jsp"><i
+						<li><a href="CadastroContas"><i
 								class="zmdi zmdi-exposure-alt zmdi-hc-fw"></i> Contas</a></li>
-						<li><a href="cadastrodoacoes.jsp"><i
-								class="zmdi zmdi-favorite zmdi-hc-fw"></i> Doações</a></li>
-						<li><a href="cadastroDizimo.jsp"><i
+						<li><a href="cadastroDoacoes"><i class="zmdi zmdi-favorite zmdi-hc-fw"></i>
+								Doações</a></li>
+						<li><a href="membroparadizimo.jsp"><i
 								class="zmdi zmdi-money zmdi-hc-fw"></i> Dízimos</a></li>
 						<li><a href="cadastroOferta.jsp"><i
 								class="zmdi zmdi-money-box zmdi-hc-fw"></i> Ofertas</a></li>
-						<li><a href="cadastropatrimonio.jsp"><i
+						<li><a href="cadastroPatrimonio"><i
 								class="zmdi zmdi-chart zmdi-hc-fw"></i> Patrimonio</a></li>
 					</ul></li>
-				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
-						class="zmdi zmdi-city zmdi-hc-fw"></i> Igrejas Filiadas <i
-						class="zmdi zmdi-caret-down pull-right"></i>
-				</a>
-					<ul class="list-unstyled full-box">
-						<li><a href="school.html"><i
-								class="zmdi zmdi-balance zmdi-hc-fw"></i> Filial 1</a></li>
-					</ul></li>
+	
+					
+					<li><a href="ajuda.jsp"> <i
+						class="zmdi zmdi-pin-help"></i> Ajuda
+				</a></li>
+					
 			</ul>
 		</div>
 	</section>
@@ -191,7 +190,7 @@
 																class="btn btn-success btn-raised btn-xs"><i
 																	class="zmdi zmdi-refresh"></i></a></td>
 															<td><a
-																href="desativa?mbrid=<%=listaMembros.get(i).getId_Membro()%>"
+																onclick = "abrirModalAlertaMembro(<%=listaMembros.get(i).getId_Membro()%>)"
 																class="btn btn-danger btn-raised btn-xs"><i
 																	class="zmdi zmdi-delete"></i></a></td>
 														</tr>
@@ -309,8 +308,29 @@
 	<script src="./js/ripples.min.js"></script>
 	<script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
 	<script src="./js/main.js"></script>
+	<script src="./js/abrir-janela-modal-membro.js"> </script>
 	<script>
 		$.material.init();
 	</script>
 </body>
+
+<div class="janela-modal-alerta" id="janela-modal-alerta">
+	<div class="modal-alerta">
+		<button class="fechar" id="fechar">X</button>
+		<div class="container-modal">
+			<img class="icone" alt="alertaIcone"
+				src="./assets/img/alertaIcone.png">
+			<h1>Alerta!</h1>
+			<p>Deseja realmente exlcuir esse registro permanentemente?</p>
+			<div class="container-btn">
+				<button class="btn btn-danger btn-raised btn-xs" id="fechar-alerta">
+					<p id='fechar-alerta'>Cancelar</p>
+				</button>
+				<br> <a class="btn btn-success btn-raised btn-xs"
+					id="confirma-exclusao">Confirmar</a>
+			</div>
+		</div>
+
+	</div>
+</div>
 </html>

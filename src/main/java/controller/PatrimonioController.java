@@ -11,15 +11,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.ContasJavaBeans;
+import model.FilialDAO;
+import model.FilialJavaBeans;
 import model.PatrimonioDAO;
 import model.PatrimonioJavaBeans;
 
-@WebServlet(urlPatterns = { "/ControllerPatrimonio", "/mainpatri", "/insertpatri", "/selectpatri", "/updatepatri", "/deletepatri" })
+@WebServlet(urlPatterns = { "/ControllerPatrimonio", "/mainpatri", "/insertpatri", "/selectpatri", "/updatepatri", "/deletepatri",
+		"/cadastroPatrimonio"})
 public class PatrimonioController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	PatrimonioDAO dao = new PatrimonioDAO();
 	PatrimonioJavaBeans patrimonio = new PatrimonioJavaBeans();
+	ContasJavaBeans conta = new ContasJavaBeans();
+	FilialDAO daoFilial = new FilialDAO();
+	FilialJavaBeans filial = new FilialJavaBeans();
 
 	public PatrimonioController() {
 		super();
@@ -47,12 +54,25 @@ public class PatrimonioController extends HttpServlet {
 			editarPatrimonio(request, response);
 		}else if (action.equals("/deletepatri")) {
 			removerPatrimonio(request, response);
+		}else if(action.equals("/cadastroPatrimonio")){
+			listarFilial(request, response);
 		}else {
+		
 			response.sendRedirect("indexpatri.html");
 		}
 
 	}
 	
+	protected void listarFilial(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		ArrayList<FilialJavaBeans> filiais = daoFilial.listarFilial();
+		request.setAttribute("filiais", filiais);
+		RequestDispatcher rd = request.getRequestDispatcher("cadastropatrimonio.jsp");
+		rd.forward(request, response);
+		
+	
+	}
 	//Listar Patrimonio
 	protected void patrimonio(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int filial = Integer.parseInt(request.getParameter("filial"));
@@ -96,9 +116,9 @@ public class PatrimonioController extends HttpServlet {
 		//Invocar o método inserirPatrimonio passando o objeto patrimonio
 		
 		if(dao.inserirpatrimonio(patrimonio)) {
-			response.sendRedirect("cadastropatrimonio.jsp?success=true");
+			response.sendRedirect("cadastroPatrimonio?success=true");
 		}else {
-			response.sendRedirect("cadastropatrimonio.jsp?success=false");
+			response.sendRedirect("cadastroPatrimonio?success=false");
 		}
 		
 	}
