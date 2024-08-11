@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<title>pesquisapatrimonio</title>
+<title>Pesquisa Patrimônio</title>
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -77,7 +77,7 @@
 								Doações</a></li>
 						<li><a href="membroparadizimo.jsp"><i
 								class="zmdi zmdi-money zmdi-hc-fw"></i> Dízimos</a></li>
-						<li><a href="cadastroOferta.jsp"><i
+						<li><a href="membroparaoferta.jsp"><i
 								class="zmdi zmdi-money-box zmdi-hc-fw"></i> Ofertas</a></li>
 						<li><a href="cadastroPatrimonio"><i
 								class="zmdi zmdi-chart zmdi-hc-fw"></i> Patrimonio</a></li>
@@ -126,7 +126,7 @@
 
 					<ul class="nav nav-tabs" style="margin-bottom: 15px;">
 
-						<li><a id="fonte-nav" href="cadastropatrimonio.jsp">
+						<li><a id="fonte-nav" href="cadastroPatrimonio">
 								Cadastrar Patrimônios</a></li>
 
 					</ul>

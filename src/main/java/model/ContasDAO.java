@@ -106,8 +106,8 @@ public class ContasDAO {
 				conta.setCntidfilial(rs.getString(3));
 				conta.setCntdescricaoconta(rs.getString(4));
 				conta.setCntdtvencimento(rs.getDate(5));
-				conta.setCntvalor(rs.getDouble(6));
-				conta.setCntstatuspagamento(rs.getString(7));
+				conta.setCntvalor(rs.getDouble(7));
+				conta.setCntstatuspagamento(rs.getString(6));
 			}
 			con.close();
 		} catch (Exception e) {

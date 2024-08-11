@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="model.FilialDAO" %>
+<%@ page import="model.FilialJavaBeans" %>
+<%@ page import="java.util.ArrayList"%>
+<%
+	FilialDAO dao = new FilialDAO();
+	ArrayList<FilialJavaBeans> filiais = dao.listarFilial();
+%>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -76,7 +83,7 @@
 								Doações</a></li>
 						<li><a href="membroparadizimo.jsp"><i
 								class="zmdi zmdi-money zmdi-hc-fw"></i> Dízimos</a></li>
-						<li><a href="cadastroOferta.jsp"><i
+						<li><a href="membroparaoferta.jsp"><i
 								class="zmdi zmdi-money-box zmdi-hc-fw"></i> Ofertas</a></li>
 						<li><a href="cadastroPatrimonio"><i
 								class="zmdi zmdi-chart zmdi-hc-fw"></i> Patrimonio</a></li>
@@ -149,9 +156,9 @@
 												<label class="control-label">Filial</label> <select
 													class="form_group" name="filial">
 													<option value="">---- Selecionar Filial ----</option>
-													<option value="1">Filial Campos Elisios</option>
-													<option value="2">Filial Coroado</option>
-													<option value="3">Filial Cachoeirinha</option>
+													<%for(FilialJavaBeans filial : filiais){ %>
+													<option value="<%=filial.getIdfilial()%>"><%=filial.getFilnome() %></option>
+													<%} %>
 												</select>
 											</div>
 											<div class="form-group label-floating">
@@ -190,96 +197,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="tab-pane fade" id="list">
-							<div class="table-responsive">
-								<table class="table table-hover text-center">
-									<thead>
-										<tr>
-											<th class="text-center">#</th>
-											<th class="text-center">Payment</th>
-											<th class="text-center">Amount</th>
-											<th class="text-center">Pending</th>
-											<th class="text-center">Student</th>
-											<th class="text-center">Section</th>
-											<th class="text-center">Year</th>
-											<th class="text-center">Update</th>
-											<th class="text-center">Delete</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>1</td>
-											<td>$70</td>
-											<td>$40</td>
-											<td>$30</td>
-											<td>Carlos Alfaro</td>
-											<td>Section</td>
-											<td>2017</td>
-											<td><a href="#!"
-												class="btn btn-success btn-raised btn-xs"><i
-													class="zmdi zmdi-refresh"></i></a></td>
-											<td><a href="#!"
-												class="btn btn-danger btn-raised btn-xs"><i
-													class="zmdi zmdi-delete"></i></a></td>
-										</tr>
-										<tr>
-											<td>2</td>
-											<td>$70</td>
-											<td>$70</td>
-											<td>$0</td>
-											<td>Claudia Rodriguez</td>
-											<td>Section</td>
-											<td>2017</td>
-											<td><a href="#!"
-												class="btn btn-success btn-raised btn-xs"><i
-													class="zmdi zmdi-refresh"></i></a></td>
-											<td><a href="#!"
-												class="btn btn-danger btn-raised btn-xs"><i
-													class="zmdi zmdi-delete"></i></a></td>
-										</tr>
-										<tr>
-											<td>3</td>
-											<td>$70</td>
-											<td>$70</td>
-											<td>$0</td>
-											<td>Alicia Melendez</td>
-											<td>Section</td>
-											<td>2017</td>
-											<td><a href="#!"
-												class="btn btn-success btn-raised btn-xs"><i
-													class="zmdi zmdi-refresh"></i></a></td>
-											<td><a href="#!"
-												class="btn btn-danger btn-raised btn-xs"><i
-													class="zmdi zmdi-delete"></i></a></td>
-										</tr>
-										<tr>
-											<td>4</td>
-											<td>$70</td>
-											<td>$70</td>
-											<td>$0</td>
-											<td>Alba Bonilla</td>
-											<td>Section</td>
-											<td>2017</td>
-											<td><a href="#!"
-												class="btn btn-success btn-raised btn-xs"><i
-													class="zmdi zmdi-refresh"></i></a></td>
-											<td><a href="#!"
-												class="btn btn-danger btn-raised btn-xs"><i
-													class="zmdi zmdi-delete"></i></a></td>
-										</tr>
-									</tbody>
-								</table>
-								<ul class="pagination pagination-sm">
-									<li class="disabled"><a href="#!">«</a></li>
-									<li class="active"><a href="#!">1</a></li>
-									<li><a href="#!">2</a></li>
-									<li><a href="#!">3</a></li>
-									<li><a href="#!">4</a></li>
-									<li><a href="#!">5</a></li>
-									<li><a href="#!">»</a></li>
-								</ul>
-							</div>
-						</div>
+						
 					</div>
 				</div>
 			</div>

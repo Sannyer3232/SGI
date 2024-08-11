@@ -165,9 +165,9 @@ public class ControllerDoacao extends HttpServlet {
 		doacao.setDoaidfilial(request.getParameter("doaidfilial"));
 
 		if (dao.alterarDoacao(doacao)) {
-			response.sendRedirect("cadastrodoacoes.jsp?success=true-edit");
+			response.sendRedirect("cadastroDoacoes?success=true-edit");
 		} else {
-			response.sendRedirect("cadastrodoacoes.jsp?success=false-edit");
+			response.sendRedirect("cadastroDoacoes?success=false-edit");
 		}
 
 		System.out.println("Matricula do membro na edicao: " + doacao.getDoamembroid());

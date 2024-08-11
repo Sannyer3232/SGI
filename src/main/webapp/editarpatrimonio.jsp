@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="model.FilialDAO" %>
+<%@ page import="model.FilialJavaBeans" %>
+<%@ page import="java.util.ArrayList"%>
+<%
+	FilialDAO dao = new FilialDAO();
+	ArrayList<FilialJavaBeans> filiais = dao.listarFilial();
+%>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -76,7 +83,7 @@
 								Doações</a></li>
 						<li><a href="membroparadizimo.jsp"><i
 								class="zmdi zmdi-money zmdi-hc-fw"></i> Dízimos</a></li>
-						<li><a href="cadastroOferta.jsp"><i
+						<li><a href="membroparaoferta.jsp"><i
 								class="zmdi zmdi-money-box zmdi-hc-fw"></i> Ofertas</a></li>
 						<li><a href="cadastroPatrimonio"><i
 								class="zmdi zmdi-chart zmdi-hc-fw"></i> Patrimonio</a></li>
@@ -147,13 +154,13 @@
 													class="form-control" type="text" name="ptrnome"
 													value="<%out.print(request.getAttribute("ptrnome"));%>">
 											</div>
-											<div class="form-group label-floating">
+												<div class="form-group label-floating">
 												<label class="control-label">Filial</label> <select
 													class="form_group" name="ptridfil">
-													<option value="">Selecionar Filial</option>
-													<option value="1">Filial Campos Elisios</option>
-													<option value="2">Filial Coroado</option>
-													<option value="3">Filial Cachoeirinha</option>
+													<option value="">---- Selecionar Filial ----</option>
+													<%for(FilialJavaBeans filial : filiais){ %>
+													<option value="<%=filial.getIdfilial()%>"><%=filial.getFilnome() %></option>
+													<%} %>
 												</select>
 											</div>
 											<div class="form-group label-floating">

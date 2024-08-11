@@ -84,7 +84,7 @@ ArrayList<FilialJavaBeans> filiais = (ArrayList<FilialJavaBeans>) request.getAtt
 								Doações</a></li>
 						<li><a href="membroparadizimo.jsp"><i
 								class="zmdi zmdi-money zmdi-hc-fw"></i> Dízimos</a></li>
-						<li><a href="cadastroOferta.jsp"><i
+						<li><a href="membroparaoferta.jsp"><i
 								class="zmdi zmdi-money-box zmdi-hc-fw"></i> Ofertas</a></li>
 						<li><a href="cadastroPatrimonio"><i
 								class="zmdi zmdi-chart zmdi-hc-fw"></i> Patrimonio</a></li>

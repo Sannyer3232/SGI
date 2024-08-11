@@ -83,7 +83,7 @@ ArrayList<DoacoesJavaBeans> lista = (ArrayList<DoacoesJavaBeans>) request.getAtt
 								Doações</a></li>
 						<li><a href="membroparadizimo.jsp"><i
 								class="zmdi zmdi-money zmdi-hc-fw"></i> Dízimos</a></li>
-						<li><a href="cadastroOferta.jsp"><i
+						<li><a href="membroparaoferta.jsp"><i
 								class="zmdi zmdi-money-box zmdi-hc-fw"></i> Ofertas</a></li>
 						<li><a href="cadastroPatrimonio"><i
 								class="zmdi zmdi-chart zmdi-hc-fw"></i> Patrimonio</a></li>
@@ -131,7 +131,7 @@ ArrayList<DoacoesJavaBeans> lista = (ArrayList<DoacoesJavaBeans>) request.getAtt
 			<div class="row">
 				<div class="col-xs-12">
 					<ul class="nav nav-tabs" style="margin-bottom: 15px;">
-						<li class="active"><a href="cadastrodoacoes.jsp">Cadastrar
+						<li class="active"><a href="cadastroDoacoes">Cadastrar
 								Doaçao</a></li>
 						<li><a href="pesquisaMembros.jsp">Pesquisar Membro</a></li>
 					</ul>

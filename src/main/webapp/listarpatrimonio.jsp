@@ -89,7 +89,7 @@ ArrayList<PatrimonioJavaBeans> lista = (ArrayList<PatrimonioJavaBeans>) request.
 								Doações</a></li>
 						<li><a href="membroparadizimo.jsp"><i
 								class="zmdi zmdi-money zmdi-hc-fw"></i> Dízimos</a></li>
-						<li><a href="cadastroOferta.jsp"><i
+						<li><a href="membroparaoferta.jsp"><i
 								class="zmdi zmdi-money-box zmdi-hc-fw"></i> Ofertas</a></li>
 						<li><a href="cadastroPatrimonio"><i
 								class="zmdi zmdi-chart zmdi-hc-fw"></i> Patrimonio</a></li>
@@ -138,7 +138,7 @@ ArrayList<PatrimonioJavaBeans> lista = (ArrayList<PatrimonioJavaBeans>) request.
 			<div class="row">
 				<div class="col-xs-12">
 					<ul class="nav nav-tabs" style="margin-bottom: 15px;">
-						<li class="active"><a href="cadastropatrimonio.jsp">Cadastrar
+						<li class="active"><a href="cadastroPatrimonio">Cadastrar
 								Patrimonio</a></li>
 						<li><a href="pesquisarpatri.jsp">Listar Patrimonios</a></li>
 					</ul>
