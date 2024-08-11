@@ -120,6 +120,16 @@ public class MembroJavaBeans {
 		
 	}
 
+	
+	
+	
+	
+
+	public MembroJavaBeans(String mbrnome, String mbrfotoCaminho) {
+		this.mbrnome = mbrnome;
+		this.mbrfotoCaminho = mbrfotoCaminho;
+	}
+
 	public MembroJavaBeans(int id_Membro, String mbrmemnome, String mbrcpf, String mbremail, String sedenome, String supnome) {
 		this.id_Membro = id_Membro;
 		this.mbrnome = mbrmemnome;

@@ -316,6 +316,29 @@ public class MembroDAO {
 		}
 		
 	}
+	
+	
+	public MembroJavaBeans login(String email, String senha) {
+		MembroJavaBeans membro = new MembroJavaBeans();
+		String sp = "call sp_login(?, ?);";
+		try {
+			Connection con = conectar();
+			PreparedStatement pst = con.prepareStatement(sp);
+			pst.setString(1, email);
+			pst.setString(2, senha);
+			ResultSet rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				membro = new MembroJavaBeans(rs.getString(1), rs.getString(2));
+			}
+			
+			con.close();
+			return membro;
+			
+		} catch (Exception e) {
+			return null;
+		}
+	}
 
 	
 
