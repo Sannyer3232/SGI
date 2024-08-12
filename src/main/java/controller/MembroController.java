@@ -311,6 +311,25 @@ public class MembroController extends HttpServlet {
 		// Invocando o metodo inserir
 		System.out.println("Nome: " + membro.getMbrmemnome());
 		System.out.println("CPF: " + membro.getMbrcpf());
+		
+
+		// Tratamento do Upload do Arquivo
+		String msg = "Arquivo enviado com sucesso";
+		String path = getServletContext().getRealPath("/img");
+
+		try {
+			for (Part part : request.getParts()) {
+				if (part.getName().equals("mbrfoto")) {
+					String caminho = path + File.separator + part.getSubmittedFileName();
+					part.write(caminho);
+					membro.setMbrfotoCaminho(caminho);
+					System.out.println(msg);
+				}
+			}
+
+		} catch (Exception e) {
+			msg = "Erro ao salvar a imagem";
+		}
 
 		
 

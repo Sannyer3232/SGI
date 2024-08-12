@@ -20,9 +20,8 @@
 			<!-- SideBar User info -->
 			<div class="full-box dashboard-sideBar-UserInfo">
 				<figure class="full-box">
-					<img src="./assets/img/icon.jpeg" alt="UserIcon">
-					<figcaption class="text-center text-titles">Monkey D
-						Luffy</figcaption>
+					<img src="img/<%out.print(session.getAttribute("userphoto"));%>">
+					<figcaption class="text-center text-titles"><%out.print(session.getAttribute("username")); %></figcaption>
 				</figure>
 				<ul class="full-box list-unstyled text-center">
 					<li><a href="#!"> <i class="zmdi zmdi-settings"></i>

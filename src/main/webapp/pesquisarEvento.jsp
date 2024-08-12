@@ -1,35 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="model.DizimosOferta"%>
+<%@ page import="model.FilialJavaBeans" %>
 <%@ page import="java.util.ArrayList"%>
-<%@ page import="java.text.NumberFormat"%>
-<%@ page import="java.util.Locale"%>
-<%@ page import="java.time.LocalDate"%>
-<%@ page import="java.time.LocalDateTime"%>
-<%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="java.time.format.DateTimeFormatter"%>
-
+<%@ page import="model.FilialDAO" %>
+<%@ page import="model.FilialJavaBeans" %>
+<%@ page import="java.util.ArrayList"%>
 <%
-	String[] meses = {"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro",
-		"Novembro", "Dezembro"};
+	FilialDAO dao = new FilialDAO();
+	ArrayList<FilialJavaBeans> filiais = dao.listarFilial();
 %>
-
-<%
-	int mes = (int) request.getAttribute("p_mes");
-	int ano = (int) request.getAttribute("p_ano");
-	String tipo = (String) request.getAttribute("p_tipo");
-%>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+<title>Cadastro</title>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <link rel="stylesheet" href="./css/main.css">
-<link rel="stylesheet" href="./css/janela-modal-alerta.css">
-<title>Resultado Consulta de <%=tipo %> </title>
+<link rel="stylesheet" href="./css/janela-modal-sucesso-erro.css">
 </head>
 <body>
+	<!-- SideBar -->
 	<section class="full-box cover dashboard-sideBar">
 		<div class="full-box dashboard-sideBar-bg btn-menu-dashboard"></div>
 		<div class="full-box dashboard-sideBar-ct">
@@ -53,7 +44,7 @@
 				</ul>
 			</div>
 			<!-- SideBar Menu -->
-				<ul class="list-unstyled full-box dashboard-sideBar-Menu">
+			<ul class="list-unstyled full-box dashboard-sideBar-Menu">
 				<li><a href="home.html"> <i
 						class="zmdi zmdi-view-dashboard zmdi-hc-fw"></i> Panel Principal
 				</a></li>
@@ -129,110 +120,43 @@
 		<div class="container-fluid">
 			<div class="page-header">
 				<h1 class="text-titles">
-				<%if(tipo.equals("Dizimo")){ %>
-					<i class="zmdi zmdi-money zmdi-hc-fw"></i> Dízimo <small>Consulta</small>
-				<%}else if(tipo.equals("Oferta")){ %>
-					<i class="zmdi zmdi-money-box"></i> Ofertas <small>Consulta</small>
-				<%} %>
+					<i class="zmdi zmdi-timer zmdi-hc-fw"></i> Evento <small>Pesquisa</small>
 				</h1>
-
 			</div>
 		</div>
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-xs-12">
 
-
 					<ul class="nav nav-tabs" style="margin-bottom: 15px;">
-						<%if(tipo.equals("Dizimo")){ %>
-						<li><a id="fonte-nav" href="consultarDizimo.jsp"> Nova Consulta
-								Dízimo</a></li>
-						<%}else if(tipo.equals("Oferta")){ %>
-						<li><a id="fonte-nav" href="consultaOferta.jsp"> Nova Consulta
-								Oferta</a></li>
-						<%} %>
-			
+						<li class="active"><a id="fonte-nav"
+							href="cadastro_evento.jsp">Cadastrar Novo Evento</a></li>
 					</ul>
-
 
 					<div id="myTabContent" class="tab-content">
 						<div class="tab-pane fade active in" id="new">
 							<div class="container-fluid">
 								<div class="row">
 									<div class="col-xs-12 col-md-10 col-md-offset-1">
-										<%
-											ArrayList<DizimosOferta> listaDizimosOfertas = (ArrayList<DizimosOferta>) request.getAttribute("dizimosOfertas");
-											float total = (float) request.getAttribute("totalDizimosOfertas");
-											NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
-											
-											if (listaDizimosOfertas != null) {
-										%>
-										<div class="cardDizOferta">
+										<form method="get" enctype="multipart/form-data"
+											name="frmMembro" action="listarEventos">
+							
 
-											<div class="title">
-												<p class="title-text">
-													Total de <%=tipo%> do Mês de
-													<%=meses[mes - 1]%>
-													de
-													<%=ano%></p>
-											</div>
-											<div class="data">
-												<p><%=nf.format(total)%></p>
-											</div>
-										</div>
-										<br> <br> <br>
-										<table class="table table-hover text-center">
-
-											<thead>
-												<tr>
-													<th class="text-center">ID</th>
-													<th class="text-center">Nome do Membro</th>
-													<th class="text-center">Filial</th>
-													<th class="text-center">Data da Contribuição</th>
-													<th class="text-center">Tipo</th>
-													<th class="text-center">Valor</th>
-													<th class="text-center">Excluir</th>
-												</tr>
-											</thead>
-											<tbody>
-
-												<%
-													for (DizimosOferta dizimoOferta : listaDizimosOfertas) {
-													LocalDateTime data = LocalDateTime.parse(dizimoOferta.getDzodtcontribuicao() + " " + "00:00:00",
-																DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-													LocalDateTime dataAtual = LocalDateTime.now();
-													SimpleDateFormat dataFormatter = new SimpleDateFormat("dd/MM/yyyy");
-													String dataFormatada = dataFormatter.format(dizimoOferta.getDzodtcontribuicao());
-												%>
-												<tr>
-													<td><%=dizimoOferta.getIddizimooferta()%></td>
-													<td><%=dizimoOferta.getDzomembronome()%></td>
-													<td><%=dizimoOferta.getDzoFilialNome()%></td>
-													<td><%=dataFormatada%></td>
-													<td><%=dizimoOferta.getDzotipo()%></td>
-													<td><%=nf.format(dizimoOferta.getDzovalor())%></td>
-													<td>
-														<button class="btn btn-danger btn-raised btn-xs"
-															onclick="abrirModalAlerta('<%=dizimoOferta.getIddizimooferta()%>', '<%=mes%>', '<%=ano%>','<%=tipo%>')">
-															<i class="zmdi zmdi-delete"></i>
-														</button></td>
-
-
+											<div class="custom-select">
+												<label class="select-fonte">Filial</label> <select
+													class="form_group" name="evefilial">
 													
-												</tr>
-
-
-												<%
-												}
-												%>
-												<%
-												}
-												%>
-
-											</tbody>
-										</table>
-
-
+													<%for(FilialJavaBeans filial : filiais){ %>
+													<option value="<%=filial.getIdfilial()%>"><%=filial.getFilnome() %></option>
+													<%} %>
+												</select>
+											</div>
+						
+							
+											<p class="text-center">
+										    	<button  class="btn btn-info btn-raised btn-sm"><i class="zmdi zmdi-search"></i> Pesquisar </button>
+										   </p>
+										</form>
 									</div>
 								</div>
 							</div>
@@ -338,31 +262,42 @@
 	<script src="./js/ripples.min.js"></script>
 	<script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
 	<script src="./js/main.js"></script>
-	<script src="js/script-fecha-alerta.js"></script>
-
 	<script>
 		$.material.init();
 	</script>
 </body>
 
-<div class="janela-modal-alerta" id="janela-modal-alerta">
-	<div class="modal-alerta">
-		<button class="fechar" id="fechar">X</button>
-		<div class="container-modal">
-			<img class="icone" alt="alertaIcone"
-				src="./assets/img/alertaIcone.png">
-			<h1>Alerta!</h1>
-			<p>Deseja realmente exlcuir esse registro permanentemente?</p>
-			<div class="container-btn">
-				<button class="btn btn-danger btn-raised btn-xs" id="fechar-alerta">
-					<p id='fechar-alerta'>Cancelar</p>
-				</button>
-				<br> <a class="btn btn-success btn-raised btn-xs"
-					id="confirma-exclusao">Confirmar</a>
+<%
+String achouMembro = request.getParameter("success");
+if (achouMembro != null) {
+	if ("true".equals(achouMembro)) {
+%>
+<div class="janela-modal-sucesso" id="janela-modal-sucesso">
+	<div class="modal-sucesso">
+		<button class="fechar" id="fechar-sucesso">X</button>
+			<div class="container-modal">
+				<img class = "icone"alt="sucessoIcon" src="./assets/img/sucesso.png">
+				<h1>Sucesso!</h1>
+				<p>O atualização do evento foi realizado com sucesso.</p>
 			</div>
-		</div>
-
 	</div>
 </div>
-
+<%
+} else if ("false".equals(achouMembro)) {
+%>
+<div class="janela-modal-erro" id="janela-modal-erro">
+	<div class="modal-erro">
+		<button class="fechar" id="fechar-erro">X</button>
+			<div class="container-modal">
+				<img class="icone"alt="sucessoIcon" src="./assets/img/erro.png">
+				<h1>Erro!</h1>
+				<p>Erro ao atualizar o evento.</p>
+			</div>
+	</div>
+</div>
+<%
+}
+}
+%>
+<script src="js/script-fechar.js"></script>
 </html>

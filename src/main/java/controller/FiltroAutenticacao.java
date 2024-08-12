@@ -49,7 +49,8 @@ public class FiltroAutenticacao extends HttpFilter implements Filter {
         boolean resourceRequest = requestedURI.endsWith("index.jsp") 
                                   || requestedURI.startsWith(req.getContextPath() + "/css/") 
                                   || requestedURI.startsWith(req.getContextPath() + "/js/") 
-                                  || requestedURI.startsWith(req.getContextPath() + "/images/");
+                                  || requestedURI.startsWith(req.getContextPath() + "/assets/")
+                                  || requestedURI.startsWith(req.getContextPath() + "/css2/");
 
         if (loggedIn || loginRequest || resourceRequest) {
             // Adiciona cabeçalhos para evitar cache
