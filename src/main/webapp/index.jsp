@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./css/login.css">
     <link rel="stylesheet" href="./css/janela-modal-sucesso-erro.css">
  
-    <title>Document</title>
+    <title>SGI - Sistema de Gestão de Igreja</title>
 </head>
 
 <body>
@@ -32,7 +32,7 @@
                     <label for="pass">Senha</label>
                 </div>
                 <div class="input-block">
-<span class="forgot"><a href="#">Esqueceu a senha?</a></span>
+<span class="forgot"><a href="pesquisarUsuario.jsp">Esqueceu a senha?</a></span>
                 <button>Acessar</button>
             </div>
             </form>

@@ -47,6 +47,9 @@ public class FiltroAutenticacao extends HttpFilter implements Filter {
 
         // Verifica se a URI requisitada é para a página de login ou um recurso público
         boolean resourceRequest = requestedURI.endsWith("index.jsp") 
+        						  || requestedURI.endsWith("pesquisarUsuario.jsp")
+        						  || requestedURI.endsWith("TrocarSenhaController")
+        						  || requestedURI.endsWith("trocarSenha.jsp")
                                   || requestedURI.startsWith(req.getContextPath() + "/css/") 
                                   || requestedURI.startsWith(req.getContextPath() + "/js/") 
                                   || requestedURI.startsWith(req.getContextPath() + "/assets/")

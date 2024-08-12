@@ -341,6 +341,49 @@ public class MembroDAO {
 			return null;
 		}
 	}
+	
+	public String achaMembroCPF(String cpf) {
+		String function = "SELECT f_achou_membro_cpf(?);";
+		System.out.println(cpf);
+		
+		String achouMembro = null;
+		try {
+			Connection con = conectar();
+			PreparedStatement pst = con.prepareStatement(function);
+			pst.setString(1, cpf);
+			
+			ResultSet rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				
+				achouMembro = rs.getString(1);
+				
+			}
+			return achouMembro;
+		
+		} catch (Exception e) {
+			System.out.println("Erro ao achar o Membro: "  + e);
+			return null;
+		}
+		
+	}
+	
+	public boolean alteraSenha(MembroJavaBeans membro) {
+		String callSp = "Call sp_trocar_a_senha(?,?);";
+		
+		try {
+			Connection con = conectar();
+			PreparedStatement pst = con.prepareStatement(callSp);
+			pst.setInt(2, membro.getId_Membro());
+			pst.setString(1,membro.getMbrsenha());
+			pst.executeUpdate();
+			con.close();
+			return true;
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		}
+	}
 
 	
 
