@@ -157,4 +157,27 @@ public class PatrimonioDAO {
 			System.out.println(e);
 		}
 	}
+	
+	
+	public float totalPatrimonio() {
+		String functionSQL = "SELECT f_total_patrimonio();";
+		float total = 0;
+		
+		try {
+			Connection con = conectar();
+			PreparedStatement pst = con.prepareStatement(functionSQL);
+			ResultSet rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				
+				total = rs.getFloat(1);
+			}
+			
+			con.close();
+			return total;
+			
+		} catch (Exception e) {
+			return 0;
+		}
+	}
 }

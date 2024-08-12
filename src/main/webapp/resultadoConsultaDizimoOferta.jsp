@@ -151,6 +151,9 @@
 						<li><a id="fonte-nav" href="consultaOferta.jsp"> Nova Consulta
 								Oferta</a></li>
 						<%} %>
+						
+						<li><a id="fonte-nav" href="relatorioDZO?tipo=<%=tipo%>&mes=<%=mes%>&ano=<%=ano%>"> <i class="zmdi zmdi-download"></i>   Emitir Relatório
+								</a></li>
 			
 					</ul>
 

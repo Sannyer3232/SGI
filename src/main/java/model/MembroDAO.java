@@ -126,113 +126,108 @@ public class MembroDAO {
 
 	}
 
-	
 	public ArrayList<MembroJavaBeans> pesquisarMembro(String nome, String status) {
-	    ArrayList<MembroJavaBeans> membros = new ArrayList<>();
-	    String call_spmembros = "Call sp_membro_dados_nome(?, ?)";
+		ArrayList<MembroJavaBeans> membros = new ArrayList<>();
+		String call_spmembros = "Call sp_membro_dados_nome(?, ?)";
 
-	    try {
-	        Connection conn = conectar();
-	        PreparedStatement pst = conn.prepareStatement(call_spmembros);
-	        
-	        // Defina os parâmetros da procedure
-	        pst.setString(1, nome);
-	        pst.setInt(2, Integer.parseInt(status)); // Converta status para Int
-	        
-	        ResultSet rs = pst.executeQuery();
+		try {
+			Connection conn = conectar();
+			PreparedStatement pst = conn.prepareStatement(call_spmembros);
 
-	        while (rs.next()) {
-	            int id = rs.getInt(1);
-	            String mbrnome = rs.getString(2);
-	            String cpf = rs.getString(3);
-	            String email = rs.getString(4);
-	            String sede = rs.getString(5);
-	            String superior = rs.getString(6);
-	            String cargo = rs.getString(7);
-	            String filial = rs.getString(8);
-	            
-	            
-	            // Verifique se o campo superior é nulo antes de atribuir
-	            if (superior == null) {
-	                membros.add(new MembroJavaBeans(id,mbrnome, cpf, email,sede, "Sem superior", cargo, filial));
-	            } else {
-	                membros.add(new MembroJavaBeans(id,mbrnome, cpf, email,sede, superior, cargo, filial));
-	            }
-	        }
-	        
-	        conn.close();
-	        return membros;
-	        
-	    } catch (Exception e) {
-	        System.out.println(e);
-	        return null;
-	    }
+			// Defina os parâmetros da procedure
+			pst.setString(1, nome);
+			pst.setInt(2, Integer.parseInt(status)); // Converta status para Int
+
+			ResultSet rs = pst.executeQuery();
+
+			while (rs.next()) {
+				int id = rs.getInt(1);
+				String mbrnome = rs.getString(2);
+				String cpf = rs.getString(3);
+				String email = rs.getString(4);
+				String sede = rs.getString(5);
+				String superior = rs.getString(6);
+				String cargo = rs.getString(7);
+				String filial = rs.getString(8);
+
+				// Verifique se o campo superior é nulo antes de atribuir
+				if (superior == null) {
+					membros.add(new MembroJavaBeans(id, mbrnome, cpf, email, sede, "Sem superior", cargo, filial));
+				} else {
+					membros.add(new MembroJavaBeans(id, mbrnome, cpf, email, sede, superior, cargo, filial));
+				}
+			}
+
+			conn.close();
+			return membros;
+
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+		}
 	}
-	
-	//CRUD UPADATE
-	//Selecionar o membro
-	
+
+	// CRUD UPADATE
+	// Selecionar o membro
+
 	public MembroJavaBeans selecaoMembro(int idmembro) {
-	    String callspselcionarMembro = "CALL sp_membro_por_id(?);";
-	    EnderecoJavaBeans endereco = new EnderecoJavaBeans();
-	    
-	    try {
-	        Connection conn = conectar();
-	        PreparedStatement pst = conn.prepareStatement(callspselcionarMembro);
-	        pst.setInt(1, idmembro); // Passando o ID do membro para a query
-	        ResultSet rs = pst.executeQuery();
-	        
-	        MembroJavaBeans membro = null; // Inicializando como null para verificar se um membro foi encontrado
-	        
-	        while (rs.next()) {
-	            // Criar um novo objeto MembroJavaBeans com os dados do ResultSet
-	            membro = new MembroJavaBeans();
-	            membro.setId_Membro(rs.getInt(1));
-	            membro.setSedenome(rs.getString(2));
-	            membro.setMbrmemnome(rs.getString(3));
-	            membro.setMbrcpf(rs.getString(4));
-	            membro.setSupnome(rs.getString(5));
-	            membro.setMbrnumero_identidade(rs.getString(6));
-	            membro.setMbremail(rs.getString(7));
-	            membro.setMbrtelefone(rs.getString(9));
-	            membro.setMbrata_nascimento(rs.getDate(10));
-	            membro.setEstdescricao(rs.getString(11));
-	            membro.setMbrfotoCaminho(rs.getString(12));
-	            membro.setMbrativo(rs.getBoolean(13));
-	            membro.setMbracesso(rs.getString(14));
-	           
-	            
-	            endereco.setEndrua(rs.getString(15));
-	            endereco.setEndnumero(rs.getString(16));
-	            endereco.setEndbairro(rs.getString(17));
-	            endereco.setEndcep(rs.getString(18));
-	            endereco.setEndcidade(rs.getString(19));
-	            endereco.setEndestado(rs.getString(20));
-	            
-	            membro.setMbrendereco(endereco);
-	            
-	            // Verificando se o cargo é nulo no banco
-	            String cargo = rs.getString(21);
-	            if (cargo != null) {
-	                membro.setCargoNome(cargo);
-	            } else {
-	                membro.setCargoNome("Membro Comum");
-	            }
-	           membro.setFilialnome(rs.getString(23));
-	        }
-	        membro.setFilialnome(callspselcionarMembro);
-	        
-	        
-	        conn.close();
-	        return membro; // Retorna o membro encontrado (ou null se não encontrado)
-	        
-	    } catch (Exception e) {
-	        System.out.println(e);
-	        return null;
-	    }
+		String callspselcionarMembro = "CALL sp_membro_por_id(?);";
+		EnderecoJavaBeans endereco = new EnderecoJavaBeans();
+
+		try {
+			Connection conn = conectar();
+			PreparedStatement pst = conn.prepareStatement(callspselcionarMembro);
+			pst.setInt(1, idmembro); // Passando o ID do membro para a query
+			ResultSet rs = pst.executeQuery();
+
+			MembroJavaBeans membro = null; // Inicializando como null para verificar se um membro foi encontrado
+
+			while (rs.next()) {
+				// Criar um novo objeto MembroJavaBeans com os dados do ResultSet
+				membro = new MembroJavaBeans();
+				membro.setId_Membro(rs.getInt(1));
+				membro.setSedenome(rs.getString(2));
+				membro.setMbrmemnome(rs.getString(3));
+				membro.setMbrcpf(rs.getString(4));
+				membro.setSupnome(rs.getString(5));
+				membro.setMbrnumero_identidade(rs.getString(6));
+				membro.setMbremail(rs.getString(7));
+				membro.setMbrtelefone(rs.getString(9));
+				membro.setMbrata_nascimento(rs.getDate(10));
+				membro.setEstdescricao(rs.getString(11));
+				membro.setMbrfotoCaminho(rs.getString(12));
+				membro.setMbrativo(rs.getBoolean(13));
+				membro.setMbracesso(rs.getString(14));
+
+				endereco.setEndrua(rs.getString(15));
+				endereco.setEndnumero(rs.getString(16));
+				endereco.setEndbairro(rs.getString(17));
+				endereco.setEndcep(rs.getString(18));
+				endereco.setEndcidade(rs.getString(19));
+				endereco.setEndestado(rs.getString(20));
+
+				membro.setMbrendereco(endereco);
+
+				// Verificando se o cargo é nulo no banco
+				String cargo = rs.getString(21);
+				if (cargo != null) {
+					membro.setCargoNome(cargo);
+				} else {
+					membro.setCargoNome("Membro Comum");
+				}
+				membro.setFilialnome(rs.getString(23));
+			}
+			membro.setFilialnome(callspselcionarMembro);
+
+			conn.close();
+			return membro; // Retorna o membro encontrado (ou null se não encontrado)
+
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+		}
 	}
 
-	
 	public boolean updateMembro(MembroJavaBeans membro) {
 		String callSpAtulizar = "call sp_atualizar_membro(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 
@@ -277,10 +272,10 @@ public class MembroDAO {
 			return false;
 		}
 	}
-	
+
 	public void desativaMembro(MembroJavaBeans membro) {
 		String callSpDesativa = "Call sp_desativar_membro(?);";
-		
+
 		try {
 			Connection con = conectar();
 			PreparedStatement pst = con.prepareStatement(callSpDesativa);
@@ -291,35 +286,33 @@ public class MembroDAO {
 			System.out.println(e);
 		}
 	}
-	
-	
+
 	public boolean achaMembro(int membroId) {
 		String function = "SELECT f_achou_membro(?);";
 		System.out.println(membroId);
-		
+
 		boolean achouMembro = false;
 		try {
 			Connection con = conectar();
 			PreparedStatement pst = con.prepareStatement(function);
 			pst.setInt(1, membroId);
-			
+
 			ResultSet rs = pst.executeQuery();
-			
-			while(rs.next()) {
-				
+
+			while (rs.next()) {
+
 				achouMembro = rs.getBoolean(1);
-				
+
 			}
 			return achouMembro;
-		
+
 		} catch (Exception e) {
-			System.out.println("Erro ao achar o Membro: "  + e);
+			System.out.println("Erro ao achar o Membro: " + e);
 			return false;
 		}
-		
+
 	}
-	
-	
+
 	public MembroJavaBeans login(String email, String senha) {
 		MembroJavaBeans membro = new MembroJavaBeans();
 		String sp = "call sp_login(?, ?);";
@@ -329,53 +322,53 @@ public class MembroDAO {
 			pst.setString(1, email);
 			pst.setString(2, senha);
 			ResultSet rs = pst.executeQuery();
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
 				membro = new MembroJavaBeans(rs.getString(1), rs.getString(2));
 			}
-			
+
 			con.close();
 			return membro;
-			
+
 		} catch (Exception e) {
 			return null;
 		}
 	}
-	
+
 	public String achaMembroCPF(String cpf) {
 		String function = "SELECT f_achou_membro_cpf(?);";
 		System.out.println(cpf);
-		
+
 		String achouMembro = null;
 		try {
 			Connection con = conectar();
 			PreparedStatement pst = con.prepareStatement(function);
 			pst.setString(1, cpf);
-			
+
 			ResultSet rs = pst.executeQuery();
-			
-			while(rs.next()) {
-				
+
+			while (rs.next()) {
+
 				achouMembro = rs.getString(1);
-				
+
 			}
 			return achouMembro;
-		
+
 		} catch (Exception e) {
-			System.out.println("Erro ao achar o Membro: "  + e);
+			System.out.println("Erro ao achar o Membro: " + e);
 			return null;
 		}
-		
+
 	}
-	
+
 	public boolean alteraSenha(MembroJavaBeans membro) {
 		String callSp = "Call sp_trocar_a_senha(?,?);";
-		
+
 		try {
 			Connection con = conectar();
 			PreparedStatement pst = con.prepareStatement(callSp);
 			pst.setInt(2, membro.getId_Membro());
-			pst.setString(1,membro.getMbrsenha());
+			pst.setString(1, membro.getMbrsenha());
 			pst.executeUpdate();
 			con.close();
 			return true;
@@ -385,6 +378,27 @@ public class MembroDAO {
 		}
 	}
 
-	
+	public String totalMembros() {
+		String function = "SELECT quantidade_membros();";
+
+		String achouMembro = null;
+		try {
+			Connection con = conectar();
+			PreparedStatement pst = con.prepareStatement(function);
+			ResultSet rs = pst.executeQuery();
+
+			while (rs.next()) {
+
+				achouMembro = rs.getString(1);
+
+			}
+			return achouMembro;
+
+		} catch (Exception e) {
+			System.out.println("Erro ao contar os membros: " + e);
+			return null;
+		}
+
+	}
 
 }

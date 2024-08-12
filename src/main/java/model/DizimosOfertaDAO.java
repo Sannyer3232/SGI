@@ -144,6 +144,28 @@ public class DizimosOfertaDAO {
 		}
 	}
 	
+	public float totalDizimoOferta(String tipo) {
+		String functionSQL = "SELECT f_total_dizimo_oferta(?);";
+		float total = 0;
+		
+		try {
+			Connection con = conectar();
+			PreparedStatement pst = con.prepareStatement(functionSQL);
+			pst.setString(1, tipo);
+			ResultSet rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				
+				total = rs.getFloat(1);
+			}
+			
+			con.close();
+			return total;
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+	
 
 
 }
