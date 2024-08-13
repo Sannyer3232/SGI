@@ -42,7 +42,7 @@ ArrayList<DoacoesJavaBeans> lista = (ArrayList<DoacoesJavaBeans>) request.getAtt
 			</div>
 			<!-- SideBar Menu -->
 				<ul class="list-unstyled full-box dashboard-sideBar-Menu">
-				<li><a href="home.html"> <i
+				<li><a href="home.jsp"> <i
 						class="zmdi zmdi-view-dashboard zmdi-hc-fw"></i> Panel Principal
 				</a></li>
 				<li><a href="#!" class="btn-sideBar-SubMenu"> <i

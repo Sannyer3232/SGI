@@ -163,4 +163,29 @@ public class EventoDAO {
 	      }
 
 	   }
+	   
+	   public ArrayList<EventoJavaBeans> listarEventoCard(){
+		   String sp = "CALL sp_listar_evento_card();";
+		   ArrayList<EventoJavaBeans> eventos = new ArrayList<>();
+		   
+		   try {
+			
+			   Connection con = conectar();
+			   PreparedStatement pst = con.prepareStatement(sp);
+			   ResultSet rs = pst.executeQuery();	
+			   
+			   while(rs.next()) {
+				   String titulo = rs.getString(1);
+				   Date data = rs.getDate(2);
+				   Time hora = rs.getTime(3);
+				   
+				   eventos.add(new EventoJavaBeans(titulo, data, hora));
+			   }
+			   
+			   con.close();
+			   return eventos;
+		} catch (Exception e) {
+			return null;
+		}
+	   }
 }

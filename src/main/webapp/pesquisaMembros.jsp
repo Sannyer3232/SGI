@@ -39,7 +39,7 @@
 			</div>
 			<!-- SideBar Menu -->
 				<ul class="list-unstyled full-box dashboard-sideBar-Menu">
-				<li><a href="home.html"> <i
+				<li><a href="home.jsp"> <i
 						class="zmdi zmdi-view-dashboard zmdi-hc-fw"></i> Panel Principal
 				</a></li>
 				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
@@ -126,7 +126,7 @@
 
 					<ul class="nav nav-tabs" style="margin-bottom: 15px;">
 
-						<li><a id="fonte-nav" href="cadastroMembros.jsp">
+						<li><a id="fonte-nav" href="cadastroMembros">
 								Cadastrar Membros</a></li>
 
 					</ul>

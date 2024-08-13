@@ -23,7 +23,17 @@ public class EventoJavaBeans {
 	   
 	   
 	   
-	   public EventoJavaBeans(String evetitulo, String evedescricao, Date evedata, Time evehora, String evelocailacao,
+	   public EventoJavaBeans(String evetitulo, Date evedata, Time evehora) {
+		this.evetitulo = evetitulo;
+		this.evedata = evedata;
+		this.evehora = evehora;
+	}
+
+
+
+
+
+	public EventoJavaBeans(String evetitulo, String evedescricao, Date evedata, Time evehora, String evelocailacao,
 			String evestatus, String evefilial) {
 		this.evetitulo = evetitulo;
 		this.evedescricao = evedescricao;

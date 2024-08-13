@@ -12,6 +12,7 @@
 <meta name="viewport"
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <link rel="stylesheet" href="./css/main.css">
+<link rel="stylesheet" href="./css/card.css">
 </head>
 <body>
 	<!-- SideBar -->
@@ -26,8 +27,8 @@
 			<!-- SideBar User info -->
 			<div class="full-box dashboard-sideBar-UserInfo">
 				<figure class="full-box">
-					<img src="./assets/img/avatar.jpg" alt="UserIcon">
-					<figcaption class="text-center text-titles">User Name</figcaption>
+					<img src="img/<%out.print(session.getAttribute("userphoto"));%>">
+					<figcaption class="text-center text-titles"><%out.print(session.getAttribute("username")); %></figcaption>
 				</figure>
 				<ul class="full-box list-unstyled text-center">
 					<li><a href="#!"> <i class="zmdi zmdi-settings"></i>
@@ -38,56 +39,56 @@
 				</ul>
 			</div>
 			<!-- SideBar Menu -->
-			<ul class="list-unstyled full-box dashboard-sideBar-Menu">
-				<li><a href="home.html"> <i
-						class="zmdi zmdi-view-dashboard zmdi-hc-fw"></i> Dashboard
+				<ul class="list-unstyled full-box dashboard-sideBar-Menu">
+				<li><a href="home.jsp"> <i
+						class="zmdi zmdi-view-dashboard zmdi-hc-fw"></i> Panel Principal
 				</a></li>
 				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
-						class="zmdi zmdi-case zmdi-hc-fw"></i> Administration <i
-						class="zmdi zmdi-caret-down pull-right"></i>
-				</a>
+						class="zmdi zmdi-case zmdi-hc-fw"></i> Cadastro <i
+						class="zmdi zmdi-caret-down pull-right"></i></a>
 					<ul class="list-unstyled full-box">
-						<li><a href="period.html"><i
-								class="zmdi zmdi-timer zmdi-hc-fw"></i> Period</a></li>
-						<li><a href="subject.html"><i
-								class="zmdi zmdi-book zmdi-hc-fw"></i> Subject</a></li>
-						<li><a href="section.html"><i
-								class="zmdi zmdi-graduation-cap zmdi-hc-fw"></i> Section</a></li>
-						<li><a href="salon.html"><i
-								class="zmdi zmdi-font zmdi-hc-fw"></i> Salon</a></li>
-					</ul></li>
-				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
-						class="zmdi zmdi-account-add zmdi-hc-fw"></i> Users <i
-						class="zmdi zmdi-caret-down pull-right"></i>
-				</a>
-					<ul class="list-unstyled full-box">
-						<li><a href="admin.html"><i
-								class="zmdi zmdi-account zmdi-hc-fw"></i> Admin</a></li>
-						<li><a href="teacher.html"><i
-								class="zmdi zmdi-male-alt zmdi-hc-fw"></i> Teacher</a></li>
+						<li><a href="cadastroMembros"><i
+								class="zmdi zmdi-account"></i> Membros</a></li>
+						<li><a href="cadastroTarefa"><i
+								class="zmdi zmdi-assignment"></i> Tarefas</a></li>
 						<li><a href="student.html"><i
-								class="zmdi zmdi-face zmdi-hc-fw"></i> Student</a></li>
-						<li><a href="representative.html"><i
-								class="zmdi zmdi-male-female zmdi-hc-fw"></i> Representative</a></li>
+								class="zmdi zmdi-accounts-add zmdi-hc-fw"></i> Grupos</a></li>
+						<li><a href="cadastro_eventos.jsp"><i class="zmdi zmdi-calendar"></i>Evento</a></li>
+
 					</ul></li>
 				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
-						class="zmdi zmdi-card zmdi-hc-fw"></i> Payments <i
+						class="zmdi zmdi-calendar-check zmdi-hc-fw"></i> Eventos <i
 						class="zmdi zmdi-caret-down pull-right"></i>
 				</a>
 					<ul class="list-unstyled full-box">
-						<li><a href="registration.html"><i
-								class="zmdi zmdi-money-box zmdi-hc-fw"></i> Registration</a></li>
-						<li><a href="cadastroDizimo.jsp"><i
-								class="zmdi zmdi-money zmdi-hc-fw"></i> Payments</a></li>
+						<li><a href="aniversatiantes.jsp"><i
+								class="zmdi zmdi-cake zmdi-hc-fw"></i> Aniversariantes</a></li>
+						<li><a href="teacher.html"><i
+								class="zmdi zmdi-alarm-plus zmdi-hc-fw"></i>Eventos</a></li>	
+						
 					</ul></li>
 				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
-						class="zmdi zmdi-shield-security zmdi-hc-fw"></i> Settings School
-						<i class="zmdi zmdi-caret-down pull-right"></i>
+						class="zmdi zmdi-card zmdi-hc-fw"></i> Financeiro <i
+						class="zmdi zmdi-caret-down pull-right"></i>
 				</a>
 					<ul class="list-unstyled full-box">
-						<li><a href="school.html"><i
-								class="zmdi zmdi-balance zmdi-hc-fw"></i> School Data</a></li>
+						<li><a href="CadastroContas"><i
+								class="zmdi zmdi-exposure-alt zmdi-hc-fw"></i> Contas</a></li>
+						<li><a href="cadastroDoacoes"><i class="zmdi zmdi-favorite zmdi-hc-fw"></i>
+								Doações</a></li>
+						<li><a href="membroparadizimo.jsp"><i
+								class="zmdi zmdi-money zmdi-hc-fw"></i> Dízimos</a></li>
+						<li><a href="membroparaoferta.jsp"><i
+								class="zmdi zmdi-money-box zmdi-hc-fw"></i> Ofertas</a></li>
+						<li><a href="cadastroPatrimonio"><i
+								class="zmdi zmdi-chart zmdi-hc-fw"></i> Patrimonio</a></li>
 					</ul></li>
+	
+					
+					<li><a href="ajuda.jsp"> <i
+						class="zmdi zmdi-pin-help"></i> Ajuda
+				</a></li>
+					
 			</ul>
 		</div>
 	</section>

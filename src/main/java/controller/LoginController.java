@@ -67,7 +67,7 @@ public class LoginController extends HttpServlet {
 	            HttpSession session = request.getSession();
 	            session.setAttribute("username", membro.getMbrnome());
 	            session.setAttribute("userphoto", membro.getMbrfotoCaminho());
-	            response.sendRedirect("cadastroMembros");
+	            response.sendRedirect("home.jsp");
 	        } else {
 	            response.sendRedirect("index.jsp?error=true");
 	        }
