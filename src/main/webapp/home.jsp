@@ -10,11 +10,13 @@
 <%@ page import="model.EventoDAO" %>
 <%@ page import="model.MembroJavaBeans" %>
 <%@ page import="model.EventoJavaBeans" %>
+<%@ page import="controller.JSONGenerators" %>
 <%
 	MembroDAO daoMembro = new MembroDAO();
 	DizimosOfertaDAO daoDizimosOferta = new DizimosOfertaDAO();
 	PatrimonioDAO daoPatrimonio = new PatrimonioDAO();
 	EventoDAO daoEvento = new EventoDAO();
+	JSONGenerators json = new JSONGenerators();
 	
 	NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
 	SimpleDateFormat dataFormatter = new SimpleDateFormat("dd/MM");
@@ -31,6 +33,9 @@
 	ArrayList<EventoJavaBeans> eventos = daoEvento.listarEventoCard();
 	String[] meses = {"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro",
 			"Novembro", "Dezembro"};
+	json.JSONListarTotalDizimoOferta("Dizimo");
+	json.JSONListarTotalDizimoOferta("Oferta");
+	json.JSONListarTotalcontas();
 
 
 %>
@@ -267,7 +272,7 @@
                 </div>
             </div>
         </div>
-
+		    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
         <script src="./js/my_chart.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>

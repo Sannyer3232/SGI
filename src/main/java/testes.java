@@ -1,3 +1,4 @@
+import controller.JSONGenerators;
 import model.DizimosOfertaDAO;
 import model.MembroDAO;
 import model.PatrimonioDAO;
@@ -10,6 +11,11 @@ public class testes {
 		PatrimonioDAO daoPTR =  new PatrimonioDAO();
 	
 		System.out.println(daoPTR.totalPatrimonio());
+		
+		JSONGenerators json = new JSONGenerators();
+		
+		json.JSONListarTotalDizimoOferta("Oferta");
+		json.JSONListarTotalcontas();
 		
 	}
 }

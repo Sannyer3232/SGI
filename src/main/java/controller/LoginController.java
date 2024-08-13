@@ -69,11 +69,11 @@ public class LoginController extends HttpServlet {
 	            session.setAttribute("userphoto", membro.getMbrfotoCaminho());
 	            response.sendRedirect("home.jsp");
 	        } else {
-	            response.sendRedirect("index.jsp?error=true");
+	            response.sendRedirect("HomeController?error=true");
 	        }
 	    } catch (Exception e) {
 	        e.printStackTrace();
-	        response.sendRedirect("index.jsp?error=true");
+	        response.sendRedirect("HomeController?error=true");
 	    }
 	}
 

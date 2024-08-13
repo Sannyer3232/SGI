@@ -100,7 +100,7 @@ public class ContasController extends HttpServlet {
 		dao.inserirConta(conta);
 
 		// redirecionar para o documento 
-		response.sendRedirect("cadastrocontas.jsp");
+		response.sendRedirect("CadastroContas");
 
 	}
 

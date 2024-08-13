@@ -166,6 +166,30 @@ public class DizimosOfertaDAO {
 		}
 	}
 	
+	public float totalDizimoOfertaMes(int mes, int ano, String tipo){
+		float total = 0;
+		String sp = "CALL sp_total_dizimo_oferta_mesano(?, ?, ?);";
+		
+		try {
+			Connection con = conectar();
+			PreparedStatement pst = con.prepareStatement(sp);
+			pst.setInt(1, mes);
+			pst.setInt(2, ano);
+			pst.setString(3, tipo);
+			ResultSet rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				total = rs.getFloat(1);
+			}
+			
+			con.close();
+			return total;
+			
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+	
 
 
 }

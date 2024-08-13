@@ -134,7 +134,7 @@ ArrayList<ContasJavaBeans> lista = (ArrayList<ContasJavaBeans>) request.getAttri
 			<div class="row">
 				<div class="col-xs-12">
 					<ul class="nav nav-tabs" style="margin-bottom: 15px;">
-						<li class="active"><a href="cadastrocontas.jsp">Cadastrar
+						<li class="active"><a href="CadastroContas">Cadastrar
 								Contas</a></li>
 					
 					</ul>
