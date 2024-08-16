@@ -275,57 +275,57 @@ public class DizimoOfertaController extends HttpServlet {
 
 	        documento.open();
 
-	        // Caminho das logos
+	      
 	        String path = request.getServletContext().getRealPath("/assets/img/");
 	        Image logo = Image.getInstance(path + "logo.png");
 	        Image logo_2 = Image.getInstance(path + "SGI.png");
 
-	        // Redimensiona as logos
+	        
 	        logo.scaleToFit(100, 100);
 	        logo_2.scaleToFit(100, 100);
 
-	        // Criar uma tabela com duas colunas para posicionar as logos
+	        
 	        PdfPTable table = new PdfPTable(2);
 	        table.setWidthPercentage(100);
-	        table.setWidths(new float[]{2, 1}); // Ajustar as proporções das colunas
+	        table.setWidths(new float[]{2, 1}); 
 
-	        // Adicionar a primeira logo na célula da esquerda
+	        
 	        PdfPCell cell1 = new PdfPCell(logo);
-	        cell1.setBorder(PdfPCell.NO_BORDER); // Remove as bordas da célula
+	        cell1.setBorder(PdfPCell.NO_BORDER); 
 	        cell1.setHorizontalAlignment(Element.ALIGN_LEFT);
 
-	        // Adicionar a segunda logo na célula da direita
+	     
 	        PdfPCell cell2 = new PdfPCell(logo_2);
-	        cell2.setBorder(PdfPCell.NO_BORDER); // Remove as bordas da célula
+	        cell2.setBorder(PdfPCell.NO_BORDER); 
 	        cell2.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
-	        // Adicionar as células na tabela
+	       
 	        table.addCell(cell1);
 	        table.addCell(cell2);
 
-	        // Adicionar a tabela ao documento
+	        
 	        documento.add(table);
 
-	        // Adicionar a data de emissão no canto superior direito
+	        
 	        Date dataAtual = new Date();
 	        SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
 	        Paragraph dataEmissao = new Paragraph("Data de Emissão: " + formatoData.format(dataAtual));
 	        dataEmissao.setAlignment(Element.ALIGN_RIGHT);
 	        documento.add(dataEmissao);
 
-	        // Título do Relatório
+	        
 	        Paragraph titulo = new Paragraph("Relatório de " + tipo + ".");
 	        titulo.setAlignment(Element.ALIGN_CENTER);
 	        documento.add(titulo);
 
-	        // Subtítulo com mês e ano
+	        
 	        Paragraph subtitulo = new Paragraph("Mês: " + meses[mes - 1] + ", Ano: " + ano);
 	        subtitulo.setAlignment(Element.ALIGN_CENTER);
 	        documento.add(subtitulo);
 
 	        documento.add(new Paragraph(" "));
 
-	        // Criando a tabela para os dados
+	        
 	        PdfPTable tabela = new PdfPTable(new float[]{1, 1, 3, 3, 2, 2, 2});
 	        tabela.setWidthPercentage(100);
 

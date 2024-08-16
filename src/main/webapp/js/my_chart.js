@@ -6,7 +6,7 @@ let previousOfertaData = null;
 
 async function loadChartData() {
     try {
-        var timestamp = new Date().getTime(); // Cria um timestamp único para evitar cache
+        var timestamp = new Date().getTime(); 
 
         const response = await fetch('/SGI/JSON/valoresContas.json?ts=' + timestamp);
         if (!response.ok) {

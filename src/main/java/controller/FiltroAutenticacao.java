@@ -57,10 +57,10 @@ public class FiltroAutenticacao extends HttpFilter implements Filter {
                                   || requestedURI.startsWith(req.getContextPath() + "/JSON/");
 
         if (loggedIn || loginRequest || resourceRequest) {
-            // Adiciona cabeçalhos para evitar cache
-        	res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0, proxy-revalidate"); // HTTP 1.1.
-        	res.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-        	res.setDateHeader("Expires", 0); // Proxies.
+           
+        	res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0, proxy-revalidate"); 
+        	res.setHeader("Pragma", "no-cache"); 
+        	res.setDateHeader("Expires", 0);
         	res.setHeader("Surrogate-Control", "no-store");
             
             chain.doFilter(request, response);

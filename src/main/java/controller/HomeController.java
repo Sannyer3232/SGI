@@ -28,7 +28,7 @@ public class HomeController extends HttpServlet {
 		// TODO Auto-generated method stub
 		String action = request.getServletPath();
 		if (action.equals("/HomeController")) {
-			
+			homeRedirect(request, response);
 		}
 	}
 
@@ -41,7 +41,9 @@ public class HomeController extends HttpServlet {
 	}
 	
 	protected void homeRedirect(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		json.JSONListarTotalDizimoOferta("Dizimo");
+		json.JSONListarTotalDizimoOferta("Oferta");
+		json.JSONListarTotalcontas();
 		
 		response.sendRedirect("home.jsp");
 		

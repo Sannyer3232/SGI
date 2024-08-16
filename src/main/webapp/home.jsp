@@ -33,9 +33,9 @@
 	ArrayList<EventoJavaBeans> eventos = daoEvento.listarEventoCard();
 	String[] meses = {"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro",
 			"Novembro", "Dezembro"};
-	json.JSONListarTotalDizimoOferta("Dizimo");
-	json.JSONListarTotalDizimoOferta("Oferta");
-	json.JSONListarTotalcontas();
+	
+
+	
 
 
 %>
@@ -64,7 +64,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="btn-exit-system">
+                        <a href="HomeController" class="btn-exit-system">
                             <span class="icon"><i class="fa fa-home" aria-hidden="true"></i></span>
                             <span class="title"> Painel Principal</span>
                             

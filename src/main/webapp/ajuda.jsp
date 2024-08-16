@@ -60,7 +60,7 @@
 						class="zmdi zmdi-caret-down pull-right"></i>
 				</a>
 					<ul class="list-unstyled full-box">
-						<li><a href="aniversatiantes.jsp"><i
+						<li><a href="MembroController"><i
 								class="zmdi zmdi-cake zmdi-hc-fw"></i> Aniversariantes</a></li>
 						<li><a href="teacher.html"><i
 								class="zmdi zmdi-alarm-plus zmdi-hc-fw"></i>Eventos</a></li>	
@@ -145,8 +145,8 @@
                                             viewBox="0 0 24 24"
                                             xmlns="http://www.w3.org/2000/svg"
                                           >
-                                            <path  d="M0 0h24v24H0z" fill="none"></path>
-                                            <path 
+                                            <path onclick="abrirModalVideo()" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path onclick="abrirModalVideo()"
                                               d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
                                               fill="currentColor"
                                             ></path>
@@ -208,7 +208,24 @@
                                           </svg>
                                         </div>
                                     </a>
-                                    
+									<p class="lead">Ajuda com módulo de Dízimos:</p>
+									<a href = "exibirajuda.jsp?nomevideo=5" class="cssbuttons-io-button">
+									  Assista ao vídeo sobre os Dízimos!
+									  <div class="icon">
+										<svg
+										  height="24"
+										  width="24"
+										  viewBox="0 0 24 24"
+										  xmlns="http://www.w3.org/2000/svg"
+										>
+										  <path d="M0 0h24v24H0z" fill="none"></path>
+										  <path
+											d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+											fill="currentColor"
+										  ></path>
+										</svg>
+									  </div>
+								  </a>
                                     </div>
                                       
                                   <div class="col-xs-12 col-md-10 col-md-offset-1">

@@ -64,7 +64,7 @@
 						class="zmdi zmdi-caret-down pull-right"></i>
 				</a>
 					<ul class="list-unstyled full-box">
-						<li><a href="aniversatiantes.jsp"><i
+						<li><a href="MembroController"><i
 								class="zmdi zmdi-cake zmdi-hc-fw"></i> Aniversariantes</a></li>
 						<li><a href="teacher.html"><i
 								class="zmdi zmdi-alarm-plus zmdi-hc-fw"></i>Eventos</a></li>	
