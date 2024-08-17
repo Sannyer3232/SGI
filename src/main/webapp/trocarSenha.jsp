@@ -35,7 +35,7 @@
 					</div>
 					<input name="mbrid" type="hidden" value = "<%out.print(request.getAttribute("id"));%>" >
 					
-				 <button>Acessar</button>
+				 <button>Trocar Senha</button>
 					
 				</form>
 

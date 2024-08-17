@@ -148,29 +148,29 @@
 									    <form name = "frmEvento" method = "POST" action="insertEvento">
 									    	<div class="form-group label-floating">
 											  <label class="control-label">Titulo</label>
-											  <input class="form-control" type="text" name="evetitulo">
+											  <input class="form-control" type="text" name="evetitulo" required>
 											</div>
 											
 											 <div class="form-group label-floating">
 												<label class="control-label">Descrição</label>
-												<input class="form-control" type="text" name="evedescricao"> 
+												<input class="form-control" type="text" name="evedescricao" required> 
 											  </div>
 											  <div class="form-group">
 												<label class="control-label">Data</label>
-												<input class="form-control" type="date" name="evedata">
+												<input class="form-control" type="date" name="evedata" required>
 											  </div>
 											  <div class="form-group">
 												<label class="control-label">Hora</label>
-												<input class="form-control" type="time" name="evehora"> 
+												<input class="form-control" type="time" name="evehora" required> 
 											  </div>
 											  <div class="form-group label-floating">
 												<label class="control-label">Localização</label>
-												<input class="form-control" type="text" name="evelocalizacao"> 
+												<input class="form-control" type="text" name="evelocalizacao" required> 
 											  </div>
 											  
 											  <div class="custom-select">
 												<label class="select-fonte">Filial</label> <select
-													class="form_group" name="evefilial">
+													class="form_group" name="evefilial" required>
 													<option value="">---- Selecionar Filial ----</option>
 													<%for(FilialJavaBeans filial : filiais){ %>
 													<option value="<%=filial.getIdfilial()%>"><%=filial.getFilnome() %></option>

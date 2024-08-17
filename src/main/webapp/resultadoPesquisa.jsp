@@ -11,6 +11,19 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+<script>
+
+
+		$(document).ready(function() {
+		    $('#cpf').mask('000.000.000-00');
+		    $('#rg').mask('0000000-0');
+		    $('#telefone').mask('(00) 00000-0000'); 
+		    $('#cep').mask('00000-000'); 
+		});
+		</script>
 <link rel="stylesheet" href="./css/main.css">
 <link rel="stylesheet" href="./css/janela-modal-alerta.css">
 </head>
@@ -174,7 +187,7 @@
 														<tr>
 															<td><%=listaMembros.get(i).getId_Membro()%></td>
 															<td><%=listaMembros.get(i).getMbrmemnome()%></td>
-															<td><%=listaMembros.get(i).getMbrcpf()%></td>
+															<td id="cpf"><%=listaMembros.get(i).getMbrcpf()%></td>
 															<td><%=listaMembros.get(i).getMbremail()%></td>
 															<td><%=listaMembros.get(i).getSedenome()%></td>
 															<td><%=listaMembros.get(i).getFilialnome()%></td>
@@ -297,7 +310,7 @@
 		</div>
 	</div>
 	<!--====== Scripts -->
-	<script src="./js/jquery-3.1.1.min.js"></script>
+
 	<script src="./js/sweetalert2.min.js"></script>
 	<script src="./js/bootstrap.min.js"></script>
 	<script src="./js/material.min.js"></script>

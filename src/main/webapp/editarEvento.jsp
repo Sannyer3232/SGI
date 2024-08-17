@@ -149,12 +149,12 @@
 											<div class="form-group label-floating">
 												<label class="control-label">Evento</label> <input
 													class="form-control" type="text" name="evetitulo"
-													value="<%out.print(request.getAttribute("evetitulo"));%>">
+													value="<%out.print(request.getAttribute("evetitulo"));%>" required>
 											</div>
 											<div class="form-group label-floating">
 												<label class="control-label">Descrição</label> <input
 													class="form-control" type="text" name="evedescricao"
-													value="<%out.print(request.getAttribute("evedescricao"));%>">
+													value="<%out.print(request.getAttribute("evedescricao"));%>" required>
 											</div>
 											<div class="form-group label-floating">
 												<label class="control-label">Data</label> <input
@@ -169,11 +169,11 @@
 											<div class="form-group label-floating">
 												<label class="control-label">Local</label> <input
 													class="form-control" type="text" name="evelocalizacao"
-													value="<%out.print(request.getAttribute("evendereco"));%>">
+													value="<%out.print(request.getAttribute("evendereco"));%>" required>
 											</div>
 											 <div class="custom-select">
 												<label class="select-fonte">Status</label> <select
-													class="form_group" name="evestatus">
+													class="form_group" name="evestatus" required>
 													<option value="Agendado">Agendado</option>
 													<option value="Concluido">Concluído</option>
 													<option value="Cancelado">Cancelado</option>
@@ -182,7 +182,7 @@
 											</div>
 											  <div class="custom-select">
 												<label class="select-fonte">Filial</label> <select
-													class="form_group" name="evefilial">
+													class="form_group" name="evefilial" required>
 													<option value="">---- Selecionar Filial ----</option>
 													<%for(FilialJavaBeans filial : filiais){ %>
 													<option value="<%=filial.getIdfilial()%>"><%=filial.getFilnome() %></option>

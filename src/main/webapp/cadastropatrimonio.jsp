@@ -139,11 +139,11 @@
 										<form name="frmPatrimonio" action="insertpatri" method="get">
 											<div class="form-group label-floating">
 												<label class="control-label">Nome do Item</label> <input
-													class="form-control" type="text" name="ptrnome">
+													class="form-control" type="text" name="ptrnome" required>
 											</div>
 											<div class="form-group label-floating">
 												<label class="control-label">Filial</label> <select
-													class="form_group" name="ptridfilfilial">
+													class="form_group" name="ptridfilfilial" required>
 													<option value="">---- Selecionar Filial ----</option>
 													<%for(FilialJavaBeans filial : filiais){ %>
 													<option value="<%=filial.getIdfilial()%>"><%=filial.getFilnome() %></option>
@@ -152,12 +152,12 @@
 											</div>
 											<div class="form-group label-floating">
 												<label class="control-label">Descrição</label> <input
-													class="form-control" type="text" name="ptrdescricao">
+													class="form-control" type="text" name="ptrdescricao" required>
 
 											</div>
 											<div class="form-group label-floating">
 												<label class="control-label">Valor</label> <input
-													class="form-control" type="text" name="ptrvalor">
+													class="form-control" type="text" name="ptrvalor" required>
 											</div>
 											<div class="form-group label-floating">
 												<label class="control-label">Data de Aquisição</label> <input
@@ -166,7 +166,7 @@
 											
 											<div class="form-group label-floating">
 												<label class="control-label">Estado</label> <select
-													class="form_group" name="ptrestado">
+													class="form_group" name="ptrestado" required>
 													<option value="">Estado do item</option>
 													<option value="novo">Novo</option>
 													<option value="usado">Usado</option>

@@ -147,11 +147,11 @@
 											<div class="form-group label-floating">
 												<label class="control-label">Nome do Fornecedor</label> <input
 													class="form-control" type="text" name="nomefornecedor"
-													value="<%out.print(request.getAttribute("nome"));%>">
+													value="<%out.print(request.getAttribute("nome"));%>" required>
 											</div>
 											<div class="form-group label-floating">
 												<label class="control-label">Filial</label> <select
-													class="form_group" name="filial">
+													class="form_group" name="filial" required>
 													<option value="">---- Selecionar Filial ----</option>
 													<%for(FilialJavaBeans filial : filiais){ %>
 													<option value="<%=filial.getIdfilial()%>"><%=filial.getFilnome() %></option>
@@ -161,23 +161,23 @@
 											<div class="form-group label-floating">
 												<label class="control-label">Descrição da conta</label> <input
 													class="form-control" type="text" name="descricao"
-													value="<%out.print(request.getAttribute("descricaoconta"));%>">
+													value="<%out.print(request.getAttribute("descricaoconta"));%> " required>
 
 											</div>
 											<div class="form-group label-floating">
 												<label class="control-label">Data de Vencimento</label> <input
 													class="form_group" type="date" name="vencimento" required
-													value="<%out.print(request.getAttribute("vencimento"));%>">
+													value="<%out.print(request.getAttribute("vencimento"));%>" >
 											</div>
 											<div class="form-group label-floating">
 												<label class="control-label">Valor</label> <input
 													class="form-control" type="text" name="valor"
-													value="<%out.print(request.getAttribute("valor"));%>">
+													value="<%out.print(request.getAttribute("valor"));%>" required>
 											</div>
 											<div class="form-group label-floating">
 												<label class="control-label">Situação</label> <select
 													class="form_group" name="status"
-													value="<%out.print(request.getAttribute("status"));%>">
+													value="<%out.print(request.getAttribute("status"));%>" required>
 													<option value="">---- Status de Pagamento ----</option>
 													<option value="Pendente">Pendente</option>
 													<option value="Pago">Pago</option>

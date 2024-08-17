@@ -149,11 +149,11 @@
 											<div class="form-group label-floating">
 												<label class="control-label">Nome do Item</label> <input
 													class="form-control" type="text" name="ptrnome"
-													value="<%out.print(request.getAttribute("ptrnome"));%>">
+													value="<%out.print(request.getAttribute("ptrnome"));%>" required>
 											</div>
 												<div class="form-group label-floating">
 												<label class="control-label">Filial</label> <select
-													class="form_group" name="ptridfil">
+													class="form_group" name="ptridfil" required>
 													<option value="">---- Selecionar Filial ----</option>
 													<%for(FilialJavaBeans filial : filiais){ %>
 													<option value="<%=filial.getIdfilial()%>"><%=filial.getFilnome() %></option>
@@ -163,13 +163,13 @@
 											<div class="form-group label-floating">
 												<label class="control-label">Descrição</label> <input
 													class="form-control" type="text" name="ptrdescricao"
-													value="<%out.print(request.getAttribute("ptrdescricao"));%>">
+													value="<%out.print(request.getAttribute("ptrdescricao"));%>" required>
 
 											</div>
 											<div class="form-group label-floating">
 												<label class="control-label">Valor</label> <input
 													class="form-control" type="text" name="ptrvalor"
-													value="<%out.print(request.getAttribute("ptrvalor"));%>">
+													value="<%out.print(request.getAttribute("ptrvalor"));%>" required>
 											</div>
 											<div class="form-group label-floating">
 												<label class="control-label">Data de Aquisição</label> <input
@@ -181,7 +181,7 @@
 											<div class="form-group label-floating">
 												<label class="control-label">Estado</label> <select
 													class="form_group" name="ptrestado"
-													value="<%out.print(request.getAttribute("ptrestado"));%>">
+													value="<%out.print(request.getAttribute("ptrestado"));%>" required>
 													<option value="">Estado do item</option>
 													<option value="novo">Novo</option>
 													<option value="usado">Usado</option>

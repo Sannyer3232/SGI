@@ -150,18 +150,18 @@
 											<div class="form-group label-floating">
 												<label class="control-label">Nome do Doador</label> <input
 													class="form-control" type="text" name="doanomedoador"
-													value="<%out.print(request.getAttribute("doanomedoador"));%>">
+													value="<%out.print(request.getAttribute("doanomedoador"));%>" required>
 											</div>
 											<div class="form-group label-floating">
 												<label class="control-label">Código do membro</label> <input
 													class="form-control" type="text" name="doamembroid"
-													value="<%out.print(request.getAttribute("doamembroid"));%>">
+													value="<%out.print(request.getAttribute("doamembroid"));%>" required>
 
 											</div>
 											<div class="form-group label-floating">
 												<label class="control-label">Descrição</label> <input
 													class="form-control" type="text" name="doadescricao"
-													value="<%out.print(request.getAttribute("doadescricao"));%>">
+													value="<%out.print(request.getAttribute("doadescricao"));%>" required>
 
 											</div>
 											<div class="form-group label-floating">
@@ -173,11 +173,11 @@
 											<div class="form-group label-floating">
 												<label class="control-label">Valor</label> <input
 													class="form-control" type="text" name="doavalor"
-													value="<%out.print(request.getAttribute("doavalor"));%>">
+													value="<%out.print(request.getAttribute("doavalor"));%>" required>
 											</div>
 											<div class="form-group label-floating">
 												<label class="control-label">Status</label> <select
-													class="form_group" name="status"
+													class="form_group" name="status" required
 													value="<%out.print(request.getAttribute("status"));%>">
 													<option value="">Status da doação</option>
 													<option value="Pendente">Pendente</option>
@@ -187,7 +187,7 @@
 											</div>
 											<div class="form-group label-floating">
 												<label class="control-label">Filial</label> <select
-													class="form_group" name="doaidfilial">
+													class="form_group" name="doaidfilial" required>
 													<option value="">---- Selecionar Filial ----</option>
 													<%for(FilialJavaBeans filial : filiais){ %>
 													<option value="<%=filial.getIdfilial()%>"><%=filial.getFilnome() %></option>

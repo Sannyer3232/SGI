@@ -173,14 +173,17 @@ public class MembroController extends HttpServlet {
 			throws ServletException, IOException, NoSuchAlgorithmException {
 
 		membro.setMbrmemnome(request.getParameter("mbrnome"));
-		membro.setMbrcpf(request.getParameter("mbrcpf"));
+		String cpfComMascara = request.getParameter("mbrcpf");
+		membro.setMbrcpf(cpfComMascara.replaceAll("[^\\d]", ""));
 
 		membro.setMbrmsuperior((Integer.parseInt(request.getParameter("mbrsuperior"))));
 
 		membro.setMbrsedeid(Integer.parseInt(request.getParameter("mbrsede")));
-		membro.setMbrnumero_identidade(request.getParameter("mbridentidade"));
+		String rgComMascara = request.getParameter("mbridentidade");
+		membro.setMbrnumero_identidade(rgComMascara.replaceAll("[^\\d]",""));
 		membro.setMbremail(request.getParameter("mbremail"));
-		membro.setMbrtelefone(request.getParameter("mbrtelefone"));
+		String telefoneComMascara = request.getParameter("mbrtelefone");
+		membro.setMbrtelefone(telefoneComMascara.replaceAll("[^\\d]",""));
 		membro.setMbrfilial(Integer.parseInt(request.getParameter("mbrfilial")));
 
 		String senha = request.getParameter("mbrsenha");
@@ -244,7 +247,8 @@ public class MembroController extends HttpServlet {
 		endereco.setEndrua(request.getParameter("endrua"));
 		endereco.setEndnumero(request.getParameter("endnumero"));
 		endereco.setEndbairro(request.getParameter("endbairro"));
-		endereco.setEndcep(request.getParameter("endcep"));
+		String cepComMascara = request.getParameter("endcep");
+		endereco.setEndcep(cepComMascara.replaceAll("[^\\d]",""));
 		endereco.setEndcidade(request.getParameter("endcidade"));
 		endereco.setEndestado(request.getParameter("endestado"));
 		membro.setMbrendereco(endereco);
@@ -271,14 +275,17 @@ public class MembroController extends HttpServlet {
 
 		membro.setId_Membro(Integer.parseInt(request.getParameter("mbrid")));
 		membro.setMbrmemnome(request.getParameter("mbrnome"));
-		membro.setMbrcpf(request.getParameter("mbrcpf"));
+		String cpfComMascara = request.getParameter("mbrcpf");
+		membro.setMbrcpf(cpfComMascara.replaceAll("[^\\d]", ""));
 
 		membro.setMbrmsuperior((Integer.parseInt(request.getParameter("mbrsuperior"))));
 
 		membro.setMbrsedeid(Integer.parseInt(request.getParameter("mbrsede")));
-		membro.setMbrnumero_identidade(request.getParameter("mbridentidade"));
+		String rgComMascara = request.getParameter("mbridentidade");
+		membro.setMbrnumero_identidade(rgComMascara.replaceAll("[^\\d]",""));
 		membro.setMbremail(request.getParameter("mbremail"));
-		membro.setMbrtelefone(request.getParameter("mbrtelefone"));
+		String telefoneComMascara = request.getParameter("mbrtelefone");
+		membro.setMbrtelefone(telefoneComMascara.replaceAll("[^\\d]",""));
 		membro.setMbrfilial(Integer.parseInt(request.getParameter("mbrfilial")));
 		
 
@@ -303,7 +310,8 @@ public class MembroController extends HttpServlet {
 		endereco.setEndrua(request.getParameter("endrua"));
 		endereco.setEndnumero(request.getParameter("endnumero"));
 		endereco.setEndbairro(request.getParameter("endbairro"));
-		endereco.setEndcep(request.getParameter("endcep"));
+		String cepComMascara = request.getParameter("endcep");
+		endereco.setEndcep(cepComMascara.replaceAll("[^\\d]",""));
 		endereco.setEndcidade(request.getParameter("endcidade"));
 		endereco.setEndestado(request.getParameter("endestado"));
 		membro.setMbrendereco(endereco);

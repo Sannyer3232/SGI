@@ -2,8 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="model.FilialJavaBeans"%>
 <%@ page import="java.util.ArrayList"%>
+<%@ page import="model.MembroDAO" %>
+<%@ page import="model.MembroJavaBeans" %>
 <%
 ArrayList<FilialJavaBeans> filiais = (ArrayList<FilialJavaBeans>) request.getAttribute("filiais");
+MembroDAO daoMembro = new MembroDAO();
+ArrayList<MembroJavaBeans> membros = daoMembro.listarMembros();
+
 %>
 
 <!DOCTYPE html>
@@ -30,7 +35,11 @@ ArrayList<FilialJavaBeans> filiais = (ArrayList<FilialJavaBeans>) request.getAtt
 			<div class="full-box dashboard-sideBar-UserInfo">
 				<figure class="full-box">
 					<img src="img/<%out.print(session.getAttribute("userphoto"));%>">
-					<figcaption class="text-center text-titles"><%out.print(session.getAttribute("username")); %></figcaption>
+					<figcaption class="text-center text-titles">
+						<%
+						out.print(session.getAttribute("username"));
+						%>
+					</figcaption>
 				</figure>
 				<ul class="full-box list-unstyled text-center">
 					<li><a href="#!"> <i class="zmdi zmdi-settings"></i>
@@ -41,7 +50,7 @@ ArrayList<FilialJavaBeans> filiais = (ArrayList<FilialJavaBeans>) request.getAtt
 				</ul>
 			</div>
 			<!-- SideBar Menu -->
-				<ul class="list-unstyled full-box dashboard-sideBar-Menu">
+			<ul class="list-unstyled full-box dashboard-sideBar-Menu">
 				<li><a href="home.html"> <i
 						class="zmdi zmdi-view-dashboard zmdi-hc-fw"></i> Panel Principal
 				</a></li>
@@ -55,7 +64,8 @@ ArrayList<FilialJavaBeans> filiais = (ArrayList<FilialJavaBeans>) request.getAtt
 								class="zmdi zmdi-assignment"></i> Tarefas</a></li>
 						<li><a href="student.html"><i
 								class="zmdi zmdi-accounts-add zmdi-hc-fw"></i> Grupos</a></li>
-						<li><a href="cadastro_eventos.jsp"><i class="zmdi zmdi-calendar"></i>Evento</a></li>
+						<li><a href="cadastro_eventos.jsp"><i
+								class="zmdi zmdi-calendar"></i>Evento</a></li>
 
 					</ul></li>
 				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
@@ -66,8 +76,8 @@ ArrayList<FilialJavaBeans> filiais = (ArrayList<FilialJavaBeans>) request.getAtt
 						<li><a href="MembroController"><i
 								class="zmdi zmdi-cake zmdi-hc-fw"></i> Aniversariantes</a></li>
 						<li><a href="teacher.html"><i
-								class="zmdi zmdi-alarm-plus zmdi-hc-fw"></i>Eventos</a></li>	
-						
+								class="zmdi zmdi-alarm-plus zmdi-hc-fw"></i>Eventos</a></li>
+
 					</ul></li>
 				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
 						class="zmdi zmdi-card zmdi-hc-fw"></i> Financeiro <i
@@ -76,8 +86,8 @@ ArrayList<FilialJavaBeans> filiais = (ArrayList<FilialJavaBeans>) request.getAtt
 					<ul class="list-unstyled full-box">
 						<li><a href="CadastroContas"><i
 								class="zmdi zmdi-exposure-alt zmdi-hc-fw"></i> Contas</a></li>
-						<li><a href="cadastroDoacoes"><i class="zmdi zmdi-favorite zmdi-hc-fw"></i>
-								Doações</a></li>
+						<li><a href="cadastroDoacoes"><i
+								class="zmdi zmdi-favorite zmdi-hc-fw"></i> Doações</a></li>
 						<li><a href="membroparadizimo.jsp"><i
 								class="zmdi zmdi-money zmdi-hc-fw"></i> Dízimos</a></li>
 						<li><a href="membroparaoferta.jsp"><i
@@ -85,12 +95,12 @@ ArrayList<FilialJavaBeans> filiais = (ArrayList<FilialJavaBeans>) request.getAtt
 						<li><a href="cadastroPatrimonio"><i
 								class="zmdi zmdi-chart zmdi-hc-fw"></i> Patrimonio</a></li>
 					</ul></li>
-	
-					
-					<li><a href="ajuda.jsp"> <i
-						class="zmdi zmdi-pin-help"></i> Ajuda
+
+
+				<li><a href="ajuda.jsp"> <i class="zmdi zmdi-pin-help"></i>
+						Ajuda
 				</a></li>
-					
+
 			</ul>
 		</div>
 	</section>
@@ -147,26 +157,43 @@ ArrayList<FilialJavaBeans> filiais = (ArrayList<FilialJavaBeans>) request.getAtt
 											onsubmit="return validarCadastroTarefa()">
 											<div class="form-group label-floating">
 												<label class="control-label">Titulo</label> <input
-													class="form-control" type="text" name="trftitulo">
+													class="form-control" type="text" name="trftitulo" required>
 											</div>
 											<div class="form-group label-floating">
 												<label class="control-label">Filial</label> <select
-													class="form_group" name="trffilial">
+													class="form_group" name="trffilial" required>
 													<option value="">---- Selecionar Filial ----</option>
-													<%for(FilialJavaBeans filial : filiais){ %>
-													<option value="<%=filial.getIdfilial()%>"><%=filial.getFilnome() %></option>
-													<%} %>
+													<%
+													for (FilialJavaBeans filial : filiais) {
+													%>
+													<option value="<%=filial.getIdfilial()%>"><%=filial.getFilnome()%></option>
+													<%
+													}
+													%>
 												</select>
 											</div>
 											<div class="form-group label-floating">
 												<label class="control-label">Descrição</label> <input
-													class="form-control" type="text" name="trfdesc"></input>
+													class="form-control" type="text" name="trfdesc" required></input>
 											</div>
 
 											<div class="form-group label-floating">
-												<label class="control-label">ID do membro
-													responsável</label> <input class="form-control" type="text"
-													name="trfmbrid">
+									
+
+												<div class="custom-select">
+													<label class="select-fonte" for="mes">Membro Responsável</label> <select
+														id="mes" name="trfmbrid" required>
+														<option value="">--Selecione o membro</option>
+														<%
+													for (MembroJavaBeans membro : membros) {
+													%>
+													<option value="<%=membro.getId_Membro()%>"><%=membro.getMbrmemnome()%></option>
+													<%
+													}
+													%>
+
+													</select>
+												</div>
 											</div>
 
 											<div class="form-group label-floating">
@@ -183,7 +210,7 @@ ArrayList<FilialJavaBeans> filiais = (ArrayList<FilialJavaBeans>) request.getAtt
 
 											<div class="form-group label-floating">
 												<label class="control-label">Status</label> <select
-													class="form_group" name="trfstatus">
+													class="form_group" name="trfstatus" required>
 													<option value="Agendado">Agendado</option>
 													<option value="Concluido">Concluido</option>
 													<option value="Cancelado">Cancelado</option>

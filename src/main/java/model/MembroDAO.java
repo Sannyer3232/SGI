@@ -400,5 +400,30 @@ public class MembroDAO {
 		}
 
 	}
+	
+	public ArrayList<MembroJavaBeans> listarMembros(){
+		String sql = "select * from vw_membros;";
+		ArrayList<MembroJavaBeans> membros = new ArrayList<>();
+		 try {
+			Connection con = conectar();
+			PreparedStatement pst = con.prepareStatement(sql);
+			ResultSet rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				
+				int id = rs.getInt(1);
+				String nome = rs.getString(2);
+				
+				membros.add(new MembroJavaBeans(id,nome));
+			}
+			
+			con.close();
+			return membros;
+			
+		} catch (Exception e) {
+			System.out.println("Erro ao contar os membros: " + e);
+			return null;
+		}
+	}
 
 }

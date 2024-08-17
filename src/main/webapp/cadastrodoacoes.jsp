@@ -1,12 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import="model.FilialJavaBeans" %>
+	pageEncoding="UTF-8"%>
+<%@ page import="model.FilialJavaBeans"%>
 <%@ page import="java.util.ArrayList"%>
-<%ArrayList<FilialJavaBeans> filiais = (ArrayList<FilialJavaBeans>) request.getAttribute("filiais"); %>
+<%@ page import="model.MembroDAO"%>
+<%@ page import="model.MembroJavaBeans"%>
+<%
+ArrayList<FilialJavaBeans> filiais = (ArrayList<FilialJavaBeans>) request.getAttribute("filiais");
+MembroDAO daoMembro = new MembroDAO();
+ArrayList<MembroJavaBeans> membros = daoMembro.listarMembros();
+%>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<title>cadastrodoacoes</title>
+<title>Cadastro Doação</title>
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -27,7 +33,11 @@
 			<div class="full-box dashboard-sideBar-UserInfo">
 				<figure class="full-box">
 					<img src="img/<%out.print(session.getAttribute("userphoto"));%>">
-					<figcaption class="text-center text-titles"><%out.print(session.getAttribute("username")); %></figcaption>
+					<figcaption class="text-center text-titles">
+						<%
+						out.print(session.getAttribute("username"));
+						%>
+					</figcaption>
 				</figure>
 				<ul class="full-box list-unstyled text-center">
 					<li><a href="#!"> <i class="zmdi zmdi-settings"></i>
@@ -38,7 +48,7 @@
 				</ul>
 			</div>
 			<!-- SideBar Menu -->
-				<ul class="list-unstyled full-box dashboard-sideBar-Menu">
+			<ul class="list-unstyled full-box dashboard-sideBar-Menu">
 				<li><a href="home.jsp"> <i
 						class="zmdi zmdi-view-dashboard zmdi-hc-fw"></i> Panel Principal
 				</a></li>
@@ -52,7 +62,8 @@
 								class="zmdi zmdi-assignment"></i> Tarefas</a></li>
 						<li><a href="student.html"><i
 								class="zmdi zmdi-accounts-add zmdi-hc-fw"></i> Grupos</a></li>
-						<li><a href="cadastro_eventos.jsp"><i class="zmdi zmdi-calendar"></i>Evento</a></li>
+						<li><a href="cadastro_eventos.jsp"><i
+								class="zmdi zmdi-calendar"></i>Evento</a></li>
 
 					</ul></li>
 				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
@@ -63,8 +74,8 @@
 						<li><a href="MembroController"><i
 								class="zmdi zmdi-cake zmdi-hc-fw"></i> Aniversariantes</a></li>
 						<li><a href="teacher.html"><i
-								class="zmdi zmdi-alarm-plus zmdi-hc-fw"></i>Eventos</a></li>	
-						
+								class="zmdi zmdi-alarm-plus zmdi-hc-fw"></i>Eventos</a></li>
+
 					</ul></li>
 				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
 						class="zmdi zmdi-card zmdi-hc-fw"></i> Financeiro <i
@@ -73,8 +84,8 @@
 					<ul class="list-unstyled full-box">
 						<li><a href="CadastroContas"><i
 								class="zmdi zmdi-exposure-alt zmdi-hc-fw"></i> Contas</a></li>
-						<li><a href="cadastroDoacoes"><i class="zmdi zmdi-favorite zmdi-hc-fw"></i>
-								Doações</a></li>
+						<li><a href="cadastroDoacoes"><i
+								class="zmdi zmdi-favorite zmdi-hc-fw"></i> Doações</a></li>
 						<li><a href="membroparadizimo.jsp"><i
 								class="zmdi zmdi-money zmdi-hc-fw"></i> Dízimos</a></li>
 						<li><a href="membroparaoferta.jsp"><i
@@ -82,12 +93,12 @@
 						<li><a href="cadastroPatrimonio"><i
 								class="zmdi zmdi-chart zmdi-hc-fw"></i> Patrimonio</a></li>
 					</ul></li>
-	
-					
-					<li><a href="ajuda.jsp"> <i
-						class="zmdi zmdi-pin-help"></i> Ajuda
+
+
+				<li><a href="ajuda.jsp"> <i class="zmdi zmdi-pin-help"></i>
+						Ajuda
 				</a></li>
-					
+
 			</ul>
 		</div>
 	</section>
@@ -126,62 +137,79 @@
 			<div class="row">
 				<div class="col-xs-12">
 					<ul class="nav nav-tabs" style="margin-bottom: 15px;">
-						<li class="active"><a href="#new" data-toggle="tab">
-								Nova Doação</a></li>
+						<li class="active"><a href="#new" data-toggle="tab"> Nova
+								Doação</a></li>
 						<li><a href="pesquisardoacao.jsp">Lista de Doações</a></li>
 						<li><a href="pesquisaMembros.jsp">Pesquisar Membro</a></li>
 					</ul>
-					
+
 					<div id="myTabContent" class="tab-content">
 						<div class="tab-pane fade active in" id="new">
 							<div class="container-fluid">
 								<div class="row">
 									<div class="col-xs-12 col-md-10 col-md-offset-1">
-									
+
 										<form name="frmDoacao" action="insertdoacao" method="get">
 											<div class="form-group label-floating">
 												<label class="control-label">Nome do Doador</label> <input
-													class="form-control" type="text" name="doanomedoador">
+													class="form-control" type="text" name="doanomedoador" required>
 											</div>
 											<div class="form-group label-floating">
-												<label class="control-label">Código do Doador</label> <input
-													class="form-control" type="text" name="doamembroid">
+												<div class="custom-select">
+													<label class="select-fonte" for="mes">Membro
+														Responsável</label> <select id="mes" name="doamembroid" required>
+														<option value="">--Selecione o membro</option>
+														<%
+														for (MembroJavaBeans membro : membros) {
+														%>
+														<option value="<%=membro.getId_Membro()%>"><%=membro.getMbrmemnome()%></option>
+														<%
+														}
+														%>
+
+													</select>
+												</div>
+
 
 											</div>
-											
+
 											<div class="form-group label-floating">
 												<label class="control-label">Descrição</label> <input
-													class="form-control" type="text" name="doadescricao">
+													class="form-control" type="text" name="doadescricao" required>
 
 											</div>
-											
+
 											<div class="form-group label-floating">
 												<label class="control-label">Data de Doação</label> <input
 													class="form_group" type="date" name="doadtdoacao" required>
 											</div>
-											
+
 											<div class="form-group label-floating">
 												<label class="control-label">Valor</label> <input
-													class="form-control" type="text" name="doavalor">
+													class="form-control" type="text" name="doavalor" required>
 											</div>
-											
+
 											<div class="form-group label-floating">
 												<label class="control-label">Status</label> <select
-													class="form_group" name="status">
+													class="form_group" name="status" required>
 													<option value="">Status da Doação</option>
 													<option value="pendente">Pendente</option>
 													<option value="entregue">Entregue</option>
 													<option value="recusado">Recusado</option>
 												</select>
 											</div>
-											
+
 											<div class="form-group label-floating">
 												<label class="control-label">Filial</label> <select
-													class="form_group" name="doaidfilial">
+													class="form_group" name="doaidfilial" required>
 													<option value="">---- Selecionar Filial ----</option>
-													<%for(FilialJavaBeans filial : filiais){ %>
-													<option value="<%=filial.getIdfilial()%>"><%=filial.getFilnome() %></option>
-													<%} %>
+													<%
+													for (FilialJavaBeans filial : filiais) {
+													%>
+													<option value="<%=filial.getIdfilial()%>"><%=filial.getFilnome()%></option>
+													<%
+													}
+													%>
 												</select>
 											</div>
 
@@ -399,11 +427,11 @@ if (achouMembro != null) {
 <div class="janela-modal-sucesso" id="janela-modal-sucesso">
 	<div class="modal-sucesso">
 		<button class="fechar" id="fechar-sucesso">X</button>
-			<div class="container-modal">
-				<img class = "icone"alt="sucessoIcon" src="./assets/img/sucesso.png">
-				<h1>Sucesso!</h1>
-				<p>O cadastro da doação foi realizado com sucesso.</p>
-			</div>
+		<div class="container-modal">
+			<img class="icone" alt="sucessoIcon" src="./assets/img/sucesso.png">
+			<h1>Sucesso!</h1>
+			<p>O cadastro da doação foi realizado com sucesso.</p>
+		</div>
 	</div>
 </div>
 <%
@@ -412,37 +440,37 @@ if (achouMembro != null) {
 <div class="janela-modal-erro" id="janela-modal-erro">
 	<div class="modal-erro">
 		<button class="fechar" id="fechar-erro">X</button>
-			<div class="container-modal">
-				<img class="icone"alt="sucessoIcon" src="./assets/img/erro.png">
-				<h1>Erro!</h1>
-				<p>Os dados inseridos estão incorretos.</p>
-			</div>
+		<div class="container-modal">
+			<img class="icone" alt="sucessoIcon" src="./assets/img/erro.png">
+			<h1>Erro!</h1>
+			<p>Os dados inseridos estão incorretos.</p>
+		</div>
 	</div>
 </div>
 <%
-}else if("true-edit".equals(achouMembro)){
+} else if ("true-edit".equals(achouMembro)) {
 %>
 <div class="janela-modal-sucesso" id="janela-modal-sucesso">
 	<div class="modal-sucesso">
 		<button class="fechar" id="fechar-sucesso">X</button>
-			<div class="container-modal">
-				<img class = "icone"alt="sucessoIcon" src="./assets/img/sucesso.png">
-				<h1>Sucesso!</h1>
-				<p>O Edição da doação foi realizado com sucesso.</p>
-			</div>
+		<div class="container-modal">
+			<img class="icone" alt="sucessoIcon" src="./assets/img/sucesso.png">
+			<h1>Sucesso!</h1>
+			<p>O Edição da doação foi realizado com sucesso.</p>
+		</div>
 	</div>
 </div>
 <%
-}else if("false-edit".equals(achouMembro)){
+} else if ("false-edit".equals(achouMembro)) {
 %>
 <div class="janela-modal-erro" id="janela-modal-erro">
 	<div class="modal-erro">
 		<button class="fechar" id="fechar-erro">X</button>
-			<div class="container-modal">
-				<img class="icone"alt="sucessoIcon" src="./assets/img/erro.png">
-				<h1>Erro!</h1>
-				<p>Os dados inseridos estão incorretos na edição.</p>
-			</div>
+		<div class="container-modal">
+			<img class="icone" alt="sucessoIcon" src="./assets/img/erro.png">
+			<h1>Erro!</h1>
+			<p>Os dados inseridos estão incorretos na edição.</p>
+		</div>
 	</div>
 </div>
 

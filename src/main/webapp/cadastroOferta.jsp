@@ -154,7 +154,7 @@
 											<div class="form-group label-floating">
 												<label class="control-label">Valor da Contribuição</label> <input
 													class="form-control" type="number" name="dzovalor"
-													step="0.01" min="0" name="dzovalor">
+													step="0.01" min="0" name="dzovalor" required>
 											</div>
 
 											<div class="form-group label-floating">

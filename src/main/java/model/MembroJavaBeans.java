@@ -30,6 +30,70 @@ public class MembroJavaBeans {
 	
 	
 	
+	public MembroJavaBeans(int id_Membro, String mbrnome) {
+		this.id_Membro = id_Membro;
+		this.mbrnome = mbrnome;
+	}
+
+
+
+
+
+	public MembroJavaBeans(int id_Membro, int mbrsedeid, String mbrmemnome, String mbrcpf, int mbrmsuperior,
+			String mbrnumero_identidade, String mbremail, String mbrtelefone, Date mbrata_nascimento, int mbrcivilId,
+			EnderecoJavaBeans mbrendereco, String mbrfotoCaminho, boolean mbrativo, String mbracesso, int mbrfilial,
+			String mbrsenha, int cargo) {
+		super();
+		this.id_Membro = id_Membro;
+		this.mbrsedeid = mbrsedeid;
+		this.mbrnome = mbrmemnome;
+		this.mbrcpf = mbrcpf;
+		this.mbrmsuperior = mbrmsuperior;
+		this.mbrnumero_identidade = mbrnumero_identidade;
+		this.mbremail = mbremail;
+		this.mbrtelefone = mbrtelefone;
+		this.mbrata_nascimento = mbrata_nascimento;
+		this.mbrcivilId = mbrcivilId;
+		this.mbrendereco = mbrendereco;
+		this.mbrfotoCaminho = mbrfotoCaminho;
+		this.mbrativo = mbrativo;
+		this.mbracesso = mbracesso;
+		this.mbrfilial = mbrfilial;
+		this.mbrsenha = mbrsenha;
+		this.cargo = cargo;
+	}
+	
+	
+	
+	
+	
+	public MembroJavaBeans(int id_Membro, String mbrnome, String mbrcpf, String mbremail, String sedenome,
+			String supnome, String cargoNome, String filialnome) {
+		this.id_Membro = id_Membro;
+		this.mbrnome = mbrnome;
+		this.mbrcpf = mbrcpf;
+		this.mbremail = mbremail;
+		this.sedenome = sedenome;
+		this.supnome = supnome;
+		this.cargoNome = cargoNome;
+		this.filialnome = filialnome;
+		
+	}
+
+
+	public MembroJavaBeans(String mbrnome, String mbrfotoCaminho) {
+		this.mbrnome = mbrnome;
+		this.mbrfotoCaminho = mbrfotoCaminho;
+	}
+
+	public MembroJavaBeans(int id_Membro, String mbrmemnome, String mbrcpf, String mbremail, String sedenome, String supnome) {
+		this.id_Membro = id_Membro;
+		this.mbrnome = mbrmemnome;
+		this.sedenome = sedenome;
+		this.mbrcpf = mbrcpf;
+		this.mbremail = mbremail;
+		this.supnome = supnome;
+	}
 	
 	public String getFilialnome() {
 		return filialnome;
@@ -79,65 +143,7 @@ public class MembroJavaBeans {
 		this.supnome = supnome;
 	}
 
-	public MembroJavaBeans(int id_Membro, int mbrsedeid, String mbrmemnome, String mbrcpf, int mbrmsuperior,
-			String mbrnumero_identidade, String mbremail, String mbrtelefone, Date mbrata_nascimento, int mbrcivilId,
-			EnderecoJavaBeans mbrendereco, String mbrfotoCaminho, boolean mbrativo, String mbracesso, int mbrfilial,
-			String mbrsenha, int cargo) {
-		super();
-		this.id_Membro = id_Membro;
-		this.mbrsedeid = mbrsedeid;
-		this.mbrnome = mbrmemnome;
-		this.mbrcpf = mbrcpf;
-		this.mbrmsuperior = mbrmsuperior;
-		this.mbrnumero_identidade = mbrnumero_identidade;
-		this.mbremail = mbremail;
-		this.mbrtelefone = mbrtelefone;
-		this.mbrata_nascimento = mbrata_nascimento;
-		this.mbrcivilId = mbrcivilId;
-		this.mbrendereco = mbrendereco;
-		this.mbrfotoCaminho = mbrfotoCaminho;
-		this.mbrativo = mbrativo;
-		this.mbracesso = mbracesso;
-		this.mbrfilial = mbrfilial;
-		this.mbrsenha = mbrsenha;
-		this.cargo = cargo;
-	}
 	
-	
-	
-	
-	
-	public MembroJavaBeans(int id_Membro, String mbrnome, String mbrcpf, String mbremail, String sedenome,
-			String supnome, String cargoNome, String filialnome) {
-		this.id_Membro = id_Membro;
-		this.mbrnome = mbrnome;
-		this.mbrcpf = mbrcpf;
-		this.mbremail = mbremail;
-		this.sedenome = sedenome;
-		this.supnome = supnome;
-		this.cargoNome = cargoNome;
-		this.filialnome = filialnome;
-		
-	}
-
-	
-	
-	
-	
-
-	public MembroJavaBeans(String mbrnome, String mbrfotoCaminho) {
-		this.mbrnome = mbrnome;
-		this.mbrfotoCaminho = mbrfotoCaminho;
-	}
-
-	public MembroJavaBeans(int id_Membro, String mbrmemnome, String mbrcpf, String mbremail, String sedenome, String supnome) {
-		this.id_Membro = id_Membro;
-		this.mbrnome = mbrmemnome;
-		this.sedenome = sedenome;
-		this.mbrcpf = mbrcpf;
-		this.mbremail = mbremail;
-		this.supnome = supnome;
-	}
 	public int getCargo() {
 		return cargo;
 	}

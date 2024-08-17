@@ -4,9 +4,13 @@
 <%@ page import="model.FilialDAO" %>
 <%@ page import="model.FilialJavaBeans" %>
 <%@ page import="java.util.ArrayList"%>
+<%@ page import="model.MembroDAO" %>
+<%@ page import="model.MembroJavaBeans" %>
 <%
 	FilialDAO dao = new FilialDAO();
 	ArrayList<FilialJavaBeans> filiais = dao.listarFilial();
+	MembroDAO daoMembro = new MembroDAO();
+	ArrayList<MembroJavaBeans> membros = daoMembro.listarMembros();
 %>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -153,11 +157,11 @@
 											<div class="form-group label-floating">
 												<label class="control-label">Titulo</label> <input
 													value="<%=tarefa.getTarefatitulo()%>" class="form-control"
-													type="text" name="trftitulo">
+													type="text" name="trftitulo" required>
 											</div>
 											<div class="form-group label-floating">
 												<label class="control-label">Filial</label> <select
-													class="form_group" name="trffilial">
+													class="form_group" name="trffilial" required>
 													<option value="">---- Selecionar Filial ----</option>
 													<%for(FilialJavaBeans filial : filiais){ %>
 													<option value="<%=filial.getIdfilial()%>"><%=filial.getFilnome() %></option>
@@ -167,13 +171,24 @@
 											<div class="form-group label-floating">
 												<label class="control-label">Descrição</label> <input
 													value="<%=tarefa.getTarefadesc()%>" class="form-control"
-													type="text" name="trfdesc"></input>
+													type="text" name="trfdesc" required></input>
 											</div>
 
 											<div class="form-group label-floating">
-												<label class="control-label">ID do membro
-													responsável</label> <input class="form-control" type="text"
-													name="trfmbrid" value="<%=tarefa.getTrfmbrid()%>">
+												<div class="custom-select">
+													<label class="select-fonte" for="mes">Membro Responsável</label> <select
+														id="mes" name="trfmbrid" required>
+														<option value="">--Selecione o membro</option>
+														<%
+													for (MembroJavaBeans membro : membros) {
+													%>
+													<option value="<%=membro.getId_Membro()%>"><%=membro.getMbrmemnome()%></option>
+													<%
+													}
+													%>
+
+													</select>
+												</div>
 											</div>
 
 											<div class="form-group label-floating">
@@ -191,7 +206,7 @@
 
 											<div class="form-group label-floating">
 												<label class="control-label">Status</label> <select
-													class="form_group" name="trfstatus">
+													class="form_group" name="trfstatus" required>
 													<option value="Agendado">Agendado</option>
 													<option value="Concluido">Concluido</option>
 													<option value="Cancelado">Cancelado</option>

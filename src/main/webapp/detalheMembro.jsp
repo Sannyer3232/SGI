@@ -15,6 +15,20 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+<script>
+
+
+		$(document).ready(function() {
+		    $('#cpf').mask('000.000.000-00');
+		    $('#rg').mask('0000000-0');
+		    $('#telefone').mask('(00) 00000-0000'); 
+		    $('#cep').mask('00000-000'); 
+		});
+		</script>
+
 <link rel="stylesheet" href="./css/main.css">
 
 </head>
@@ -164,50 +178,54 @@
 												<div class="form-group label-floating">
 													<label class="control-label">Nome</label> <input
 														class="form-control" type="text" name="mbrnome"
-														value="<%=membro.getMbrmemnome()%>"></input>
+														value="<%=membro.getMbrmemnome()%>" required></input>
 												</div>
 												<div class="form-group label-floating">
 													<label class="control-label">CPF</label> <input
-														class="form-control" type="text" name="mbrcpf"
-														value="<%=membro.getMbrcpf()%>">
+														class="form-control" type="text" name="mbrcpf" 
+														id="cpf" size="14" maxlength="14"
+														value="<%=membro.getMbrcpf()%>" required>
 												</div>
 												<div class="form-group label-floating">
 													<label class="control-label">Id Superior</label> <input
 														class="form-control" type="text" name="mbrsuperior"
-														value="<%=membro.getMbrmsuperior()%>"></input>
+														value="<%=membro.getMbrmsuperior()%>" required></input>
 												</div>
 
 												<div class="form-group label-floating">
 													<label class="control-label">Identidade</label> <input
 														class="form-control" type="text" name="mbridentidade"
-														value="<%=membro.getMbrnumero_identidade()%>"></input>
+														value="<%=membro.getMbrnumero_identidade()%>"
+														id="rg" size="9" maxlength="9" required
+														></input>
 												</div>
 												<div class="form-group label-floating">
 													<label class="control-label">Email</label> <input
 														class="form-control" type="email" name="mbremail"
-														value="<%=membro.getMbremail()%>">
+														value="<%=membro.getMbremail()%>" required>
 												</div>
 												<div class="form-group label-floating">
 													<label class="control-label">Telefone</label> <input
 														class="form-control" type="text" name="mbrtelefone"
-														value="<%=membro.getMbrtelefone()%>">
+														id="telefone" size="15" maxlength="15"
+														value="<%=membro.getMbrtelefone()%>" required>
 												</div>
 												<div class="form-group label-floating">
 													<label class="control-label">Data de Nascimento</label> <input
 														class="form_group" type="date" id="mbrnascimento"
 														name="mbrdatanascimento" required
-														value="<%=membro.getMbrata_nascimento()%>">
+														value="<%=membro.getMbrata_nascimento()%>" required>
 												</div>
 												<div class="form-group label-floating">
 													<label class="control-label">Sede</label> <select
-														class="form_group" name="mbrsede">
+														class="form_group" name="mbrsede" required>
 														<option value="1">Sede Manaus</option>
 													</select>
 												</div>
 
 												<div class="form-group label-floating">
 												<label class="control-label">Filial</label> <select
-													class="form_group" name="mbrfilial">
+													class="form_group" name="mbrfilial" required>
 													<option value="">---- Selecionar Filial ----</option>
 													<%for(FilialJavaBeans filial : filiais){ %>
 													<option value="<%=filial.getIdfilial()%>"><%=filial.getFilnome() %></option>
@@ -218,7 +236,7 @@
 
 												<div class="form-group label-floating">
 													<label class="control-label">Estado Civil</label> <select
-														class="form_group" name="mbrestadocivil">
+														class="form_group" name="mbrestadocivil" required>
 
 														<option value="1">Solteiro(a)</option>
 														<option value="2">Divorciado(a)</option>
@@ -230,8 +248,8 @@
 
 												<div class="form-group label-floating">
 													<label class="control-label">Sede</label> <select
-														class="form_group" name="mbrsede">
-														<option value="<%=membro.getMbrsedeid()%>">
+														class="form_group" name="mbrsede" required>
+														<option value="<%=membro.getMbrsedeid()%>" >
 															<%=membro.getSedenome()%>
 														</option>
 														<option value="1">Sede Manaus</option>
@@ -240,7 +258,7 @@
 
 												<div class="form-group label-floating">
 													<label class="control-label">Status</label> <select
-														class="form_group" name="mbrativo">
+														class="form_group" name="mbrativo" required>
 
 														<option value="1">Ativo</option>
 														<option value="0">Desligado</option>
@@ -249,7 +267,7 @@
 
 												<div class="form-group label-floating">
 													<label class="control-label">Nível de acesso</label> <select
-														class="form_group" name="mbracesso">
+														class="form_group" name="mbracesso" required>
 														<option value="<%=membro.getMbracesso()%>">
 															<%=membro.getMbracesso()%>
 														</option>
@@ -259,7 +277,7 @@
 												</div>
 												<div class="form-group label-floating">
 													<label class="control-label">Cargo</label> <select
-														class="form_group" name="cargo">
+														class="form_group" name="cargo" required>
 
 														<option value="10">Membro Comum</option>
 														<option value="1">Pastor</option>
@@ -276,39 +294,40 @@
 												<div class="form-group label-floating">
 													<label class="control-label">Rua</label> <input
 														class="form-control" type="text" name="endrua"
-														value="<%=membro.getMbrendereco().getEndrua()%>">
+														value="<%=membro.getMbrendereco().getEndrua()%>" required>
 												</div>
 
 												<div class="form-group label-floating">
 													<label class="control-label">Número</label> <input
 														class="form-control" type="text" name="endnumero"
-														value="<%=membro.getMbrendereco().getEndnumero()%>">
+														value="<%=membro.getMbrendereco().getEndnumero()%>" required>
 
 												</div>
 
 												<div class="form-group label-floating">
 													<label class="control-label">Bairro</label> <input
 														class="form-control" type="text" name="endbairro"
-														value="<%=membro.getMbrendereco().getEndbairro()%>">
+														value="<%=membro.getMbrendereco().getEndbairro()%>" required>
 
 												</div>
 
 												<div class="form-group label-floating">
 													<label class="control-label">CEP</label> <input
 														class="form-control" type="text" name="endcep"
-														value="<%=membro.getMbrendereco().getEndcep()%>">
+														id="cep" size="9" maxlength="9"
+														value="<%=membro.getMbrendereco().getEndcep()%>" required>
 												</div>
 
 												<div class="form-group label-floating">
 													<label class="control-label">Cidade</label> <input
 														class="form-control" type="text" name="endcidade"
-														value="<%=membro.getMbrendereco().getEndcidade()%>">
+														value="<%=membro.getMbrendereco().getEndcidade()%>" required>
 
 												</div>
 												<div class="form-group label-floating">
 													<label class="control-label">Estado</label> <input
 														class="form-control" type="text" name="endestado"
-														value="<%=membro.getMbrendereco().getEndestado()%>">
+														value="<%=membro.getMbrendereco().getEndestado()%>" required>
 
 												</div>
 												<div class="form-group">
@@ -426,7 +445,7 @@
 								</div>
 							</div>
 							<!--====== Scripts -->
-							<script src="./js/jquery-3.1.1.min.js"></script>
+						
 							<script src="./js/sweetalert2.min.js"></script>
 							<script src="./js/bootstrap.min.js"></script>
 							<script src="./js/material.min.js"></script>

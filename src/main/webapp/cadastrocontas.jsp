@@ -137,11 +137,11 @@
 										<form name="frmConta" action="ContasInsert" method="get">
 											<div class="form-group label-floating">
 												<label class="control-label">Nome do Fornecedor</label> <input
-													class="form-control" type="text" name="nomefornecedor">
+													class="form-control" type="text" name="nomefornecedor" required>
 											</div>
 											<div class="form-group label-floating">
 												<label class="control-label">Filial</label> <select
-													class="form_group" name="filial">
+													class="form_group" name="filial" required>
 													<option value="">---- Selecionar Filial ----</option>
 													<%for(FilialJavaBeans filial : filiais){ %>
 													<option value="<%=filial.getIdfilial()%>"><%=filial.getFilnome() %></option>
@@ -150,7 +150,7 @@
 											</div>
 											<div class="form-group label-floating">
 												<label class="control-label">Descrição da conta</label> <input
-													class="form-control" type="text" name="descricao">
+													class="form-control" type="text" name="descricao" required>
 
 											</div>
 											<div class="form-group label-floating">
@@ -159,11 +159,11 @@
 											</div>
 											<div class="form-group label-floating">
 												<label class="control-label">Valor</label> <input
-													class="form-control" type="text" name="valor">
+													class="form-control" type="text" name="valor" required>
 											</div>
 											<div class="form-group label-floating">
 												<label class="control-label">Situação</label> <select
-													class="form_group" name="status">
+													class="form_group" name="status" required>
 													<option value="">---- Status de Pagamento ----</option>
 													<option value="Pendente">Pendente</option>
 													<option value="Pago">Pago</option>
