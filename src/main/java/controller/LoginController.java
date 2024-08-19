@@ -65,8 +65,21 @@ public class LoginController extends HttpServlet {
 
 	        if (membro != null && membro.getMbrnome() != null) {
 	            HttpSession session = request.getSession();
-	            session.setAttribute("username", membro.getMbrnome());
+	            String nomeCompleto = membro.getMbrnome();
+	            String[] partesDoNome = nomeCompleto.split(" ");
+	            String primeirosNomes;
+
+	            if (partesDoNome.length >= 2) {
+	                primeirosNomes = partesDoNome[0] + " " + partesDoNome[1];
+	            } else {
+	                primeirosNomes = nomeCompleto; // Ou apenas partesDoNome[0] se preferir apenas o primeiro nome
+	            }
+
+	            System.out.println(primeirosNomes);
+
+	            session.setAttribute("username", primeirosNomes);
 	            session.setAttribute("userphoto", membro.getMbrfotoCaminho());
+	            session.setAttribute("nivel", membro.getMbracesso());
 	            response.sendRedirect("cadastroMembros");
 	        } else {
 	            response.sendRedirect("index.jsp?error=true");

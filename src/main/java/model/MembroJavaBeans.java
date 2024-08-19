@@ -81,9 +81,10 @@ public class MembroJavaBeans {
 	}
 
 
-	public MembroJavaBeans(String mbrnome, String mbrfotoCaminho) {
+	public MembroJavaBeans(String mbrnome, String mbrfotoCaminho, String mbracesso) {
 		this.mbrnome = mbrnome;
 		this.mbrfotoCaminho = mbrfotoCaminho;
+		this.mbracesso = mbracesso;
 	}
 
 	public MembroJavaBeans(int id_Membro, String mbrmemnome, String mbrcpf, String mbremail, String sedenome, String supnome) {

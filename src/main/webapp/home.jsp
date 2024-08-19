@@ -46,6 +46,7 @@
         <title>SGI</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="./css/style_chart.css">
         <link rel="stylesheet" type="text/css" href="./css/style.css">
 
     </head>
@@ -54,94 +55,118 @@
 <!------------------------------------------------------------------------BARRA DE NAVEGAÇÃO-------------------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------------------------------------------------------>
 
-        <div class="container">
-            <div class="navigation">
-                <ul>
-                    <li>
-                        <a href="#">
-                            <span class="icon"><img src="./assets/img/logo.png" alt="Logo SGI"></span>
-                            <span class="title"><h2>SGI</h2></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="HomeController" class="btn-exit-system">
-                            <span class="icon"><i class="fa fa-home" aria-hidden="true"></i></span>
-                            <span class="title"> Painel Principal</span>
-                            
-                        </a>
-                        
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="icon"><i class="fa fa-users" aria-hidden="true"></i></span>
-                            <span class="title"> Cadastro</span>
-                            <div class="icon-nav">
-                                <i class="fa fa-caret-down" aria-hidden="true"></i>
-                            </div>
-                        </a>
-                        <!--<ul class="sub-menu">
-                            <li><a href="#">Membros</a></li>
-                            <li><a href="#">Filiais</a></li>
-                            <li><a href="#">Grupos</a></li>
-                            <li><a href="#">Tarefas</a></li>
-                        </ul>-->
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="icon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-                            <span class="title"> Eventos</span>
-                            <div class="icon-nav">
-                                <i class="fa fa-caret-down" aria-hidden="true"></i>
-                            </div>
-                        </a>
-                        
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="icon"><i class="fa fa-line-chart" aria-hidden="true"></i></span>
-                            <span class="title"> Financeiro</span>
-                            <div class="icon-nav">
-                                <i class="fa fa-caret-down" aria-hidden="true"></i>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="icon"><i class="fa fa-info-circle" aria-hidden="true"></i></span>
-                            <span class="title"> Ajuda</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="LogoutController">
-                            <span class="icon"><i class="fa fa-power-off" aria-hidden="true"></i></span>
-                            <span class="title"> Sair</span>
-                        </a>
-                    </li>
-                </ul>
+        	<div class="container close">
+		<div class="logo">
+			<span class="icon"><img src="assets/img/logo.png"
+				alt="Logo SGI"></span> <span class="title">SGI</span>
+		</div>
 
-            </div>
+		<ul class="nav-list">
+			<li><a href="home.jsp"> <i class="fa fa-home"
+					aria-hidden="true"></i> <span class="link-name"> Painel
+						Principal</span>
+			</a></li>
+			<%
+			if (session.getAttribute("nivel").equals("Administrador")) {
+			%>
+				<li><a href="grupos.jsp"> <i class="fa fa-users"
+					aria-hidden="true"></i> <span class="link-name"> Grupos</span>
+			</a></li>
+			<li>
+				<div class="icon-link">
+					<a href="#"> <i class="fa fa-users" aria-hidden="true"></i> <span
+						class="link-name"> Cadastro </span>
+					</a> <i class="fa fa-caret-down arrow" aria-hidden="true"></i>
+				</div>
+
+				<ul class="sub-menu">
+					<li><a href="#" class="link-name"></a></li>
+					<li><a href="cadastroMembros">Membros</a></li>
+					<li><a href="cadastro_eventos.jsp">Eventos</a></li>
+					<li><a href="cadastroTarefa">Tarefas</a></li>
+				</ul>
+			</li>
+			<%
+			}
+			%>
+
+			<li>
+				<div class="icon-link">
+					<a href="#"> <i class="fa fa-calendar" aria-hidden="true"></i>
+						<span class="link-name"> Eventos</span>
+					</a> <i class="fa fa-caret-down arrow" aria-hidden="true"></i>
+				</div>
+
+				<ul class="sub-menu">
+					<li><a href="#" class="link-name"></a></li>
+					<li><a href="MembroController">Aniversariantes</a></li>
+					<li><a href="eventos.jsp">Cultos</a></li>
+				</ul>
+			</li>
+
+			<li>
+				<div class="icon-link">
+					<a href="#"> <i class="fa fa-line-chart" aria-hidden="true"></i>
+						<span class="link-name"> Financeiro</span>
+					</a> <i class="fa fa-caret-down arrow" aria-hidden="true"></i>
+				</div>
+
+				<ul class="sub-menu">
+					<li><a href="#" class="link-name"></a></li>
+					<li><a href="CadastroContas">Contas</a></li>
+					<li><a href="membroparadizimo.jsp">Dízimos</a></li>
+					<li><a href="cadastroDoacoes">Doações</a></li>
+					<li><a href="membroparaoferta.jsp">Ofertas</a></li>
+					<li><a href="cadastroPatrimonio">Patrimônios</a></li>
+				</ul>
+			</li>
+
+			<li><a href="ajuda.jsp"> <i class="fa fa-info-circle"
+					aria-hidden="true"></i> <span class="link-name"> Ajuda</span>
+			</a></li>
+
+			<li>
+				<div class="profile-details">
+					<div class="profile-content">
+						<img src="img/<%out.print(session.getAttribute("userphoto"));%>"
+							alt="">
+					</div>
+
+					<div class="name-job">
+						<div class="name">
+							<%
+							out.print(session.getAttribute("username"));
+							%>
+						</div>
+					</div>
+					<a href="LogoutController"> <i class="fa fa-sign-out"
+						aria-hidden="true"></i></a>
+				</div>
+			</li>
+		</ul>
+	</div>
 
 <!------------------------------------------------------------------------MAIN-------------------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------------------------------------------------------>
+<div class="home-container">
+		<div class="home-content">
+			<div class="ic">
+				<i class="fa fa-bars" aria-hidden="true"></i>
+			</div>
 
+			<!--BARRA DE PESQUISA-->
+			<div class="search">
+				<label> <input type="text" placeholder="Buscar"> <i
+					class="fa fa-search" aria-hidden="true"></i>
+				</label>
+			</div>
 
-            <div class="main">
-                <div class="topbar">
-                    <div class="toggle" onclick="toggleMenu();"></div>
+			<!--BARRA DE USUÁRIO-->
+			<div class="user">
+				<img src="img/<%out.print(session.getAttribute("userphoto"));%>">
+			</div>
+		</div>
 
-                    <!--BARRA DE PESQUISA-->
-                    <div class="search">
-                        <label>
-                            <input type="text" placeholder="Buscar">
-                            <i class="fa fa-search" aria-hidden="true"></i>
-                        </label>
-                    </div>
-
-                    <!--BARRA DE USUÁRIO-->
-                    <div class="user">
-                        <img src="img/<%out.print(session.getAttribute("userphoto"));%>">
-                    </div>
-                </div>
 <!------------------------------------------------------------------------CARDS GERAIS-------------------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------------------------------------------------------>
 

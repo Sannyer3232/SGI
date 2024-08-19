@@ -59,6 +59,7 @@ public class EventoController extends HttpServlet {
 	      evento.setEvefilial(request.getParameter("evefilial"));
 	      evento.setEvestatus(request.getParameter("evestatus"));
 	      String dateStr = request.getParameter("evedata");
+	      System.out.println(dateStr);
 	      SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 	      try {

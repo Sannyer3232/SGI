@@ -32,7 +32,7 @@ public class ContasDAO {
 	}
 
 	// CRUD CREATE
-	public void inserirConta(ContasJavaBeans conta) {
+	public boolean inserirConta(ContasJavaBeans conta) {
 		String create = "insert into contasapagar (cntnomefornecedor, cntidfilial, cntdescricaoconta, cntdtvencimento, cntvalor, cntstatuspagamento) value(?,?,?,?,?,?);";
 		try {
 			// abrir a conexao
@@ -51,9 +51,11 @@ public class ContasDAO {
 			pst.executeUpdate();
 			// Encerrar a conexao com banco
 			con.close();
+			return true;
 
 		} catch (Exception e) {
 			System.out.println(e);
+			return false;
 		}
 	}
 

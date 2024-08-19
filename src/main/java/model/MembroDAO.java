@@ -324,7 +324,7 @@ public class MembroDAO {
 			ResultSet rs = pst.executeQuery();
 
 			while (rs.next()) {
-				membro = new MembroJavaBeans(rs.getString(1), rs.getString(2));
+				membro = new MembroJavaBeans(rs.getString(1), rs.getString(2), rs.getString(3));
 			}
 
 			con.close();
@@ -425,5 +425,52 @@ public class MembroDAO {
 			return null;
 		}
 	}
+	
+	public ArrayList<MembroJavaBeans> listarMembrosGrupo(String grupo){
+		ArrayList<MembroJavaBeans> membros = new ArrayList<>();
+		String sql = "call sp_grupos (?);";
+		try {
+			Connection con = conectar();
+			PreparedStatement pst = con.prepareStatement(sql);
+			pst.setString(1, grupo);
+			ResultSet rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				
+				int id = rs.getInt(1);
+				String mbrnome = rs.getString(2);
+				String cpf = rs.getString(3);
+				String email = rs.getString(4);
+				String sede = rs.getString(5);
+				String superior = rs.getString(6);
+				String cargo = rs.getString(7);
+				String filial = rs.getString(8);
 
+				// Verifique se o campo superior é nulo antes de atribuir
+				if (superior == null) {
+					membros.add(new MembroJavaBeans(id, mbrnome, cpf, email, sede, "Sem superior", cargo, filial));
+				} else {
+					membros.add(new MembroJavaBeans(id, mbrnome, cpf, email, sede, superior, cargo, filial));
+				}
+				
+			}
+			con.close();
+			return membros;
+		} catch (Exception e) {
+			System.out.println("Erro ao listar membros do grupo: " + grupo + ". Erro: " + e);
+			return null;
+		}
+	}
+	
+	public int contarMembrosGrupo(String grupo) {
+		int total = 0;
+		ArrayList<MembroJavaBeans> membros = listarMembrosGrupo(grupo);
+		if(membros != null) {
+			total = membros.size();
+			return total;
+		}else {
+			return 0;
+		}
+		
+	}
 }

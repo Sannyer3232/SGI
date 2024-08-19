@@ -2,421 +2,385 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="model.FilialJavaBeans"%>
 <%@ page import="java.util.ArrayList"%>
+<%@ page import="model.MembroDAO"%>
+<%@ page import="model.MembroJavaBeans"%>
 <%
 ArrayList<FilialJavaBeans> filiais = (ArrayList<FilialJavaBeans>) request.getAttribute("filiais");
+MembroDAO daoMembro = new MembroDAO();
+ArrayList<MembroJavaBeans> membros = daoMembro.listarMembros();
 %>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<title>Cadastro</title>
-<meta charset="UTF-8">
-<meta name="viewport"
-	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SGI - Cadastro de Membros</title>
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+	crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="./css/style.css">
+<link rel="stylesheet" href="./css/janela-modal-sucesso-erro.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 <script>
-
-
-		$(document).ready(function() {
-		    $('#cpf').mask('000.000.000-00');
-		    $('#rg').mask('0000000-0');
-		    $('#telefone').mask('(00) 00000-0000'); 
-		    $('#cep').mask('00000-000'); 
-		});
-		</script>
-
-<link rel="stylesheet" href="./css/main.css">
-<link rel="stylesheet" href="./css/janela-modal-sucesso-erro.css">
-
-
-
-
+	$(document).ready(function() {
+		$('#cpf').mask('000.000.000-00');
+		$('#rg').mask('0000000-0');
+		$('#telefone').mask('(00) 00000-0000');
+		$('#cep').mask('00000-000');
+	});
+</script>
 </head>
+
 <body>
-	<!-- SideBar -->
-	<section class="full-box cover dashboard-sideBar">
-		<div class="full-box dashboard-sideBar-bg btn-menu-dashboard"></div>
-		<div class="full-box dashboard-sideBar-ct">
-			<!--SideBar Title -->
-			<div
-				class="full-box text-uppercase text-center text-titles dashboard-sideBar-title">
-				SGI <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
-			</div>
-			<!-- SideBar User info -->
-			<div class="full-box dashboard-sideBar-UserInfo">
-				<figure class="full-box">
-					<img src="img/<%out.print(session.getAttribute("userphoto"));%>">
-					<figcaption class="text-center text-titles">
-						<%
-						out.print(session.getAttribute("username"));
-						%>
-					</figcaption>
-				</figure>
-				<ul class="full-box list-unstyled text-center">
-					<li><a href="#!"> <i class="zmdi zmdi-settings"></i>
-					</a></li>
-					<li><a href="#!" class="btn-exit-system"> <i
-							class="zmdi zmdi-power"></i>
-					</a></li>
+	<div class="container close">
+		<div class="logo">
+			<span class="icon"><img src="assets/img/logo.png"
+				alt="Logo SGI"></span> <span class="title">SGI</span>
+		</div>
+
+		<ul class="nav-list">
+			<li><a href="home.jsp"> <i class="fa fa-home"
+					aria-hidden="true"></i> <span class="link-name"> Painel
+						Principal</span>
+			</a></li>
+
+			<%
+			if (session.getAttribute("nivel").equals("Administrador")) {
+			%>
+			<li><a href="grupos.jsp"> <i class="fa fa-users"
+					aria-hidden="true"></i> <span class="link-name"> Grupos</span>
+			</a></li>
+			<li>
+				<div class="icon-link">
+					<a href="#"> <i class="fa fa-users" aria-hidden="true"></i> <span
+						class="link-name"> Cadastro </span>
+					</a> <i class="fa fa-caret-down arrow" aria-hidden="true"></i>
+				</div>
+
+				<ul class="sub-menu">
+					<li><a href="#" class="link-name"></a></li>
+					<li><a href="cadastroMembros">Membros</a></li>
+					<li><a href="cadastro_eventos.jsp">Eventos</a></li>
+					<li><a href="cadastroTarefa">Tarefas</a></li>
 				</ul>
+			</li>
+			<%
+			}
+			%>
+
+			<li>
+				<div class="icon-link">
+					<a href="#"> <i class="fa fa-calendar" aria-hidden="true"></i>
+						<span class="link-name"> Eventos</span>
+					</a> <i class="fa fa-caret-down arrow" aria-hidden="true"></i>
+				</div>
+
+				<ul class="sub-menu">
+					<li><a href="#" class="link-name"></a></li>
+					<li><a href="MembroController">Aniversariantes</a></li>
+					<li><a href="eventos.jsp">Cultos</a></li>
+				</ul>
+			</li>
+
+			<li>
+				<div class="icon-link">
+					<a href="#"> <i class="fa fa-line-chart" aria-hidden="true"></i>
+						<span class="link-name"> Financeiro</span>
+					</a> <i class="fa fa-caret-down arrow" aria-hidden="true"></i>
+				</div>
+
+				<ul class="sub-menu">
+					<li><a href="#" class="link-name"></a></li>
+					<li><a href="CadastroContas">Contas</a></li>
+					<li><a href="membroparadizimo.jsp">Dízimos</a></li>
+					<li><a href="cadastroDoacoes">Doações</a></li>
+					<li><a href="membroparaoferta.jsp">Ofertas</a></li>
+					<li><a href="cadastroPatrimonio">Patrimônios</a></li>
+				</ul>
+			</li>
+
+			<li><a href="ajuda.jsp"> <i class="fa fa-info-circle"
+					aria-hidden="true"></i> <span class="link-name"> Ajuda</span>
+			</a></li>
+
+			<li>
+				<div class="profile-details">
+					<div class="profile-content">
+						<img src="img/<%out.print(session.getAttribute("userphoto"));%>"
+							alt="">
+					</div>
+
+					<div class="name-job">
+						<div class="name">
+							<%
+							out.print(session.getAttribute("username"));
+							%>
+						</div>
+					</div>
+					<a href="LogoutController"> <i class="fa fa-sign-out"
+						aria-hidden="true"></i></a>
+				</div>
+			</li>
+		</ul>
+	</div>
+
+	<div class="home-container">
+		<div class="home-content">
+			<div class="ic">
+				<i class="fa fa-bars" aria-hidden="true"></i>
 			</div>
-			<!-- SideBar Menu -->
-			<ul class="list-unstyled full-box dashboard-sideBar-Menu">
-				<li><a href="home.jsp"> <i
-						class="zmdi zmdi-view-dashboard zmdi-hc-fw"></i> Panel Principal
-				</a></li>
-				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
-						class="zmdi zmdi-case zmdi-hc-fw"></i> Cadastro <i
-						class="zmdi zmdi-caret-down pull-right"></i></a>
-					<ul class="list-unstyled full-box">
-						<li><a href="cadastroMembros"><i
-								class="zmdi zmdi-account"></i> Membros</a></li>
-						<li><a href="cadastroTarefa"><i
-								class="zmdi zmdi-assignment"></i> Tarefas</a></li>
-						<li><a href="student.html"><i
-								class="zmdi zmdi-accounts-add zmdi-hc-fw"></i> Grupos</a></li>
-						<li><a href="cadastro_eventos.jsp"><i
-								class="zmdi zmdi-calendar"></i>Evento</a></li>
 
-					</ul></li>
-				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
-						class="zmdi zmdi-calendar-check zmdi-hc-fw"></i> Eventos <i
-						class="zmdi zmdi-caret-down pull-right"></i>
-				</a>
-					<ul class="list-unstyled full-box">
-						<li><a href="MembroController"><i
-								class="zmdi zmdi-cake zmdi-hc-fw"></i> Aniversariantes</a></li>
-						<li><a href="teacher.html"><i
-								class="zmdi zmdi-alarm-plus zmdi-hc-fw"></i>Eventos</a></li>
+			<!--BARRA DE PESQUISA-->
+			<div class="search">
+				<label> <input type="text" placeholder="Buscar"> <i
+					class="fa fa-search" aria-hidden="true"></i>
+				</label>
+			</div>
 
-					</ul></li>
-				<li><a href="#!" class="btn-sideBar-SubMenu"> <i
-						class="zmdi zmdi-card zmdi-hc-fw"></i> Financeiro <i
-						class="zmdi zmdi-caret-down pull-right"></i>
-				</a>
-					<ul class="list-unstyled full-box">
-						<li><a href="CadastroContas"><i
-								class="zmdi zmdi-exposure-alt zmdi-hc-fw"></i> Contas</a></li>
-						<li><a href="cadastroDoacoes"><i
-								class="zmdi zmdi-favorite zmdi-hc-fw"></i> Doações</a></li>
-						<li><a href="membroparadizimo.jsp"><i
-								class="zmdi zmdi-money zmdi-hc-fw"></i> Dízimos</a></li>
-						<li><a href="membroparaoferta.jsp"><i
-								class="zmdi zmdi-money-box zmdi-hc-fw"></i> Ofertas</a></li>
-						<li><a href="cadastroPatrimonio"><i
-								class="zmdi zmdi-chart zmdi-hc-fw"></i> Patrimonio</a></li>
-					</ul></li>
+			<!--BARRA DE USUÁRIO-->
+			<div class="user">
+				<img src="img/<%out.print(session.getAttribute("userphoto"));%>">
+			</div>
+		</div>
 
+		<!------------------------------------------------------------------------OPÇÕES/HOME-CONTAINER-------------------------------------------------------------------------->
+		<!------------------------------------------------------------------------------------------------------------------------------------------------------>
 
-				<li><a href="ajuda.jsp"> <i class="zmdi zmdi-pin-help"></i>
-						Ajuda
-				</a></li>
+		<div class="j1">
+			<ul class="opcoes">
+				<li><a href="cadastroMembros">Cadastar Novo Membro</a></li>
+				<li><a href="pesquisaMembros.jsp">Pesquisar</a></li>
 
 			</ul>
 		</div>
-	</section>
 
-	<!-- Content page-->
-	<section class="full-box dashboard-contentPage">
-		<!-- NavBar -->
-		<nav class="full-box dashboard-Navbar">
-			<ul class="full-box list-unstyled text-right">
-				<li class="pull-left"><a href="#!" class="btn-menu-dashboard"><i
-						class="zmdi zmdi-view-list-alt"></i></a></li>
-				<li><a href="#!" class="btn-Notifications-area"> <i
-						class="zmdi zmdi-notifications-none"></i> <span class="badge">7</span>
-				</a></li>
-				<li><a href="#!" class="btn-search"> <i
-						class="zmdi zmdi-search"></i>
-				</a></li>
-				<li><a href="#!" class="btn-modal-help"> <i
-						class="zmdi zmdi-help-outline"></i>
-				</a></li>
-			</ul>
-		</nav>
-		<!-- Content page -->
-		<div class="container-fluid">
-			<div class="page-header">
-				<h1 class="text-titles">
-					<i class="zmdi zmdi-account"></i> Membros <small>Cadastro</small>
-				</h1>
-			</div>
-		</div>
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-xs-12">
+		<!------------------------------------------------------------------------HOME-CONTAINER-------------------------------------------------------------------------->
+		<!------------------------------------------------------------------------------------------------------------------------------------------------------>
+		<div class="formularios-container">
+			<div class="forms">
+				<div class="form-title">
+					<h2>Novo Membro</h2>
+				</div>
+				<form method="post" enctype="multipart/form-data" name="frmMembro"
+					action="insert">
+					<div class="form">
+						<div class="input-box">
+							<label>Nome</label> <input required=""
+								placeholder="Nome completo" type="text" name="mbrnome">
+						</div>
+						<div class="column">
+							<div class="input-box">
+								<label>CPF</label> <input required=""
+									placeholder="000.000.000-00" type="text" id="cpf" name="mbrcpf"
+									size="14" maxlength="14" required>
+							</div>
+							<div class="input-box">
+								<label>RG</label> <input required="" placeholder="000000-00"
+									type="text" id="rg" size="9" maxlength="9" type="text"
+									name="mbridentidade">
+							</div>
+							<div class="input-box">
+								<label>Data Nascimento</label> <input required=""
+									placeholder="Enter birth date" type="date"
+									name="mbrdatanascimento">
+							</div>
+						</div>
 
-					<ul class="nav nav-tabs" style="margin-bottom: 15px;">
-						<li class="active"><a id="fonte-nav"
-							href="pesquisaMembros.jsp">Buscar Membros</a></li>
-					</ul>
+						<div class="column-ig">
+							<label>Superior</label>
+							<div class="select-box-ig">
+								<select name="mbrsuperior" required>
+									<option value="">Superior</option>
+									<option value="0">Sem Superior</option>
 
-					<div id="myTabContent" class="tab-content">
-						<div class="tab-pane fade active in" id="new">
-							<div class="container-fluid">
-								<div class="row">
-									<div class="col-xs-12 col-md-10 col-md-offset-1">
-										<form method="post" enctype="multipart/form-data"
-											name="frmMembro" action="insert">
-											<div class="form-group label-floating">
-												<label class="control-label">Nome</label> <input
-													class="form-control" type="text" name="mbrnome" required>
-											</div>
-											<div class="form-group label-floating">
-												<label class="control-label">CPF</label> <input
-													class="form-control" id="cpf" type="text" name="mbrcpf"
-													size="14" maxlength="14" required>
-											</div>
-											<div class="form-group label-floating">
-												<label class="control-label">Id Superior</label> <input
-													class="form-control" type="text" name="mbrsuperior" required></input>
-											</div>
-											<div class="form-group label-floating">
-												<label class="control-label">Identidade</label> <input
-													class="form-control" id="rg" size="9" maxlength="9"
-													type="text" name="mbridentidade" required></input>
-											</div>
-											<div class="form-group label-floating">
-												<label class="control-label">Email</label> <input
-													class="form-control" type="email" name="mbremail" required>
-											</div>
-											<div class="form-group label-floating">
-												<label class="control-label">Telefone</label> <input
-													class="form-control" type="text" name="mbrtelefone" id="telefone" size="15" maxlength="15" required>
-											</div>
-											<div class="form-group label-floating">
-												<label class="control-label">Senha de Acesso</label> <input
-													class="form-control" type="text" name="mbrsenha" required>
-											</div>
-											<div class="form-group label-floating">
-												<label class="control-label">Data de Nascimento</label> <input
-													class="form_group" type="date" id="mbrnascimento"
-													name="mbrdatanascimento" required>
-											</div>
+									<%
+									if (membros != null) {
+										for (MembroJavaBeans membro : membros) {
+									%>
+									<option value="<%=membro.getId_Membro()%>"><%=membro.getMbrmemnome()%></option>
+									<%
+									}
+									}
+									%>
+								</select>
+							</div>
 
-											<div class="form-group label-floating">
-												<label class="control-label">Estado Civil</label> <select
-													class="form_group" name="mbrestadocivil" required>
-													<option value="1">Solteiro(a)</option>
-													<option value="2">Divorciado(a)</option>
-													<option value="3">Viúvo(a)</option>
-													<option value="4">Casado(a)</option>
-
-												</select>
-											</div>
-
-
-											<div class="form-group label-floating">
-												<label class="control-label">Sede</label> <select
-													class="form_group" name="mbrsede" required>
-													<option value="1">Sede Manaus</option>
-												</select>
-											</div>
-
-											<div class="form-group label-floating">
-												<label class="control-label">Filial</label> <select
-													class="form_group" name="mbrfilial" required>
-													<option value="">---- Selecionar Filial ----</option>
-													<%
-													for (FilialJavaBeans filial : filiais) {
-													%>
-													<option value="<%=filial.getIdfilial()%>"><%=filial.getFilnome()%></option>
-													<%
-													}
-													%>
-												</select>
-											</div>
-
-											<div class="form-group label-floating">
-												<label class="control-label">Ativo</label> <select
-													class="form_group" name="mbrativo" required>
-													<option value="1">Ativo</option>
-													<option value="0">Desligado</option>
-												</select>
-											</div>
-
-											<div class="form-group label-floating">
-												<label class="control-label">Nível de acesso</label> <select
-													class="form_group" name="mbracesso" required>
-													<option value="Administrador">Administrador</option>
-													<option value="Usuario">Usuário</option>
-												</select>
-											</div>
-											<div class="form-group label-floating">
-												<label class="control-label">Cargo</label> <select
-													class="form_group" name="cargo" required>
-													<option value="">---Selecione o Cargo---</option>
-													<option value="10">Membro Comum</option>
-													<option value="1">Pastor</option>
-													<option value="2">Presbitero</option>
-													<option value="3">Secretaria</option>
-													<option value="4">Diacono</option>
-													<option value="5">Porteiro</option>
-													<option value="6">Músico</option>
-													<option value="7">Coral e Louvor</option>
-													<option value="8">Oração e Intercessão</option>
-													<option value="9">Sonoplastia</option>
-												</select>
-											</div>
-											<div class="form-group label-floating">
-												<label class="control-label">Rua</label> <input
-													class="form-control" type="text" name="endrua" required>
-											</div>
-
-											<div class="form-group label-floating">
-												<label class="control-label">Número</label> <input
-													class="form-control" type="text" name="endnumero" required>
-											</div>
-
-											<div class="form-group label-floating">
-												<label class="control-label">Bairro</label> <input
-													class="form-control" type="text" name="endbairro" required>
-											</div>
-
-											<div class="form-group label-floating">
-												<label class="control-label">CEP</label> <input
-													class="form-control" type="text" name="endcep" id="cep" size="9" maxlength="9" required>
-											</div>
-
-											<div class="form-group label-floating">
-												<label class="control-label">Cidade</label> <input
-													class="form-control" type="text" name="endcidade" required>
-											</div>
-											<div class="form-group label-floating">
-												<label class="control-label">Estado</label> <input
-													class="form-control" type="text" name="endestado" required>
-											</div>
-
-											<div class="form-group">
-												<label class="control-label">Photo</label>
-												<div>
-													<input type="text" readonly="" class="form-control"
-														placeholder="Pesquisar..."> <input type="file"
-														id="mbrfoto" name="mbrfoto">
-												</div>
-											</div>
-
-
-
-											<p class="text-center">
-
-												<button type="submit" class="btn btn-info btn-raised btn-sm">
-													<i class="zmdi zmdi-floppy"></i> Save
-												</button>
-											</p>
-										</form>
-									</div>
+						</div>
+						<div class="gen-box">
+							<label>Estado Civil</label>
+							<div class="gen-option">
+								<div class="gen">
+									<input checked="" name="mbrestadocivil" id="check-male"
+										type="radio" value="1"> <label for="check-male">Solteiro(a)</label>
+								</div>
+								<div class="gen">
+									<input name="mbrestadocivil" id="check-female" type="radio"
+										value="2"> <label for="check-female">Divorciado(a)</label>
+								</div>
+								<div class="gen">
+									<input name="mbrestadocivil" id="check-other" type="radio"
+										value="3"> <label for="check-other">Viúvo(a)</label>
+								</div>
+								<div class="gen">
+									<input name="mbrestadocivil" id="check-other" type="radio"
+										value="4"> <label for="check-other">Casado(a)</label>
 								</div>
 							</div>
+						</div>
+						<div class="input-box address">
+							<label>Email</label> <input required=""
+								placeholder="Insira um Email" type="text" name="mbremail">
+						</div>
+						<div class="input-box address">
+							<label>Senha</label> <input required=""
+								placeholder="Digite uma senha" type="text" name="mbrsenha">
+						</div>
+						<div class="input-box address">
+							<label for="arquivo">Escolha uma imagem:</label> <input
+								accept=".jpg, .jpeg, .png, .gif, .pdf" class="inpdddut"
+								name="mbrfoto" id="arquivo" type="file">
+						</div>
+					</div>
+			</div>
+			<div class="forms-end">
+				<div class="form-end-title">
+					<h2>Endereço</h2>
+				</div>
+				<div class="form-end">
+					<div class="input-box-end">
+						<label>Rua</label> <input required="" placeholder="Rua"
+							type="text" name="endrua">
+					</div>
+					<div class="column-end">
+						<div class="input-box-end">
+							<label>Número</label> <input required="" placeholder="0000"
+								type="number" name="endnumero">
+						</div>
+						<div class="input-box-end">
+							<label>Bairro</label> <input required=""
+								placeholder="Digite o nome do bairro" type="text"
+								name="endbairro">
+						</div>
+						<div class="input-box-end">
+							<label>CEP</label> <input required=""
+								placeholder="Digite o nome do CEP" type="text" name="endcep"
+								id="cep" size="9" maxlength="9">
+						</div>
+						<div class="input-box-end">
+							<label>Cidade</label> <input required=""
+								placeholder="Digite o nome da Cidade" type="text"
+								name="endcidade">
+						</div>
+						<div class="input-box-end">
+							<label>Estado</label> <input required="" placeholder="Estado"
+								type="text" name="endestado">
+						</div>
+						<div class="input-box-end">
+							<label>Telefone</label> <input required=""
+								placeholder="(00) 00000-0000" type="text" name="mbrtelefone"
+								id="telefone" size="15" maxlength="15">
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="form-info-ig">
+			<div class="forms-ig">
+				<div class="form-title-ig">
+					<h2>Informações da Igreja</h2>
+				</div>
+				<div class="form-ig">
+
+					<div class="column-ig">
+						<div class="select-box-ig">
+							<select name="mbrsede" required>
+								<option value="">Sede</option>
+								<option value="1">Manaus</option>
+							</select>
+						</div>
+
+					</div>
+					<div class="column-ig">
+						<div class="select-box-ig">
+							<select name="mbrativo" required>
+								<option value="">Status</option>
+								<option value="1">Ativo</option>
+								<option value="0">Inativo</option>
+							</select>
+						</div>
+
+					</div>
+					<div class="column-ig">
+						<div class="select-box-ig">
+							<select name="mbrfilial" required>
+								<option value="">Filial</option>
+								<%
+								for (FilialJavaBeans filial : filiais) {
+								%>
+								<option value="<%=filial.getIdfilial()%>"><%=filial.getFilnome()%></option>
+								<%
+								}
+								%>
+							</select>
+						</div>
+
+					</div>
+
+
+					<div class="column-ig">
+						<div class="select-box-ig">
+							<select name="mbracesso" required>
+								<option value="">Nível de Acesso</option>
+								<option value="Administrador">Administrador</option>
+								<option value="Usuario">Usuário</option>
+							</select>
+						</div>
+
+					</div>
+
+					<div class="column-ig">
+						<div class="select-box-ig">
+							<select name="cargo" required>
+								<option value="">Cargo</option>
+								<option value="10">Membro Comum</option>
+								<option value="1">Pastor</option>
+								<option value="2">Presbitero</option>
+								<option value="3">Secretaria</option>
+								<option value="4">Diacono</option>
+								<option value="5">Porteiro</option>
+								<option value="6">Músico</option>
+								<option value="7">Coral e Louvor</option>
+								<option value="8">Oração e Intercessão</option>
+								<option value="9">Sonoplastia</option>
+							</select>
 						</div>
 
 					</div>
 				</div>
 			</div>
 		</div>
-	</section>
 
-	<!-- Notifications area -->
-	<section class="full-box Notifications-area">
-		<div class="full-box Notifications-bg btn-Notifications-area"></div>
-		<div class="full-box Notifications-body">
-			<div class="Notifications-body-title text-titles text-center">
-				Notifications <i class="zmdi zmdi-close btn-Notifications-area"></i>
-			</div>
-			<div class="list-group">
-				<div class="list-group-item">
-					<div class="row-action-primary">
-						<i class="zmdi zmdi-alert-triangle"></i>
-					</div>
-					<div class="row-content">
-						<div class="least-content">17m</div>
-						<h4 class="list-group-item-heading">Tile with a label</h4>
-						<p class="list-group-item-text">Donec id elit non mi porta
-							gravida at eget metus.</p>
-					</div>
-				</div>
-				<div class="list-group-separator"></div>
-				<div class="list-group-item">
-					<div class="row-action-primary">
-						<i class="zmdi zmdi-alert-octagon"></i>
-					</div>
-					<div class="row-content">
-						<div class="least-content">15m</div>
-						<h4 class="list-group-item-heading">Tile with a label</h4>
-						<p class="list-group-item-text">Donec id elit non mi porta
-							gravida at eget metus.</p>
-					</div>
-				</div>
-				<div class="list-group-separator"></div>
-				<div class="list-group-item">
-					<div class="row-action-primary">
-						<i class="zmdi zmdi-help"></i>
-					</div>
-					<div class="row-content">
-						<div class="least-content">10m</div>
-						<h4 class="list-group-item-heading">Tile with a label</h4>
-						<p class="list-group-item-text">Maecenas sed diam eget risus
-							varius blandit.</p>
-					</div>
-				</div>
-				<div class="list-group-separator"></div>
-				<div class="list-group-item">
-					<div class="row-action-primary">
-						<i class="zmdi zmdi-info"></i>
-					</div>
-					<div class="row-content">
-						<div class="least-content">8m</div>
-						<h4 class="list-group-item-heading">Tile with a label</h4>
-						<p class="list-group-item-text">Maecenas sed diam eget risus
-							varius blandit.</p>
-					</div>
-				</div>
-			</div>
-
+		<div class="submit">
+			<button>
+				<i class="fa fa-floppy-o" aria-hidden="true"></i> Cadastrar
+			</button>
 		</div>
-	</section>
+		</form>
 
-	<!-- Dialog help -->
-	<div class="modal fade" tabindex="-1" role="dialog" id="Dialog-Help">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title">Help</h4>
-				</div>
-				<div class="modal-body">
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-						Nesciunt beatae esse velit ipsa sunt incidunt aut voluptas, nihil
-						reiciendis maiores eaque hic vitae saepe voluptatibus. Ratione
-						veritatis a unde autem!</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary btn-raised"
-						data-dismiss="modal">
-						<i class="zmdi zmdi-thumb-up"></i> Ok
-					</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--====== Scripts -->
 
-	<script src="./js/sweetalert2.min.js"></script>
-	<script src="./js/bootstrap.min.js"></script>
-	<script src="./js/material.min.js"></script>
-	<script src="./js/ripples.min.js"></script>
-	<script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
-	<script src="./js/main.js"></script>
-	<script>
-		$.material.init();
-	</script>
-
+		<script
+			src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+		<script src="my_chart.js"></script>
+		<script type="text/javascript"
+			src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
+		<script src="./js/script.js"></script>
 </body>
-
 <%
 String achouMembro = request.getParameter("success");
 if (achouMembro != null) {
@@ -450,5 +414,4 @@ if (achouMembro != null) {
 }
 %>
 <script src="js/script-fechar.js"></script>
-
 </html>

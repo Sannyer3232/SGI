@@ -97,10 +97,14 @@ public class ContasController extends HttpServlet {
 		System.out.println(conta.getCntnomefornecedor());
 
 		// Invocar o método inserirConta passando o objeto conta
-		dao.inserirConta(conta);
+		if(dao.inserirConta(conta)) {
+			response.sendRedirect("CadastroContas?success=true");
+		}else {
+			response.sendRedirect("CadastroContas?success=false");
+		}
 
 		// redirecionar para o documento 
-		response.sendRedirect("CadastroContas");
+		
 
 	}
 

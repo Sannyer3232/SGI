@@ -17,6 +17,6 @@ public class testes {
 		json.JSONListarTotalDizimoOferta("Oferta");
 		json.JSONListarTotalcontas();
 
-		
+		System.out.println("Total: " + dao.contarMembrosGrupo("Comum"));
 	}
 }
