@@ -176,7 +176,7 @@
                                 </select>
                             </div>
                         </div>
-                        <input type="hidden" value="Dizimo" name="tipo">
+                        <input type="hidden" value="Oferta" name="tipo">
                     </div>
                     <div class="submit">
                         <button type="submit" class="btn btn-info btn-raised btn-sm">
