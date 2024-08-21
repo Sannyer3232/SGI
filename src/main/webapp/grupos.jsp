@@ -30,6 +30,7 @@ int totalComum = dao.contarMembrosGrupo("Comum");
 	integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
 	crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="./css/style.css">
+<link rel="stylesheet" type="text/css" href="./css/cardgrupo.css">
 
 
 </head>
@@ -46,12 +47,12 @@ int totalComum = dao.contarMembrosGrupo("Comum");
 					aria-hidden="true"></i> <span class="link-name"> Painel
 						Principal</span>
 			</a></li>
-	
+
 			<%
 			if (session.getAttribute("nivel").equals("Administrador")) {
 			%>
-					<li><a href="grupos.jsp"> <i class="fa fa-home"
-					aria-hidden="true"></i> <span class="link-name"> Painel
+			<li><a href="grupos.jsp"> <i class="fa fa-users"
+					aria-hidden="true"></i> <span class="link-name"> 
 						Grupos</span>
 			</a></li>
 			<li>
@@ -95,6 +96,7 @@ int totalComum = dao.contarMembrosGrupo("Comum");
 
 				<ul class="sub-menu">
 					<li><a href="#" class="link-name"></a></li>
+					<li><a href="metricas.jsp">Métricas</a></li>
 					<li><a href="CadastroContas">Contas</a></li>
 					<li><a href="membroparadizimo.jsp">Dízimos</a></li>
 					<li><a href="cadastroDoacoes">Doações</a></li>
@@ -150,129 +152,171 @@ int totalComum = dao.contarMembrosGrupo("Comum");
 		<!------------------------------------------------------------------------------------------------------------------------------------------------------>
 		<!------------------------------------------------------------------------HOME-CONTAINER-------------------------------------------------------------------------->
 		<!------------------------------------------------------------------------------------------------------------------------------------------------------>
-		<div class="grupo-conteiner">
-            <article class="full-box tile" onclick="listarGrupo('Pastor')" id="card-grupo">
-                <div
-                    class="full-box tile-title text-center text-titles text-uppercase">
-                    Pastores</div>
-                <div class="full-box tile-icon text-center">
-                    <i class="zmdi zmdi-accounts"></i>
-                </div>
-                <div class="full-box tile-number text-titles">
-                    <p class="full-box"><%=totalPastor%></p>
-                    <small>Cadastrados</small>
-                </div>
-            </article>
-            <article class="full-box tile" onclick="listarGrupo('Presbítero')" id="card-grupo">
-                <div
-                    class="full-box tile-title text-center text-titles text-uppercase">
-                    Presbítero</div>
-                <div class="full-box tile-icon text-center">
-                    <i class="zmdi zmdi-accounts"></i>
-                </div>
-                <div class="full-box tile-number text-titles">
-                    <p class="full-box"><%=totalPresbitero%></p>
-                    <small>Cadastrados</small>
-                </div>
-            </article>
-            <article class="full-box tile" onclick="listarGrupo('Secretaria')" id="card-grupo">
-                <div
-                    class="full-box tile-title text-center text-titles text-uppercase">
-                    Secretaria</div>
-                <div class="full-box tile-icon text-center">
-                    <i class="zmdi zmdi-accounts"></i>
-                </div>
-                <div class="full-box tile-number text-titles">
-                    <p class="full-box"><%=totalSecretaria%></p>
-                    <small>Cadastrados</small>
-                </div>
-            </article>
-            <article class="full-box tile" onclick="listarGrupo('Diácono')" id="card-grupo">
-                <div
-                    class="full-box tile-title text-center text-titles text-uppercase">
-                    Diácono</div>
-                <div class="full-box tile-icon text-center">
-                    <i class="zmdi zmdi-accounts"></i>
-                </div>
-                <div class="full-box tile-number text-titles">
-                    <p class="full-box"><%=totalDiacono%></p>
-                    <small>Cadastrados</small>
-                </div>
-            </article> 
-            <article class="full-box tile" onclick="listarGrupo('Porteiro')" id="card-grupo">
-                <div
-                    class="full-box tile-title text-center text-titles text-uppercase">
-                    Porteiro</div>
-                <div class="full-box tile-icon text-center">
-                    <i class="zmdi zmdi-accounts"></i>
-                </div>
-                <div class="full-box tile-number text-titles">
-                    <p class="full-box"><%=totalPorteiro%></p>
-                    <small>Cadastrados</small>
-                </div>
-            </article>
-            <article class="full-box tile" onclick="listarGrupo('Músico')" id="card-grupo">
-                <div
-                    class="full-box tile-title text-center text-titles text-uppercase">
-                    Músico</div>
-                <div class="full-box tile-icon text-center">
-                    <i class="zmdi zmdi-accounts"></i>
-                </div>
-                <div class="full-box tile-number text-titles">
-                    <p class="full-box"><%=totalMusico%></p>
-                    <small>Cadastrados</small>
-                </div>
-            </article>
-            <article class="full-box tile" onclick="listarGrupo('Coral de Louvor')" id="card-grupo">
-                <div
-                    class="full-box tile-title text-center text-titles text-uppercase">
-                    Coral de Louvor</div>
-                <div class="full-box tile-icon text-center">
-                    <i class="zmdi zmdi-accounts"></i>
-                </div>
-                <div class="full-box tile-number text-titles">
-                    <p class="full-box"><%=totalCoralLouvor%></p>
-                    <small>Cadastrados</small>
-                </div>
-            </article>
-            <article class="full-box tile" onclick="listarGrupo('Oração e Intercessão')" id="card-grupo">
-                <div
-                    class="full-box tile-title text-center text-titles text-uppercase">
-                    Oração e Intercessão</div>
-                <div class="full-box tile-icon text-center">
-                    <i class="zmdi zmdi-accounts"></i>
-                </div>
-                <div class="full-box tile-number text-titles">
-                    <p class="full-box"><%=totalOracao%></p>
-                    <small>Cadastrados</small>
-                </div>
-            </article>
-            <article class="full-box tile" onclick="listarGrupo('Sonoplastia')" id="card-grupo">
-                <div
-                    class="full-box tile-title text-center text-titles text-uppercase">
-                    Sonoplastia</div>
-                <div class="full-box tile-icon text-center">
-                    <i class="zmdi zmdi-accounts"></i>
-                </div>
-                <div class="full-box tile-number text-titles">
-                    <p class="full-box"><%=totalSonoplastia%></p>
-                    <small>Cadastrados</small>
-                </div>
-            </article>
-            <article class="full-box tile" onclick="listarGrupo('Comum')" id="card-grupo">
-                <div
-                    class="full-box tile-title text-center text-titles text-uppercase">
-                    Membros Comuns</div>
-                <div class="full-box tile-icon text-center">
-                    <i class="zmdi zmdi-accounts"></i>
-                </div>
-                <div class="full-box tile-number text-titles">
-                    <p class="full-box"><%=totalComum%></p>
-                    <small>Cadastrados</small>
-                </div>
-            </article>
-        </div>
-        
+
+		<div class="container-grupo">
+			<div class="card-grupo" onclick="listarGrupo('Pastor')">
+				<div class="card-content">
+					<div class="card-top">
+						<span class="card-title">01.</span>
+						<p>Pastores</p>
+					</div>
+					<div class="card-bottom">
+						<span class="card-title">Cadastrados: <%=totalPastor%>
+						</span>
+					</div>
+				</div>
+				<div class="card-image">
+					<i class="fa fa-users fa-5x" aria-hidden="true"></i>
+				</div>
+			</div>
+
+			<div class="card-grupo" onclick="listarGrupo('Presbítero')">
+				<div class="card-content">
+					<div class="card-top">
+						<span class="card-title">02.</span>
+						<p>Presbíteros</p>
+					</div>
+					<div class="card-bottom">
+						<span class="card-title">Cadastrados: <%=totalPresbitero%>
+						</span>
+					</div>
+				</div>
+				<div class="card-image">
+					<i class="fa fa-users fa-5x" aria-hidden="true"></i>
+				</div>
+			</div>
+
+			<div class="card-grupo" onclick="listarGrupo('Secretaria')">
+				<div class="card-content">
+					<div class="card-top">
+						<span class="card-title">03.</span>
+						<p>Secretaria</p>
+					</div>
+					<div class="card-bottom">
+						<span class="card-title">Cadastrados: <%=totalSecretaria%>
+						</span>
+					</div>
+				</div>
+				<div class="card-image">
+					<i class="fa fa-users fa-5x" aria-hidden="true"></i>
+				</div>
+			</div>
+
+			<div class="card-grupo" onclick="listarGrupo('Diácono')">
+				<div class="card-content">
+					<div class="card-top">
+						<span class="card-title">04.</span>
+						<p>Diáconos</p>
+					</div>
+					<div class="card-bottom">
+						<span class="card-title">Cadastrados: <%=totalDiacono%>
+						</span>
+					</div>
+				</div>
+				<div class="card-image">
+					<i class="fa fa-users fa-5x" aria-hidden="true"></i>
+				</div>
+			</div>
+
+			<div class="card-grupo" onclick="listarGrupo('Porteiro')">
+				<div class="card-content">
+					<div class="card-top">
+						<span class="card-title">05.</span>
+						<p>Porteiros</p>
+					</div>
+					<div class="card-bottom">
+						<span class="card-title">Cadastrados: <%=totalPorteiro%>
+						</span>
+					</div>
+				</div>
+				<div class="card-image">
+					<i class="fa fa-users fa-5x" aria-hidden="true"></i>
+				</div>
+			</div>
+
+			<div class="card-grupo" onclick="listarGrupo('Músico')">
+				<div class="card-content">
+					<div class="card-top">
+						<span class="card-title">06.</span>
+						<p>Músicos</p>
+					</div>
+					<div class="card-bottom">
+						<span class="card-title">Cadastrados: <%=totalMusico%>
+						</span>
+					</div>
+				</div>
+				<div class="card-image">
+					<i class="fa fa-music fa-5x" aria-hidden="true"></i>
+				</div>
+			</div>
+
+			<div class="card-grupo" onclick="listarGrupo('Coral de Louvor')">
+				<div class="card-content">
+					<div class="card-top">
+						<span class="card-title">07.</span>
+						<p>Coral de Louvor</p>
+					</div>
+					<div class="card-bottom">
+						<span class="card-title">Cadastrados: <%=totalCoralLouvor%>
+						</span>
+					</div>
+				</div>
+				<div class="card-image">
+					<i class="fa fa-music fa-5x" aria-hidden="true"></i>
+				</div>
+			</div>
+
+			<div class="card-grupo" onclick="listarGrupo('Oração e Intercessão')">
+				<div class="card-content">
+					<div class="card-top">
+						<span class="card-title">08.</span>
+						<p>Oração e Intercessão</p>
+					</div>
+					<div class="card-bottom">
+						<span class="card-title">Cadastrados: <%=totalOracao%>
+						</span>
+					</div>
+				</div>
+				<div class="card-image">
+					<i class="fa fa-users fa-5x" aria-hidden="true"></i>
+				</div>
+			</div>
+
+			<div class="card-grupo" onclick="listarGrupo('Sonoplastia')">
+				<div class="card-content">
+					<div class="card-top">
+						<span class="card-title">09.</span>
+						<p>Sonoplastia</p>
+					</div>
+					<div class="card-bottom">
+						<span class="card-title">Cadastrados: <%=totalSonoplastia%>
+						</span>
+					</div>
+				</div>
+				<div class="card-image">
+					<i class="fa fa-music fa-5x" aria-hidden="true"></i>
+				</div>
+			</div>
+
+			<div class="card-grupo" onclick="listarGrupo('Comum')">
+				<div class="card-content">
+					<div class="card-top">
+						<span class="card-title">10.</span>
+						<p>Membros Comuns</p>
+					</div>
+					<div class="card-bottom">
+						<span class="card-title">Cadastrados: <%=totalComum%>
+						</span>
+					</div>
+				</div>
+				<div class="card-image">
+					<i class="fa fa-users fa-5x" aria-hidden="true"></i>
+				</div>
+			</div>
+
+
+		</div>
+
 
 
 		<script
@@ -281,7 +325,7 @@ int totalComum = dao.contarMembrosGrupo("Comum");
 		<script type="text/javascript"
 			src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
 		<script src="./js/script.js"></script>
-        <script src="./js/grupoListar.js"></script>
+		<script src="./js/grupoListar.js"></script>
 </body>
 
 </html>

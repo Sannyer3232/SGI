@@ -80,7 +80,7 @@ public class LoginController extends HttpServlet {
 	            session.setAttribute("username", primeirosNomes);
 	            session.setAttribute("userphoto", membro.getMbrfotoCaminho());
 	            session.setAttribute("nivel", membro.getMbracesso());
-	            response.sendRedirect("cadastroMembros");
+	            response.sendRedirect("home.jsp");
 	        } else {
 	            response.sendRedirect("index.jsp?error=true");
 	        }

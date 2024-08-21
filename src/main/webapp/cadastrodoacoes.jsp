@@ -97,6 +97,7 @@ ArrayList<MembroJavaBeans> membros = daoMembro.listarMembros();
 
 				<ul class="sub-menu">
 					<li><a href="#" class="link-name"></a></li>
+					<li><a href="metricas.jsp">Métricas</a></li>
 					<li><a href="CadastroContas">Contas</a></li>
 					<li><a href="membroparadizimo.jsp">Dízimos</a></li>
 					<li><a href="cadastroDoacoes">Doações</a></li>

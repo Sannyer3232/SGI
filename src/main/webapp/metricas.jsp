@@ -113,7 +113,6 @@
 
 				<ul class="sub-menu">
 					<li><a href="#" class="link-name"></a></li>
-					<li><a href="metricas.jsp">Métricas</a></li>
 					<li><a href="CadastroContas">Contas</a></li>
 					<li><a href="membroparadizimo.jsp">Dízimos</a></li>
 					<li><a href="cadastroDoacoes">Doações</a></li>
@@ -174,92 +173,50 @@
                 <div class="cardBox">
                     <div class="card">
                         <div>
-                            <div class="numbers"><%=quantidadeMembros %></div>
-                            <div class="cardName">Membros</div>
+                            <div class="numbers"><%=totalPatrimonio %></div>
+                            <div class="cardName">Patrimônios</div>
                         </div>
                         <div class="iconBox">
-                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div>
+                            <div class="numbers"><%=totalDizimo %></div>
+                            <div class="cardName">Dízimo</div>
+                        </div>
+                        <div class="iconBox">
+                            <i class="fa fa-money" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div>
+                            <div class="numbers"><%=totalOferta %></div>
+                            <div class="cardName">Ofertas</div>
+                        </div>
+                        <div class="iconBox">
+                            <i class="fa fa-usd" aria-hidden="true"></i>
                         </div>
                     </div>
                 </div>
 
 
-
-
-<!------------------------------------------------------------------------PAINEL PRINCIPAL - ANIVERSARIANTES-------------------------------------------------------------------------->
+<!------------------------------------------------------------------------GRÁFICOS-------------------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------------------------------------------------------>
 
-                <div class="details">
-                    <div class="recentOrders">
-                        <div class="cardHeader">
-                            <h2>Aniversariantes do mês</h2>
-                            <a href="MembroController" class="btn">Geral</a>
-                        </div>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <td>Foto</td>
-                                    <td>Data</td>
-                                    <td>Nome</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <%if(membros != null){
-                            	for(MembroJavaBeans membro : membros){
-                            		String dataFormatada = dataFormatter.format(membro.getMbrata_nascimento());
-                            	
-                            	%>
-                            
-                                <tr>
-                                    <td width="60px"><div class="imgbx"><img src="img/<%=membro.getMbrfotoCaminho()%>"></div></td>
-                                    <td><%=dataFormatada%></td>
-                                    <td><span><%=membro.getMbrmemnome()%></span></td>
-                                </tr>
-                              <%}
-                            	}%>
-                                
-                            </tbody>
-                        </table>
+                <div class="graphBox">
+                    
+                    <div class="box">
+                        <canvas id="myChart"></canvas>
                     </div>
-
-<!------------------------------------------------------------------------PAINEL PRINCIPAL - EVENTOS -------------------------------------------------------------------------->
-<!------------------------------------------------------------------------------------------------------------------------------------------------------>
-
-                    <div class="eventosProximos">
-                        <h2>Próximos Eventos</h2>
-                            <div class="parent">
-                            <%if(eventos != null){
-                            	
-                            	for(EventoJavaBeans evento : eventos){
-                            		
-                            		int mes = Integer.parseInt(dataMes.format(evento.getEvedata()));
-                            		String horaFormatada = shf.format(evento.getEvehora());
-                            	
-                            	%>
-                            
-                                <div class="card">
-                                    <div class="content-box">
-                                        <span class="card-title"><%=evento.getEvetitulo() %></span>
-                                        <p class="card-content">
-                                            <i class="fa fa-clock-o" aria-hidden="true"><%=horaFormatada %></i> 
-                                        </p>
-                                       
-                                    </div>
-                                    <div class="date-box">
-                                        <span class="month"><%=meses[mes-1] %></span> 
-                                        <span class="date"><%=dataDia.format(evento.getEvedata()) %></span>
-                                    </div>
-                                </div>
-                              <%
-                              		 }
-                            	} 
-                            %>
-                            </div>
+                    <div class="box">
+                        <canvas id="earning"></canvas>
                     </div>
 
                 </div>
+
+
             </div>
-        </div>
 		    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
         <script src="./js/my_chart.js"></script>
