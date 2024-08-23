@@ -31,6 +31,7 @@ int totalComum = dao.contarMembrosGrupo("Comum");
 	crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="./css/style.css">
 <link rel="stylesheet" type="text/css" href="./css/cardgrupo.css">
+ <link rel="stylesheet" href="./css/slider.css">
 
 
 </head>
@@ -326,6 +327,8 @@ int totalComum = dao.contarMembrosGrupo("Comum");
 			src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
 		<script src="./js/script.js"></script>
 		<script src="./js/grupoListar.js"></script>
+		<script src="./js/slider.js"></script>
 </body>
+v
 
 </html>

@@ -9,7 +9,7 @@ function abrirModalAlerta(id, mes, ano, tipo) {
     confirmaExlcusao.href = 'desativaDizOferta?dzoid=' + id + '&p_excluir_mes=' + mes + '&p_excluir_ano=' + ano + '&p_excluir_tipo=' + tipo;
 
     modal.addEventListener('click', (e) => {
-        if (e.target.id == 'fechar' || e.target.id == 'janela-modal-alerta' || e.target.id == 'fechar-alerta') {
+        if (e.target.id == 'fechar' || e.target.id == 'janela-modal-alerta' || e.target.id == 'btn-fechar-alerta') {
             modal.classList.remove('abrir');
         }
     });

@@ -94,7 +94,8 @@ public class JSONGenerators {
 
 		for (ContasJavaBeans conta : contas) {
 			// Converter Date para LocalDate
-		
+				
+			System.out.println(conta.getCntstatuspagamento() +" "+conta.getCntdtvencimento());
 
 			// Verificar se a data de vencimento é igual ou posterior à data atual
 			if (conta.getCntstatuspagamento().equals("Pago")) {

@@ -14,6 +14,7 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="./css/style.css">
 <link rel="stylesheet" href="./css/janela-modal-sucesso-erro.css">
+ <link rel="stylesheet" href="./css/slider.css">
 
 </head>
 
@@ -171,6 +172,7 @@
 		<script type="text/javascript"
 			src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
 		<script src="./js/script.js"></script>
+		<script src="./js/slider.js"></script>
 </body>
 
 
@@ -208,5 +210,110 @@ if (achouMembro != null) {
 }
 %>
 <script src="js/script-fechar.js"></script>
+
+<div class="janela-modal-ajuda" id="janela-modal-ajuda">
+	<div class="modal-ajuda">
+		<button class="fechar" id="fechar-ajuda">X</button>
+		<div class="container-modal-ajuda">
+			<h1 class="modal-titulo"></h1>
+			<h2 class=modal-subtitulo id="modal-subtitulo">Grave na Memória
+				a palavra: Benção</h2>
+			<div class="container-slide">
+				<i id="left" class="fa fa-chevron-left" aria-hidden="true"></i>
+				<div class="slider">
+					<div class="slides">
+						<!-- Slides Imagens -->
+						<div class="slide first">
+
+							<img src="assets/img/Acessando_eventos.gif" alt="imagem1">
+						</div>
+						<div class="slide">
+							<img src="assets/img/cadastrando_eventos.gif" alt="imagem2">
+						</div>
+						<div class="slide">
+							<img src="assets/img/Pesquisar_membro.gif" alt="imagem3">
+						</div>
+						<div class="slide">
+							<img src="assets/img/cadastro_dizimo.gif" alt="imagem4">
+						</div>
+						<div class="slide">
+							<img src="assets/img/consulta_e_emissão_relatorio_ofertap.gif"
+								alt="imagem5">
+						</div>
+						<div class="slide" id="slide-final">
+
+							<a class="link-mais-ajuda" href="ajuda.jsp">Para mais ajuda,
+								clique aqui!</a>
+							<div class="info" id="info">
+								<div class="info__icon">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24"
+										viewBox="0 0 24 24" height="24" fill="none">
+										<path fill="#393a37"
+											d="m12 1.5c-5.79844 0-10.5 4.70156-10.5 10.5 0 5.7984 4.70156 10.5 10.5 10.5 5.7984 0 10.5-4.7016 10.5-10.5 0-5.79844-4.7016-10.5-10.5-10.5zm.75 15.5625c0 .1031-.0844.1875-.1875.1875h-1.125c-.1031 0-.1875-.0844-.1875-.1875v-6.375c0-.1031.0844-.1875.1875-.1875h1.125c.1031 0 .1875.0844.1875.1875zm-.75-8.0625c-.2944-.00601-.5747-.12718-.7808-.3375-.206-.21032-.3215-.49305-.3215-.7875s.1155-.57718.3215-.7875c.2061-.21032.4864-.33149.7808-.3375.2944.00601.5747.12718.7808.3375.206.21032.3215.49305.3215.7875s-.1155.57718-.3215.7875c-.2061.21032-.4864.33149-.7808.3375z"></path></svg>
+								</div>
+								<div class="info__title" id="info__title"></div>
+								<div class="info__close" id="info_close">
+									<svg height="20" viewBox="0 0 20 20" width="20"
+										xmlns="http://www.w3.org/2000/svg">
+										<path
+											d="m15.8333 5.34166-1.175-1.175-4.6583 4.65834-4.65833-4.65834-1.175 1.175 4.65833 4.65834-4.65833 4.6583 1.175 1.175 4.65833-4.6583 4.6583 4.6583 1.175-1.175-4.6583-4.6583z"
+											fill="#393a37"></path></svg>
+								</div>
+							</div>
+							<div class="form-container-geral">
+								<div class="formularios-container">
+									<div class="forms">
+										<div class="form-title">
+											<h2>Digite a palavra do início</h2>
+										</div>
+										<form id="verificacao-form">
+											
+										<div class="form">
+											<div class="column">
+												<div class="input-box">
+													<label>Resposta</label>
+													<input required="" placeholder="Digite a palavra" type="text" name="resposta" id="resposta">
+												</div>
+											
+										</div>
+										<br>
+										<div class="submit">
+											<button  id="btn-sim" type="submit">Responder</button>
+										</div>
+										</div>
+										
+											
+									
+									</form>
+								</div>
+							</div>
+						</div>
+							
+
+                        </div>
+            
+					</div>
+				
+            </div>
+        
+           
+        	<i id="right" class="fa fa-chevron-right" aria-hidden="true"></i>
+                
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<div class="card-mensagem-ajuda" id="card-mensagem-ajuda">
+	<p class="time-text"><span>Precisando de Ajuda com o sistema?</span></p>
+	<div class="day-text">
+		<button id="btn-sim" type="button" onclick="abrirModalAjuda()">Sim</button>
+		<button id="btn-nao" type="button">Não</button>
+	</div>
+	<div class="moon">
+		<button class="fechar-mensagem-ajuda" id="fechar-mensagem-ajuda">X</button>
+	</div>
+</div>
 
 </html>

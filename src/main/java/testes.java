@@ -14,7 +14,7 @@ public class testes {
 		
 		JSONGenerators json = new JSONGenerators();
 		
-		json.JSONListarTotalDizimoOferta("Oferta");
+		
 		json.JSONListarTotalcontas();
 
 		System.out.println("Total: " + dao.contarMembrosGrupo("Comum"));

@@ -9,7 +9,7 @@ function abrirModalAlertaEvento(id) {
     confirmaExlcusao.href = 'deleteEvento?idevento=' + id;
 
     modal.addEventListener('click', (e) => {
-        if (e.target.id == 'fechar' || e.target.id == 'janela-modal-alerta' || e.target.id == 'fechar-alerta') {
+        if (e.target.id == 'fechar' || e.target.id == 'janela-modal-alerta' || e.target.id == 'btn-fechar-alerta') {
             modal.classList.remove('abrir');
         }
     });
