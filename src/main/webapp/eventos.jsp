@@ -1,37 +1,31 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import="model.FilialJavaBeans" %>
-<%@ page import="java.util.ArrayList"%>
-<%@ page import="model.FilialDAO" %>
-<%
-FilialDAO daoFilial = new FilialDAO();
-ArrayList<FilialJavaBeans> filiais = daoFilial.listarFilial(); %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+	<%@ page import="model.EventoJavaBeans"%>
+	<%@ page import="java.util.ArrayList"%>
+	<%@ page import="java.time.LocalDateTime"%>
+	<%@ page import="java.time.format.DateTimeFormatter"%>
+	<%@page import="java.text.SimpleDateFormat"%>
+	<%@ page import="model.EventoDAO" %>
+	<%
+		EventoDAO eventoDAO = new EventoDAO();
+		ArrayList<EventoJavaBeans> lista = eventoDAO.listarCultos();
+	%>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>SGI - Cadastro de Patrimônios</title>
+<title>SGI - Lista de Eventos</title>
 
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 	integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
 	crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="./css/style.css">
-<link rel="stylesheet" href="./css/janela-modal-sucesso-erro.css">
+<link rel="stylesheet" type="text/css" href="./css/tablelist.css">
+<link rel="stylesheet" href="./css/janela-modal-alerta.css">
  <link rel="stylesheet" href="./css/slider.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
-<script>
-	$(document).ready(function() {
-		$('#cpf').mask('000.000.000-00');
-		$('#rg').mask('0000000-0');
-		$('#telefone').mask('(00) 00000-0000');
-		$('#cep').mask('00000-000');
-	});
-</script>
 </head>
 
 <body>
@@ -46,11 +40,13 @@ ArrayList<FilialJavaBeans> filiais = daoFilial.listarFilial(); %>
 					aria-hidden="true"></i> <span class="link-name"> Painel
 						Principal</span>
 			</a></li>
+			
 			<%
 			if (session.getAttribute("nivel").equals("Administrador")) {
 			%>
-				<li><a href="grupos.jsp"> <i class="fa fa-users"
-					aria-hidden="true"></i> <span class="link-name"> Grupos</span>
+			<li><a href="grupos.jsp"> <i class="fa fa-home"
+					aria-hidden="true"></i> <span class="link-name"> Painel
+						Grupos</span>
 			</a></li>
 			<li>
 				<div class="icon-link">
@@ -148,120 +144,97 @@ ArrayList<FilialJavaBeans> filiais = daoFilial.listarFilial(); %>
 		<!------------------------------------------------------------------------OPÇÕES/HOME-CONTAINER-------------------------------------------------------------------------->
 		<!------------------------------------------------------------------------------------------------------------------------------------------------------>
 
-		<div class="j1">
-			<ul class="opcoes">
-				<li><a href="cadastropatrimonio.jsp">Cadastar Novo Patrimônios</a></li>
-				<li><a href="pesquisarpatri.jsp">Listar Patrimônios</a></li>
-
-			</ul>
-		</div>
+	
 
 		<!------------------------------------------------------------------------HOME-CONTAINER-------------------------------------------------------------------------->
 		<!------------------------------------------------------------------------------------------------------------------------------------------------------>
-		<div class="formularios-container" id="form-normal">
-            <div class="forms">
-                <div class="form-title">
-                    <h2>Cadastro de Patrimônio</h2>
-                </div>
-                <form name="frmPatrimonio" action="insertpatri" method="get">
-                    <div class="form">
-                        <div class="input-box">
-                            <label>Nome do Item</label>
-                            <input class="form-control" type="text" name="ptrnome" required>
-                        </div>
-                        <div class="input-box">
-                            <label>Filial</label>
-                            <div class="select-box-ig">
-                                <select class="form_group" name="ptridfilfilial" required>
-                                    <option value="">---- Selecionar Filial ----</option>
-                                    <%for(FilialJavaBeans filial : filiais){ %>
-                                    <option value="<%=filial.getIdfilial()%>"><%=filial.getFilnome() %></option>
-                                    <%} %>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="input-box">
-                            <label>Descrição</label>
-                            <input class="form-control" type="text" name="ptrdescricao" required>
-                        </div>
-                        <div class="input-box">
-                            <label>Valor</label>
-                            <input class="form-control" type="text" name="ptrvalor" required>
-                        </div>
-                        <div class="input-box">
-                            <label>Data de Aquisição</label>
-                            <input class="form_group" type="date" name="ptrdataaquisicao" required>
-                        </div>
-                        <div class="input-box">
-                            <label>Estado</label>
-                            <div class="select-box-ig">
-                                <select class="form_group" name="ptrestado" required>
-                                    <option value="">Estado do item</option>
-                                    <option value="novo">Novo</option>
-                                    <option value="usado">Usado</option>
-                                    <option value="danificado">Danificado</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    
-            
-            </div>
-              
-        </div>
-        <div class="submit">
-                        <button type="submit"><i class="fa fa-floppy-o" aria-hidden="true"></i> Cadastrar</button>
-                    </div>
-        
-    </form>
-              
-	
+		<div class="table-list-container">
 
+			<div class="table-list">
+				<div class="table__body">
+					<table>
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Evento</th>
+								<th>Descrição</th>
+								<th>Data</th>
+								<th>Hora</th>
+								<th>Local</th>
+								<th>Staus</th>
+								<th>Filial</th>
+						
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<tr>
+									<%if(lista != null){
+											for (int i = 0; i < lista.size(); i++) {
+												LocalDateTime dataTarefa = LocalDateTime.parse(lista.get(i).getEvedata() + " " + lista.get(i).getEvehora(),
+														DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
+														LocalDateTime dataAtual = LocalDateTime.now();
+														SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+														SimpleDateFormat shf = new SimpleDateFormat("HH:mm");
+														String dataFormatada = sdf.format(lista.get(i).getEvedata());
+														String horaFormatada = shf.format(lista.get(i).getEvehora());
+												
+									%>
+										
+										<tr>
+											<td><%=lista.get(i).getIdevento()%></td>
+											<td><%=lista.get(i).getEvetitulo()%></td>
+											<td><%=lista.get(i).getEvedescricao()%></td>
+											<td><%=dataFormatada%></td>
+											<td><%=horaFormatada%></td>
+											<td><%=lista.get(i).getEvelocailacao()%></td>
+											<td><%=lista.get(i).getEvestatus()%></td>
+											<td><%=lista.get(i).getEvefilial()%></td>
+								
+								
+							</tr>
+							<%
+						}
+					}
+						%>
 
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>    
+   
+	</div>            
 
-	<script
-		src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
-	<script src="my_chart.js"></script>
-	<script type="text/javascript"
-		src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
-	<script src="./js/script.js"></script>
-	<script src="./js/slider.js"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+		<script src="my_chart.js"></script>
+		<script type="text/javascript"
+			src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
+		<script src="./js/script.js"></script>
+		<script src="js/script-fecha-alerta-evento.js"></script>
+		<script src="./js/slider.js"></script>
 </body>
-<%
-String achouMembro = request.getParameter("success");
-if (achouMembro != null) {
-	if ("true".equals(achouMembro)) {
-%>
-<div class="janela-modal-sucesso" id="janela-modal-sucesso">
-	<div class="modal-sucesso">
-		<button class="fechar" id="fechar-sucesso">X</button>
-			<div class="container-modal">
-				<img class = "icone"alt="sucessoIcon" src="./assets/img/sucesso.png">
-				<h1>Sucesso!</h1>
-				<p>O cadastro do património foi realizado com sucesso.</p>
-			</div>
-	</div>
-</div>
-<%
-} else if ("false".equals(achouMembro)) {
-%>
-<div class="janela-modal-erro" id="janela-modal-erro">
-	<div class="modal-erro">
-		<button class="fechar" id="fechar-erro">X</button>
-			<div class="container-modal">
-				<img class="icone"alt="sucessoIcon" src="./assets/img/erro.png">
-				<h1>Erro!</h1>
-				<p>Erro ao cadastrar um novo património.</p>
-			</div>
-	</div>
-</div>
-<%
-}
-}
-%>
-<script src="js/script-fechar.js"></script>
 
+<div class="janela-modal-alerta" id="janela-modal-alerta">
+	<div class="modal-alerta">
+		<button class="fechar" id="fechar">X</button>
+		<div class="container-modal">
+			<img class="icone" alt="alertaIcone"
+				src="./assets/img/alertaIcone.png">
+			<h1>Alerta!</h1>
+			<p>Deseja realmente exlcuir esse registro permanentemente?</p>
+			<div class="container-btn">
+				<button class="btnCancelar" id="btn-fechar-alerta">Cancelar</button>
+				<a class="btnConfirmar"
+					id="confirma-exclusao">Confirmar</a>
+			</div>
+		</div>
+
+	</div>
+</div>
 
 
 <div class="janela-modal-ajuda" id="janela-modal-ajuda">
@@ -368,4 +341,5 @@ if (achouMembro != null) {
 		<button class="fechar-mensagem-ajuda" id="fechar-mensagem-ajuda">X</button>
 	</div>
 </div>
+
 </html>

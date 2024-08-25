@@ -5,6 +5,7 @@
 	<%@ page import="java.time.LocalDateTime"%>
 	<%@ page import="java.time.format.DateTimeFormatter"%>
 	<%@page import="java.text.SimpleDateFormat"%>
+	<%@ page import="model.EventoDAO" %>
 	<%
 	ArrayList<EventoJavaBeans> lista = (ArrayList<EventoJavaBeans>) request.getAttribute("listarEvento");
 	

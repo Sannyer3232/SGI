@@ -256,7 +256,7 @@ ArrayList<MembroJavaBeans> membros = daoMembro.listarMembros();
 							<label for="arquivo">Escolha uma imagem:</label> <input
 								accept=".jpg, .jpeg, .png, .gif, .pdf" class="inpdddut"
 								name="mbrfoto" id="arquivo" type="file"
-								value="<%=membro.getMbrfotoCaminho()%>">>
+								value="<%=membro.getMbrfotoCaminho()%>">
 						</div>
 					</div>
 			</div>
@@ -390,7 +390,7 @@ ArrayList<MembroJavaBeans> membros = daoMembro.listarMembros();
 			<button>
 				<i class="fa fa-floppy-o" aria-hidden="true"></i> Salvar Edição
 			</button>
-			</button>
+		</form>
 		</div>
 
 		<script
