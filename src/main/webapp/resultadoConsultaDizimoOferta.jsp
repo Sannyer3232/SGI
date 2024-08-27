@@ -52,11 +52,10 @@ String tipo = (String) request.getAttribute("p_tipo");
 					aria-hidden="true"></i> <span class="link-name"> Painel
 						Principal</span>
 			</a></li>
-
 			<%
 			if (session.getAttribute("nivel").equals("Administrador")) {
 			%>
-			<li><a href="grupos.jsp"> <i class="fa fa-users"
+				<li><a href="grupos.jsp"> <i class="fa fa-users"
 					aria-hidden="true"></i> <span class="link-name"> Grupos</span>
 			</a></li>
 			<li>
@@ -114,22 +113,12 @@ String tipo = (String) request.getAttribute("p_tipo");
 			</a></li>
 
 			<li>
-				<div class="profile-details">
-					<div class="profile-content">
-						<img src="img/<%out.print(session.getAttribute("userphoto"));%>"
-							alt="">
-					</div>
-
-					<div class="name-job">
-						<div class="name">
-							<%
-							out.print(session.getAttribute("username"));
-							%>
-						</div>
-					</div>
-					<a href="LogoutController"> <i class="fa fa-sign-out"
-						aria-hidden="true"></i></a>
-				</div>
+					<a href="LogoutController">
+					
+							<span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+							<span class="logout"> Logout</span>
+						
+					</a>
 			</li>
 		</ul>
 	</div>

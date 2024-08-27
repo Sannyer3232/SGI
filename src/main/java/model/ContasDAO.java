@@ -118,7 +118,7 @@ public class ContasDAO {
 	}
 
 	// editar a conta
-	public void alterarConta(ContasJavaBeans conta) {
+	public boolean alterarConta(ContasJavaBeans conta) {
 		String create = "update contasapagar set cntnomefornecedor=?, cntidfilial=?, cntdescricaoconta=?, cntdtvencimento=?, cntvalor=?, cntstatuspagamento=? where idcontapagar=?";
 		try {
 			Connection con = conectar();
@@ -133,8 +133,10 @@ public class ContasDAO {
 			
 			pst.executeUpdate();
 			con.close();
+			return true;
 		} catch (Exception e) {
 			System.out.println(e);
+			return false;
 		}
 	}
 	

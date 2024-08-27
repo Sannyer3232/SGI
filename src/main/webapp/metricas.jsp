@@ -117,6 +117,7 @@
 
 				<ul class="sub-menu">
 					<li><a href="#" class="link-name"></a></li>
+					<li><a href="metricas.jsp">Métricas</a></li>
 					<li><a href="CadastroContas">Contas</a></li>
 					<li><a href="membroparadizimo.jsp">Dízimos</a></li>
 					<li><a href="cadastroDoacoes">Doações</a></li>
@@ -130,25 +131,16 @@
 			</a></li>
 
 			<li>
-				<div class="profile-details">
-					<div class="profile-content">
-						<img src="img/<%out.print(session.getAttribute("userphoto"));%>"
-							alt="">
-					</div>
-
-					<div class="name-job">
-						<div class="name">
-							<%
-							out.print(session.getAttribute("username"));
-							%>
-						</div>
-					</div>
-					<a href="LogoutController"> <i class="fa fa-sign-out"
-						aria-hidden="true"></i></a>
-				</div>
+					<a href="LogoutController">
+					
+							<span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+							<span class="logout"> Logout</span>
+						
+					</a>
 			</li>
 		</ul>
 	</div>
+
 
 <!------------------------------------------------------------------------MAIN-------------------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------------------------------------------------------>

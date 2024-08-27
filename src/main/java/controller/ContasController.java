@@ -167,9 +167,14 @@ public class ContasController extends HttpServlet {
 		conta.setCntstatuspagamento(request.getParameter("status"));
 		System.out.println(conta.getCntnomefornecedor());
 		// executar o método alterarConta
-		dao.alterarConta(conta);
-		// redirecionar para o documento contasapagar.jsp (atualizando alterações)
-		response.sendRedirect("ContasMain");
+		if(dao.alterarConta(conta)) {
+			// redirecionar para o documento contasapagar.jsp (atualizando alterações)
+			response.sendRedirect("ContasMain?success=true");
+		}else {
+			// redirecionar para o documento contasapagar.jsp (atualizando alterações)
+			response.sendRedirect("ContasMain?success=false");
+		}
+
 	}
 
 	// Remover conta

@@ -27,6 +27,7 @@
 <link rel="stylesheet" href="./css/janela-modal-alerta.css">
 <link rel="stylesheet" type="text/css" href="./css/tablelist.css">
  <link rel="stylesheet" href="./css/slider.css">
+ <link rel="stylesheet" href="./css/janela-modal-sucesso-erro.css">
 </head>
 
 <body>
@@ -41,13 +42,11 @@
 					aria-hidden="true"></i> <span class="link-name"> Painel
 						Principal</span>
 			</a></li>
-			
 			<%
 			if (session.getAttribute("nivel").equals("Administrador")) {
 			%>
-			<li><a href="grupos.jsp"> <i class="fa fa-home"
-					aria-hidden="true"></i> <span class="link-name"> Painel
-						Grupos</span>
+				<li><a href="grupos.jsp"> <i class="fa fa-users"
+					aria-hidden="true"></i> <span class="link-name"> Grupos</span>
 			</a></li>
 			<li>
 				<div class="icon-link">
@@ -104,25 +103,16 @@
 			</a></li>
 
 			<li>
-				<div class="profile-details">
-					<div class="profile-content">
-						<img src="img/<%out.print(session.getAttribute("userphoto"));%>"
-							alt="">
-					</div>
-
-					<div class="name-job">
-						<div class="name">
-							<%
-							out.print(session.getAttribute("username"));
-							%>
-						</div>
-					</div>
-					<a href="LogoutController"> <i class="fa fa-sign-out"
-						aria-hidden="true"></i></a>
-				</div>
+					<a href="LogoutController">
+					
+							<span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+							<span class="logout"> Logout</span>
+						
+					</a>
 			</li>
 		</ul>
 	</div>
+
 
 	<div class="home-container">
 		<div class="home-content">
@@ -222,6 +212,39 @@
 		<script src="./js/abrir-janela-modal-conta.js"></script>
 		<script src="./js/slider.js"></script>
 </body>
+<%
+String achouMembro = request.getParameter("success");
+if (achouMembro != null) {
+	if ("true".equals(achouMembro)) {
+%>
+<div class="janela-modal-sucesso" id="janela-modal-sucesso">
+	<div class="modal-sucesso">
+		<button class="fechar" id="fechar-sucesso">X</button>
+		<div class="container-modal">
+			<img class="icone" alt="sucessoIcon" src="./assets/img/sucesso.png">
+			<h1>Sucesso!</h1>
+			<p>O edição da conta foi realizado com sucesso.</p>
+		</div>
+	</div>
+</div>
+<%
+} else if ("false".equals(achouMembro)) {
+%>
+<div class="janela-modal-erro" id="janela-modal-erro">
+	<div class="modal-erro">
+		<button class="fechar" id="fechar-erro">X</button>
+		<div class="container-modal">
+			<img class="icone" alt="sucessoIcon" src="./assets/img/erro.png">
+			<h1>Erro!</h1>
+			<p>Erro ao editar a conta.</p>
+		</div>
+	</div>
+</div>
+<%
+}
+}
+%>
+<script src="js/script-fechar.js"></script>
 
 <div class="janela-modal-alerta" id="janela-modal-alerta">
 	<div class="modal-alerta">

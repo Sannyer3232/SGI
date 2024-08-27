@@ -19,7 +19,7 @@ ArrayList<MembroJavaBeans> lista = (ArrayList<MembroJavaBeans>) request.getAttri
 	crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="./css/style.css">
 <link rel="stylesheet" href="./css/aniversario.css">
- <link rel="stylesheet" href="./css/slider.css">
+<link rel="stylesheet" href="./css/slider.css">
 
 </head>
 
@@ -35,11 +35,10 @@ ArrayList<MembroJavaBeans> lista = (ArrayList<MembroJavaBeans>) request.getAttri
 					aria-hidden="true"></i> <span class="link-name"> Painel
 						Principal</span>
 			</a></li>
-			
 			<%
 			if (session.getAttribute("nivel").equals("Administrador")) {
 			%>
-			<li><a href="grupos.jsp"> <i class="fa fa-users"
+				<li><a href="grupos.jsp"> <i class="fa fa-users"
 					aria-hidden="true"></i> <span class="link-name"> Grupos</span>
 			</a></li>
 			<li>
@@ -97,25 +96,17 @@ ArrayList<MembroJavaBeans> lista = (ArrayList<MembroJavaBeans>) request.getAttri
 			</a></li>
 
 			<li>
-				<div class="profile-details">
-					<div class="profile-content">
-						<img src="img/<%out.print(session.getAttribute("userphoto"));%>"
-							alt="">
-					</div>
-
-					<div class="name-job">
-						<div class="name">
-							<%
-							out.print(session.getAttribute("username"));
-							%>
-						</div>
-					</div>
-					<a href="LogoutController"> <i class="fa fa-sign-out"
-						aria-hidden="true"></i></a>
-				</div>
+					<a href="LogoutController">
+					
+							<span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+							<span class="logout"> Logout</span>
+						
+					</a>
 			</li>
 		</ul>
 	</div>
+
+
 
 	<div class="home-container">
 		<div class="home-content">
@@ -265,46 +256,49 @@ ArrayList<MembroJavaBeans> lista = (ArrayList<MembroJavaBeans>) request.getAttri
 											<h2>Digite a palavra do início</h2>
 										</div>
 										<form id="verificacao-form">
-											
-										<div class="form">
-											<div class="column">
-												<div class="input-box">
-													<label>Resposta</label>
-													<input required="" placeholder="Digite a palavra" type="text" name="resposta" id="resposta">
+
+											<div class="form">
+												<div class="column">
+													<div class="input-box">
+														<label>Resposta</label> <input required=""
+															placeholder="Digite a palavra" type="text"
+															name="resposta" id="resposta">
+													</div>
+
 												</div>
-											
-										</div>
-										<br>
-										<div class="submit">
-											<button  id="btn-sim" type="submit">Responder</button>
-										</div>
-										</div>
-										
-											
-									
-									</form>
+												<br>
+												<div class="submit">
+													<button id="btn-sim" type="submit">Responder</button>
+												</div>
+											</div>
+
+
+
+										</form>
+									</div>
 								</div>
 							</div>
-						</div>
-							
 
-                        </div>
-            
+
+						</div>
+
 					</div>
-				
-            </div>
-        
-           
-        	<i id="right" class="fa fa-chevron-right" aria-hidden="true"></i>
-                
-            </div>
-            
-        </div>
-    </div>
+
+				</div>
+
+
+				<i id="right" class="fa fa-chevron-right" aria-hidden="true"></i>
+
+			</div>
+
+		</div>
+	</div>
 </div>
 
 <div class="card-mensagem-ajuda" id="card-mensagem-ajuda">
-	<p class="time-text"><span>Precisando de Ajuda com o sistema?</span></p>
+	<p class="time-text">
+		<span>Precisando de Ajuda com o sistema?</span>
+	</p>
 	<div class="day-text">
 		<button id="btn-sim" type="button" onclick="abrirModalAjuda()">Sim</button>
 		<button id="btn-nao" type="button">Não</button>
