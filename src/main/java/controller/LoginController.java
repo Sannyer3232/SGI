@@ -63,7 +63,7 @@ public class LoginController extends HttpServlet {
 	    try {
 	        MembroJavaBeans membro = dao.login(email, senha);
 
-	        if (membro != null && membro.getMbrnome() != null) {
+	        if (membro != null && membro.getMbrnome() != null){
 	            HttpSession session = request.getSession();
 	            String nomeCompleto = membro.getMbrnome();
 	            String[] partesDoNome = nomeCompleto.split(" ");

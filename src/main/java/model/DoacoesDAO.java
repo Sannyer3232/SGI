@@ -12,9 +12,9 @@ public class DoacoesDAO {
 	// Parametros de conexao //
 	
 	private String driver = "com.mysql.cj.jdbc.Driver";
-	private String url = "jdbc:mysql://127.0.0.1:3306/bdsgi?useTimezone=true&serverTimezone=UTC";
-	private String user = "sannyerAdmin";
-	private String password = "07114915Sa@";
+	private String url = "jdbc:mysql://localhost:3306/bdsgi?useTimezone=true&serverTimezone=UTC";
+	private String user = "root";
+	private String password = "root";
 	// Metodos de conexao
 	private Connection conectar() {
 		Connection con = null;
